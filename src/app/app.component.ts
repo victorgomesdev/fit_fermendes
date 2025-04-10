@@ -5,6 +5,4 @@ import { Component } from "@angular/core";
     selector: 'app-root',
     standalone: false
 })
-export class AppComponent {
-
-}
+export class AppComponent { }
