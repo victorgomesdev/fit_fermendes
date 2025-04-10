@@ -1,0 +1,23 @@
+<div class="w-full flex flex-col items-center pt-4">
+    <div class="w-[70%] flex flex-col bg-white rounded-md p-5 gap-3">
+        <h1 class="text-2xl font-bold">Aulas marcadas</h1>
+        <div class="flex flex-col bg-success-bg rounded-lg shadow border-l-4 border-l-success p-4 gap-3">
+            <h2 class="font-semibold text-lg">Aulas de hoje</h2>
+            <div class="grid grid-cols-3 gap-3 w-full">
+                <session-card/>
+                <session-card/>
+                <session-card/>
+            </div>
+        </div>
+    </div>
+    <div class="w-[70%] flex flex-col bg-white rounded-md p-5 gap-3">
+        <div class="flex flex-col bg-background rounded-lg shadow p-4 gap-3">
+            <h2 class="font-semibold text-lg">Próximas aulas</h2>
+            <div class="grid grid-cols-3 gap-3 w-full">
+                <session-card/>
+                <session-card/>
+                <session-card/>
+            </div>
+        </div>
+    </div>
+</div>
