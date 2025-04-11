@@ -1,11 +1,88 @@
-<div class="w-full flex flex-col items-center">
-    <div class="flex flex-col px-7 py-5 bg-white rounded-md w-[80%]">
-        <h1 class="text-xl font-bold">Agendar nova aula</h1>
-        <div class="w-full flex flex-row">
-            <mwl-calendar-month-view
-                [viewDate]="today"
-                [events]="sessions"
-            />
+<div class="w-full flex flex-col items-center pt-4">
+    <div class="flex flex-col px-7 py-5 gap-3 bg-white rounded-md w-[80%]">
+        <h1 class="text-2xl font-bold">Agendar nova aula</h1>
+        <div class="w-full flex flex-row justify-around p-3 gap-5">
+            <div class="w-3/5 flex flex-col gap-3">
+                <span class="flex flex-row gap-1 self-center">
+                    <button class="bg-primary text-white p-2 rounded-l-md"><i class="pi pi-arrow-left"></i></button>
+                    <button class="bg-primary text-white p-2"><i class="pi pi-calendar"></i></button>
+                    <button class="bg-primary text-white p-2 rounded-r-md"><i class="pi pi-arrow-right"></i></button>
+                </span>
+                <mwl-calendar-month-view [viewDate]="today" [events]="sessions"/>
+            </div>
+            <div class="flex flex-col bg-background rounded-md py-5 px-6 gap-4 shadow w-2/5">
+                <h2 class="text-primary font-bold text-xl">Detalhes da Aula</h2>
+                <div class="flex flex-col gap-5 w-full">
+                    <span class="flex flex-col">
+                        <label class="text-paragraph font-semibold mb-2" for="horario"><i
+                                class="pi pi-clock text-primary text-lg"></i>
+                            Horário</label>
+                        <select id="horario"
+                            class="p-3 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100">
+                            <optgroup class="border-none outline-none">
+                                <option value="">Selecione um horário</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                            </optgroup>
+                        </select>
+                    </span>
+                    <span class="flex flex-col">
+                        <label class="text-paragraph font-semibold mb-1" for="modalidade"><i
+                                class="pi pi-wrench text-primary text-lg"></i>
+                            Modalidade</label>
+                        <select id="horario"
+                            class="p-3 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100">
+                            <optgroup class="border-none outline-none">
+                                <option value="">Selecione uma modalidade</option>
+                                <option value="Personal Pilates">Personal Pilates</option>
+                                <option value="Neopilates">Neopilates</option>
+                                <option value="Elastic Training">Elastic Training</option>
+                                <option value="Bungee Fusion">Bungee Fusion</option>
+                            </optgroup>
+                        </select>
+                    </span>
+                    <span class="flex flex-col">
+                        <h2 class="text-paragraph font-semibold mb-2"><i class="pi pi-users text-lg text-primary"></i>
+                            Alunos</h2>
+
+                        <div class="bg-white shadow rounded-lg p-3 flex flex-col gap-5">
+                            <div class="w-full flex flex-row justify-between p-2">
+                                <input type="text"
+                                    class="outline-none shadow-md focus:shadow-input-focus rounded-lg p-3 w-3/4 bg-background"
+                                    placeholder="Pesquisar">
+                                <button
+                                    class="bg-primary rounded-lg p-2 text-white text-sm transition duration-300 transform hover:-translate-y-1"><i
+                                        class="pi pi-plus"></i>
+                                    Adicionar</button>
+                            </div>
+                            <div class="w-full flex flex-col bg-background rounded-md p-3 gap-2">
+                                <p class="text-paragraph">Alunos selecionados:</p>
+                            </div>
+                            <div class="w-full flex flex-col bg-background rounded-md p-3 gap-2">
+                                <p class="text-paragraph">Nenhum aluno encontrado para ""</p>
+                                <button
+                                    class="bg-primary rounded-lg p-2 text-white text-sm max-w-[80%] self-center transition duration-300 transform hover:-translate-y-1" (click)="toggleModal()"><i
+                                        class="pi pi-plus"></i> Adicionar "" como aluno?</button>
+                            </div>
+                        </div>
+                    </span>
+                    <span class="flex flex-col">
+                        <h2 class="text-paragraph font-semibold mb-2"><i
+                                class="pi pi-exclamation-circle text-lg text-primary"></i>
+                            Observações</h2>
+                        <textarea rows="3"
+                            class="w-full flex shadow flex-col bg-white rounded-md p-4 outline-none focus:shadow-input-focus"
+                            placeholder="Observações da aula"></textarea>
+                    </span>
+                    <button
+                        class="bg-primary rounded-lg p-2 text-white text-sm max-w-[80%] self-center transition duration-300 transform hover:-translate-y-1"><i
+                            class="pi pi-calendar-plus"></i> Confirmar agendamento</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<patient-modal *ngIf="showModal" (close)="toggleModal()"/>

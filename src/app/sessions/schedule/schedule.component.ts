@@ -12,7 +12,8 @@ export class ScheduleComponent {
     today!: Date
     sessions!: CalendarEvent[]
     calendarLocale!: Locale
-
+    showModal: boolean = false
+    
     constructor() {
         this.today = new Date()
         this.sessions = [
@@ -21,5 +22,9 @@ export class ScheduleComponent {
                 start: this.today,
             }
         ]
+    }
+
+    toggleModal(): void {
+        this.showModal = !this.showModal
     }
 }
