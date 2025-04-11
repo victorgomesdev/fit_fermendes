@@ -19,7 +19,8 @@
     "module": "ES2022",
     "paths": {
       "@components/*": ["./src/app/shared/components/*"],
-      "@sessions/*": ["./src/app/sessions/*"]
+      "@sessions/*": ["./src/app/sessions/*"],
+      "@shared/*": ["./src/app/shared/*"]
     } 
   },
   "angularCompilerOptions": {
