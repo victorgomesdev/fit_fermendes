@@ -1,0 +1,11 @@
+<div class="w-full flex flex-col items-center">
+    <div class="flex flex-col px-7 py-5 bg-white rounded-md w-[80%]">
+        <h1 class="text-xl font-bold">Agendar nova aula</h1>
+        <div class="w-full flex flex-row">
+            <mwl-calendar-month-view
+                [viewDate]="today"
+                [events]="sessions"
+            />
+        </div>
+    </div>
+</div>
