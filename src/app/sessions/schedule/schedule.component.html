@@ -4,9 +4,9 @@
         <div class="w-full flex flex-row justify-around p-3 gap-5">
             <div class="w-3/5 flex flex-col gap-3">
                 <span class="flex flex-row gap-1 self-center">
-                    <button class="bg-primary text-white p-2 rounded-l-md"><i class="pi pi-arrow-left"></i></button>
-                    <button class="bg-primary text-white p-2"><i class="pi pi-calendar"></i></button>
-                    <button class="bg-primary text-white p-2 rounded-r-md"><i class="pi pi-arrow-right"></i></button>
+                    <button class="w-10 bg-primary text-white p-2 rounded-l-md"><i class="pi pi-arrow-left"></i></button>
+                    <button class="w-10 bg-primary text-white p-2"><i class="pi pi-calendar"></i></button>
+                    <button class="w-10 bg-primary text-white p-2 rounded-r-md"><i class="pi pi-arrow-right"></i></button>
                 </span>
                 <mwl-calendar-month-view [viewDate]="today" [events]="sessions"/>
             </div>
@@ -18,7 +18,7 @@
                                 class="pi pi-clock text-primary text-lg"></i>
                             Horário</label>
                         <select id="horario"
-                            class="p-3 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100">
+                            class="p-3 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer">
                             <optgroup class="border-none outline-none">
                                 <option value="">Selecione um horário</option>
                                 <option value="10:00">10:00</option>
@@ -34,7 +34,7 @@
                                 class="pi pi-wrench text-primary text-lg"></i>
                             Modalidade</label>
                         <select id="horario"
-                            class="p-3 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100">
+                            class="p-3 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer">
                             <optgroup class="border-none outline-none">
                                 <option value="">Selecione uma modalidade</option>
                                 <option value="Personal Pilates">Personal Pilates</option>
@@ -49,12 +49,12 @@
                             Alunos</h2>
 
                         <div class="bg-white shadow rounded-lg p-3 flex flex-col gap-5">
-                            <div class="w-full flex flex-row justify-between p-2">
+                            <div class="w-full flex flex-row justify-center gap-3 p-2">
                                 <input type="text"
-                                    class="outline-none shadow-md focus:shadow-input-focus rounded-lg p-3 w-3/4 bg-background"
+                                    class="outline-none shadow-md focus:shadow-input-focus rounded-lg p-2 w-3/4 bg-background"
                                     placeholder="Pesquisar">
                                 <button
-                                    class="bg-primary rounded-lg p-2 text-white text-sm transition duration-300 transform hover:-translate-y-1"><i
+                                    class="bg-primary rounded-lg p-2 text-white text-sm transition duration-300 transform hover:-translate-y-1 max-w-1/4"><i
                                         class="pi pi-plus"></i>
                                     Adicionar</button>
                             </div>
