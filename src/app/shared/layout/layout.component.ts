@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 
 @Component({
-    standalone: false,
     templateUrl: './layout.component.html',
-    selector: 'layout'
+    selector: 'layout',
+    standalone: false
 })
 export class LayoutComponent { }

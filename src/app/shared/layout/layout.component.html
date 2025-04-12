@@ -1,0 +1,27 @@
+<header class="w-full flex flex-row justify-between bg-primary p-6">
+    <div class="flex flex-col">
+        <span class="text-white text-2xl font-extrabold">Fit Fermendes</span>
+        <span class="min-h-[2px] bg-white w-[25%]"></span>
+        <span class="text-white text-xs">STUDIO DE PILATES</span>
+    </div>
+    <div class="flex flex-row">
+        <nav class="flex flex-row gap-3 items-center">
+            <a [routerLink]="'aulas'"
+                class="py-1 px-3 text-sm rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Aulas</a>
+            <a [routerLink]="'aulas/agendar'"
+                class="py-1 px-3 text-sm rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Agendar</a>
+            <a [routerLink]="'aulas/historico'"
+                class="text-sm py-1 px-3 rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Histórico</a>
+            <a
+                class="py-1 px-3 text-sm rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Alunos</a>
+            <a
+                class="py-1 px-3 text-sm rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Financeiro</a>
+            <a
+                class="py-1 px-3 text-sm rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Cadastro</a>
+            <a class="py-1 px-3 text-sm rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Sair</a>
+        </nav>
+    </div>
+</header>
+<main class="w-full bg-background px-5 py-5">
+    <ng-content></ng-content>
+</main>
