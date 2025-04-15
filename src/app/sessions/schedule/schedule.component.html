@@ -3,16 +3,30 @@
         <h1 class="text-2xl font-bold">Agendar nova aula</h1>
         <div class="w-full flex flex-row justify-around p-3 gap-5">
             <div class="w-3/5 flex flex-col gap-3">
-                <span class="flex flex-row gap-1 self-center">
-                    <button class="w-10 bg-primary text-white p-2 rounded-l-md"><i class="pi pi-arrow-left"></i></button>
-                    <button class="w-10 bg-primary text-white p-2"><i class="pi pi-calendar"></i></button>
-                    <button class="w-10 bg-primary text-white p-2 rounded-r-md"><i class="pi pi-arrow-right"></i></button>
-                </span>
-                <mwl-calendar-month-view [viewDate]="today" [events]="sessions"/>
+                <div class="w-full flex flex-row justify-between items-center">
+                    <span class="flex flex-row gap-1 self-center">
+                        <button class="w-10 bg-primary text-white p-2 rounded-l-md"><i
+                                class="pi pi-arrow-left"></i></button>
+                        <button class="w-10 bg-primary text-white p-2"><i class="pi pi-calendar"></i></button>
+                        <button class="w-10 bg-primary text-white p-2 rounded-r-md"><i
+                                class="pi pi-arrow-right"></i></button>
+                    </span>
+                    <span class="font-bold text-primary bg-background rounded-md shadow py-1 px-2">{{targetDate ? "Data
+                        selecionada: " +
+                        targetDate.toLocaleDateString(): "Nenhuma data selecionada"}}</span>
+                </div>
+                <mwl-calendar-month-view [viewDate]="today" [events]="sessions" [activeDay]="targetDate"
+                    (dayClicked)="dayClicked($event.day)" [activeDayIsOpen]="showActiveDay" />
             </div>
             <div class="flex flex-col bg-background rounded-md py-5 px-6 gap-4 shadow w-2/5">
                 <h2 class="text-primary font-bold text-xl">Detalhes da Aula</h2>
                 <div class="flex flex-col gap-5 w-full">
+                    <span class="flex flex-col">
+                        <label class="text-paragraph font-semibold mb-2" for="horario"><i
+                                class="pi pi-calendar text-primary text-lg"></i>
+                            Data</label>
+                            <input type="date" class="p-3 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer" placeholder="Data da aula"/>
+                    </span>
                     <span class="flex flex-col">
                         <label class="text-paragraph font-semibold mb-2" for="horario"><i
                                 class="pi pi-clock text-primary text-lg"></i>
@@ -64,8 +78,8 @@
                             <div class="w-full flex flex-col bg-background rounded-md p-3 gap-2">
                                 <p class="text-paragraph">Nenhum aluno encontrado para ""</p>
                                 <button
-                                    class="bg-primary rounded-lg p-2 text-white text-sm max-w-[80%] self-center transition duration-300 transform hover:-translate-y-1" (click)="toggleModal()"><i
-                                        class="pi pi-plus"></i> Adicionar "" como aluno?</button>
+                                    class="bg-primary rounded-lg p-2 text-white text-sm max-w-[80%] self-center transition duration-300 transform hover:-translate-y-1"
+                                    (click)="toggleModal()"><i class="pi pi-plus"></i> Adicionar "" como aluno?</button>
                             </div>
                         </div>
                     </span>
@@ -85,4 +99,4 @@
         </div>
     </div>
 </div>
-<patient-modal *ngIf="showModal" (close)="toggleModal()"/>
+<patient-modal *ngIf="showModal" (close)="toggleModal()" />
