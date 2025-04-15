@@ -9,7 +9,11 @@ const routes: Route[] = [
     },
     {
         path: 'aulas',
-        loadChildren: ()=> import('@sessions/sessions.module').then(s=> s.SessionsModule)
+        loadChildren: () => import('@sessions/sessions.module').then(s => s.SessionsModule)
+    },
+    {
+        path: 'alunos',
+        loadChildren: () => import("@client/client.module").then(c => c.ClientModule)
     }
 ]
 

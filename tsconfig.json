@@ -20,7 +20,8 @@
     "paths": {
       "@components/*": ["./src/app/shared/components/*"],
       "@sessions/*": ["./src/app/sessions/*"],
-      "@shared/*": ["./src/app/shared/*"]
+      "@shared/*": ["./src/app/shared/*"],
+      "@client/*": ["./src/app/client/*"]
     } 
   },
   "angularCompilerOptions": {
