@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { CalendarEvent } from 'angular-calendar'
-import { addDays } from 'date-fns'
+import { addDays, addMonths, subMonths } from 'date-fns'
 
 @Component({
     templateUrl: './schedule.component.html',
@@ -23,7 +23,7 @@ export class ScheduleComponent {
             {
                 title: "Aula 1",
                 start: this.today,
-                
+
             },
             {
                 title: "Aula 2",
@@ -47,6 +47,17 @@ export class ScheduleComponent {
     dayClicked(day: any) {
         this.targetDate = day.date
         this.showActiveDay = this.showActiveDay ? false : (this.hasEventInThisDate(day.date) ? true : false)
+    }
+
+    changeCurrentMonth(index: number) {
+        
+        switch (index) {
+            case 1: this.today = addMonths(this.today, 1); break;
+            case -1: this.today = subMonths(this.today, 1); break;
+            case 0: this.today = new Date()
+        }
+
+        console.log(this.today)
     }
 
     private hasEventInThisDate(target: Date) {
