@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
+import { ClientDetails } from "./client-details/client-details.component";
 
 @Component({
   templateUrl: './client-home.component.html',
@@ -7,9 +8,14 @@ import { Component } from "@angular/core";
 })
 export class ClienteHomeComponent { 
 
+  @ViewChild(ClientDetails) details!: ClientDetails
   showModal = false
 
-  toggleModal() {
+  toggleModal(): void {
     this.showModal = !this.showModal
+  }
+
+  clientSelected(): void {
+    this.details.openModal()
   }
 }
