@@ -19,28 +19,30 @@
             <div class="flex flex-col bg-background rounded-md py-5 px-6 gap-4 shadow w-2/5">
                 <h2 class="text-primary font-bold text-xl">Detalhes da Aula</h2>
                 <div class="flex flex-col gap-5 w-full">
-                    <span class="flex flex-col">
-                        <label class="text-paragraph font-semibold mb-2" for="horario"><i
-                                class="pi pi-calendar text-primary text-lg"></i>
-                            Data</label>
-                            <input type="date" class="p-3 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer" placeholder="Data da aula"/>
-                    </span>
-                    <span class="flex flex-col">
-                        <label class="text-paragraph font-semibold mb-2" for="horario"><i
-                                class="pi pi-clock text-primary text-lg"></i>
-                            Horário</label>
-                        <select id="horario"
-                            class="p-3 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer">
-                            <optgroup class="border-none outline-none">
-                                <option value="">Selecione um horário</option>
-                                <option value="10:00">10:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="12:00">12:00</option>
-                                <option value="13:00">13:00</option>
-                                <option value="14:00">14:00</option>
-                            </optgroup>
-                        </select>
-                    </span>
+                    <div class="w-full flex flex-row items-center justify-between gap-2">
+                        <span class="flex flex-col w-1/2">
+                            <label class="text-paragraph font-semibold mb-2" for="data"><i
+                                    class="pi pi-calendar text-primary text-lg"></i>
+                                Data</label>
+                                <input id="data" [value]="today.toISOString().split('T')[0]" (change)="changeCurrentDate($event)" type="date" class="p-2 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer" placeholder="Data da aula"/>
+                        </span>
+                        <span class="flex flex-col w-1/2">
+                            <label class="text-paragraph font-semibold mb-2" for="horario"><i
+                                    class="pi pi-clock text-primary text-lg"></i>
+                                Horário</label>
+                            <select id="horario"
+                                class="p-2 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer">
+                                <optgroup class="border-none outline-none">
+                                    <option value="">Selecione um horário</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="14:00">14:00</option>
+                                </optgroup>
+                            </select>
+                        </span>
+                    </div>
                     <span class="flex flex-col">
                         <label class="text-paragraph font-semibold mb-1" for="modalidade"><i
                                 class="pi pi-wrench text-primary text-lg"></i>
@@ -61,20 +63,15 @@
                             Alunos</h2>
 
                         <div class="bg-white shadow rounded-lg p-3 flex flex-col gap-5">
-                            <div class="w-full flex flex-row justify-center gap-3 p-2">
                                 <input type="text"
-                                    class="outline-none shadow-md focus:shadow-input-focus rounded-lg p-2 w-3/4 bg-background"
+                                    class="outline-none shadow-md focus:shadow-input-focus rounded-lg p-2 w-11/12 bg-background"
                                     placeholder="Pesquisar">
-                                <button
-                                    class="bg-primary rounded-lg p-2 text-white text-sm transition duration-300 transform hover:-translate-y-1 max-w-1/4"><i
-                                        class="pi pi-plus"></i>
-                                    Adicionar</button>
+                            <div class="w-full flex flex-col bg-background rounded-md p-3 gap-2 shadow">
+                                <p class="text-paragraph font-semibold">Alunos selecionados:</p>
+                                <span class="text-paragraph"><i class="pi pi-exclamation-circle"></i> Nenhum aluno selecionado</span>
                             </div>
-                            <div class="w-full flex flex-col bg-background rounded-md p-3 gap-2">
-                                <p class="text-paragraph">Alunos selecionados:</p>
-                            </div>
-                            <div class="w-full flex flex-col bg-background rounded-md p-3 gap-2">
-                                <p class="text-paragraph">Nenhum aluno encontrado para ""</p>
+                            <div class="w-full flex flex-col items-center bg-background rounded-md p-3 gap-2 shadow">
+                                <p class="text-paragraph"><i class="pi pi-exclamation-circle"></i> Nenhum aluno encontrado para ""</p>
                                 <button
                                     class="bg-primary rounded-lg p-2 text-white text-sm max-w-[80%] self-center transition duration-300 transform hover:-translate-y-1"
                                     (click)="toggleModal()"><i class="pi pi-plus"></i> Adicionar "" como aluno?</button>

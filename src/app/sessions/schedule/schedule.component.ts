@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { CalendarEvent } from 'angular-calendar'
 import { addDays, addMonths, subMonths } from 'date-fns'
 
@@ -7,17 +7,19 @@ import { addDays, addMonths, subMonths } from 'date-fns'
     selector: 'schedule',
     standalone: false
 })
-export class ScheduleComponent {
+export class ScheduleComponent implements OnInit {
 
     today!: Date
     targetDate!: Date
 
     sessions!: CalendarEvent[]
 
-    showActiveDay = false
+    showActiveDay: boolean = false
     showModal: boolean = false
 
-    constructor() {
+    constructor() { }
+
+    ngOnInit(): void {
         this.today = new Date()
         this.sessions = [
             {
@@ -40,27 +42,33 @@ export class ScheduleComponent {
             {
                 title: "Aula 5",
                 start: addDays(this.today, 10),
+            },
+            {
+                title: "Aula 6",
+                start: addDays(this.today, 100),
             }
         ]
     }
 
-    dayClicked(day: any) {
+    dayClicked(day: any): void {
         this.targetDate = day.date
         this.showActiveDay = this.showActiveDay ? false : (this.hasEventInThisDate(day.date) ? true : false)
     }
 
-    changeCurrentMonth(index: number) {
-        
+    changeCurrentMonth(index: number): void {
         switch (index) {
             case 1: this.today = addMonths(this.today, 1); break;
             case -1: this.today = subMonths(this.today, 1); break;
             case 0: this.today = new Date()
         }
-
-        console.log(this.today)
     }
 
-    private hasEventInThisDate(target: Date) {
+    changeCurrentDate(event: Event): void {
+        const date = new Date((<HTMLInputElement>event.target).value)
+        this.today = date
+    }
+
+    private hasEventInThisDate(target: Date): boolean {
         return this.sessions.some(s => s.start.getDate() === target.getDate())
     }
 
