@@ -6,22 +6,22 @@
     </div>
     <div class="flex flex-row">
         <nav class="flex flex-row gap-3 items-center">
-            <a [routerLink]="'aulas'" routerLinkActive="bg-white text-secondary" [routerLinkActiveOptions]="{exact: true}"
-                class="py-1 px-3 rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Aulas</a>
-            <a [routerLink]="'aulas/agendar'" routerLinkActive="bg-white text-secondary" [routerLinkActiveOptions]="{exact: true}"
-                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Agendar</a>
-            <a [routerLink]="'aulas/historico'" routerLinkActive="bg-white text-secondary" [routerLinkActiveOptions]="{exact: true}"
-                class=" py-1 px-3 rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Histórico</a>
+            <a [routerLink]="'aulas'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                class="py-1 px-3 rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300">Aulas</a>
+            <a [routerLink]="'aulas/agendar'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300">Agendar</a>
+            <a [routerLink]="'aulas/historico'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                class=" py-1 px-3 rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300">Histórico</a>
             <a
-                [routerLink]="'alunos'" routerLinkActive="bg-white text-secondary" [routerLinkActiveOptions]="{exact: true}"
-                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Alunos</a>
+                [routerLink]="'alunos'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300">Alunos</a>
             <a
-                [routerLink]="'alunos/posicao'" routerLinkActive="bg-white text-secondary" [routerLinkActiveOptions]="{exact: true}"
-                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Financeiro</a>
+                [routerLink]="'alunos/posicao'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300">Financeiro</a>
             <a
-                [routerLink]="'alunos/cadastrar'" routerLinkActive="bg-white text-secondary" [routerLinkActiveOptions]="{exact: true}"
+                [routerLink]="'alunos/cadastrar'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                 class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Cadastro</a>
-            <a class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer">Sair</a>
+            <a class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300">Sair</a>
         </nav>
     </div>
 </header>
