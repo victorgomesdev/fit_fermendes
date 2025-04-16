@@ -1,11 +1,32 @@
 <div *ngIf="show" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-    <div class="bg-white w-1/2 rounded-md p-4 flex flex-col gap-2">
+    <div class="bg-white w-1/2 rounded-md p-6 flex flex-col gap-4">
         <div class="flex flex-row items-center w-full justify-between px-3">
-            <h2 class="text-xl font-bold">Detalhes do aluno</h2>
+            <h2 class="text-2xl font-bold">Detalhes do aluno</h2>
             <button class="px-2 py-1 shadow bg-background rounded-full" (click)="closeModal()"><i class="pi pi-times"></i></button>
         </div>
-        <div class="bg-background w-full rounded-md shadow p-3">
-            <p class="text-paragraph font-semibold"><i class="pi pi-user text-primary"></i> Nome: <span class="text-primary">Teste</span></p>
+        <div class="bg-background w-full rounded-md shadow p-5 gap-3 flex flex-col">
+            <h2 class="text-lg text-paragraph font-semibold"><i class="pi pi-user text-primary"></i> Dados pessoais</h2>
+            <div class="w-full grid grid-cols-2 gap-4">
+                <p class="text-paragraph font-semibold">Nome: <span class="text-primary">Teste</span></p>
+                <p class="text-paragraph font-semibold">Idade (anos): <span class="text-primary">20</span></p>
+                <p class="text-paragraph font-semibold">Telefone: <span class="text-primary">Teste</span></p>
+                <p class="text-paragraph font-semibold">Email: <span class="text-primary">Teste</span></p>
+
+            </div>
+        </div>
+        <div class="bg-background w-full rounded-md shadow p-5 gap-3 flex flex-col">
+            <h2 class="text-lg text-paragraph font-semibold"><i class="pi pi-heart text-primary"></i> Dados de saúde</h2>
+            <div class="w-full grid grid-cols-2 gap-4">
+                <p class="text-paragraph font-semibold">Objetivo: <span class="text-primary">Teste</span></p>
+                <p class="text-paragraph font-semibold">Indicação: <span class="text-primary">20</span></p>
+                <p class="text-paragraph font-semibold col-span-2">Tipo de lesão: <span class="text-primary">Teste</span></p>
+                <p class="text-paragraph font-semibold">Altura (cm): <span class="text-primary">Teste</span></p>
+                <p class="text-paragraph font-semibold">Peso (kg): <span class="text-primary">Teste</span></p>
+            </div>
+        </div>
+        <div class="w-full flex flex-row justify-center gap-3">
+            <button class="bg-error text-white rounded-md p-2"><i class="pi pi-times"></i> EXCLUIR</button>
+            <button class="bg-info text-white rounded-md p-2"><i class="pi pi-user-edit"></i> EDITAR</button>
         </div>
     </div>
 </div>

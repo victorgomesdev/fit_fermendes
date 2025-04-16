@@ -1,8 +1,15 @@
-import { Component } from "@angular/core";
+import { Component, output } from "@angular/core";
 
 @Component({
   templateUrl: './client-card.component.html',
   selector: 'client-card',
   standalone: false
 })
-export class ClientCardComponent { }
+export class ClientCardComponent { 
+
+  selected = output()
+
+  clientSelected(): void {
+    this.selected.emit()
+  }
+}

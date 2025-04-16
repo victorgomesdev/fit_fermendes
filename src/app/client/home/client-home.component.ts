@@ -9,12 +9,7 @@ import { ClientDetails } from "./client-details/client-details.component";
 export class ClienteHomeComponent { 
 
   @ViewChild(ClientDetails) details!: ClientDetails
-  showModal = false
-
-  toggleModal(): void {
-    this.showModal = !this.showModal
-  }
-
+  
   clientSelected(): void {
     this.details.openModal()
   }

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, input } from "@angular/core";
 
 @Component({
   selector: 'no-client-card',
@@ -10,4 +10,7 @@ import { Component } from "@angular/core";
   </div>
   `
 })
-export class NoClientCardComponent { }
+export class NoClientCardComponent {
+
+  type = input()
+}
