@@ -6,6 +6,7 @@ import { ClienteHomeComponent } from "./home/client-home.component";
 import { ClientCardComponent } from "./client-card/client-card.component";
 import { NoClientCardComponent } from "./no-client-card/no-client-card.component";
 import { ClientDetails } from "./home/client-details/client-details.component";
+import { ClientRegistrationComponent } from "./registration/client-registration.component";
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { ClientDetails } from "./home/client-details/client-details.component";
     ClienteHomeComponent,
     ClientCardComponent,
     NoClientCardComponent,
-    ClientDetails
+    ClientDetails,
+    ClientRegistrationComponent
   ]
 })
 export class ClientModule {}

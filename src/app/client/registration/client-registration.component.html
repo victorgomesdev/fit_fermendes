@@ -1,0 +1,86 @@
+<div class="w-full flex flex-col p-4 items-center">
+  <div class="flex flex-col bg-white rounded-md shadow p-5 w-4/6 gap-4">
+    <h2 class="font-bold text-2xl">Cadastrar novo aluno</h2>
+    <div class="bg-background shadow grid grid-cols-2 w-full rounded-md p-5 gap-5">
+      <h2 class="text-primary font-bold text-xl col-span-2">Dados pessoais</h2>
+      <span class="flex flex-col gap-1">
+        <label for="nome" class="text-paragraph font-semibold"><i class="pi pi-user text-primary"></i> Nome<span
+          class="text-error">*</span></label>
+          <input type="text" id="nome" class="outline-none shadow rounded-md p-2 focus:shadow-input-focus"
+          placeholder="Nome completo">
+        </span>
+        <span class="flex flex-col gap-1">
+          <label for="cpf" class="text-paragraph font-semibold"><i class="pi pi-id-card text-primary"></i> CPF<span
+            class="text-error">*</span></label>
+            <input type="text" id="cpf" class="outline-none shadow rounded-md p-2 focus:shadow-input-focus"
+            placeholder="XXX.XXX.XXX-XX">
+          </span>
+          <span class="flex flex-col gap-1">
+            <label for="idade" class="text-paragraph font-semibold"><i class="pi pi-gift text-primary"></i> Idade
+              (anos)<span class="text-error">*</span></label>
+              <input type="number" id="idade" class="outline-none shadow rounded-md p-2 focus:shadow-input-focus"
+              placeholder="Idade">
+            </span>
+            <span class="flex flex-col gap-1">
+              <label for="telefone" class="text-paragraph font-semibold"><i class="pi pi-phone text-primary"></i>
+                Telefone<span class="text-error">*</span></label>
+                <input type="text" id="telefone" class="outline-none shadow rounded-md p-2 focus:shadow-input-focus"
+                placeholder="(XX) XXXXX-XXXX">
+              </span>
+              <span class="flex flex-col gap-1">
+                <label for="email" class="text-paragraph font-semibold"><i class="pi pi-envelope text-primary"></i>
+                  Email<span class="text-error">*</span></label>
+                  <input type="email" id="email" class="outline-none shadow rounded-md p-2 focus:shadow-input-focus"
+                  placeholder="email@email.com">
+                </span>
+                <span class="flex flex-col items-center justify-center gap-1">
+                  <div class="w-24 relative">
+                    <img src="assets/user.png" alt="User" class="w-full">
+                    <label for="foto" class="bg-primary px-1 rounded-full absolute z-50 bottom-0 right-0 cursor-pointer"><i class="pi pi-camera text-white"></i>
+                    </label>
+                    <input type="file" id="foto" class="hidden w-[1%]" accept="image/*">          
+                  </div>
+                  <span class="text-paragraph font-semibold">Foto</span>
+                </span>
+              </div>
+              <div class="bg-background shadow grid grid-cols-2 w-full rounded-md p-5 gap-5">
+      <h2 class="text-primary font-bold text-xl col-span-2">Dados de saúde</h2>
+      <span class="flex flex-col gap-1">
+        <label for="objetivo" class="text-paragraph font-semibold"><i class="pi pi-bullseye text-primary"></i>
+          Objetivo<span class="text-error">*</span></label>
+        <textarea type="text" id="objetivo" class="outline-none shadow rounded-md p-2 focus:shadow-input-focus"
+          placeholder="Objetivo"></textarea>
+      </span>
+      <span class="flex flex-col gap-1">
+        <label for="objetivo" class="text-paragraph font-semibold"><i class="pi pi-heart text-primary"></i> Indicação
+          médica</label>
+        <input type="text" id="objetivo" class="outline-none shadow rounded-md p-2 focus:shadow-input-focus"
+          placeholder="Indicação, se houver">
+      </span>
+      <span class="flex flex-col gap-1 col-span-2">
+        <label for="lesao" class="text-paragraph font-semibold"><i class="pi pi-exclamation-triangle text-primary"></i>
+          Tipo de lesão</label>
+        <textarea type="text" id="lesao" class="outline-none shadow rounded-md p-2 focus:shadow-input-focus"
+          placeholder="Tipo da lesão, se houver"></textarea>
+      </span>
+      <span class="flex flex-col gap-1">
+        <label for="altura" class="text-paragraph font-semibold"><i class="pi pi-arrows-v text-primary"></i> Altura
+          (cm)<span class="text-error">*</span></label>
+        <input type="number" id="altura" class="outline-none shadow rounded-md p-2 focus:shadow-input-focus"
+          placeholder="Altura">
+      </span>
+      <span class="flex flex-col gap-1">
+        <label for="peso" class="text-paragraph font-semibold"><i class="pi pi-gauge text-primary"></i> Peso
+          (kg)<span class="text-error">*</span></label>
+        <input type="number" id="peso" class="outline-none shadow rounded-md p-2 focus:shadow-input-focus"
+          placeholder="Peso">
+      </span>
+    </div>
+    <div class="self-end">
+      <button class="bg-error text-white p-2 rounded-md font-semibold mr-5"><i class="pi pi-times"></i>
+        CANCELAR</button>
+      <button class="bg-info text-white p-2 rounded-md font-semibold mr-5"><i class="pi pi-user-plus"></i>
+        CADASTRAR</button>
+    </div>
+  </div>
+</div>
