@@ -4,29 +4,30 @@
             <h2 class="text-2xl font-bold">Detalhes do aluno</h2>
             <button class="px-2 py-1 shadow bg-background rounded-full" (click)="closeModal()"><i class="pi pi-times"></i></button>
         </div>
-        <div class="bg-background w-full rounded-md shadow p-5 gap-3 flex flex-col">
-            <h2 class="text-lg text-paragraph font-semibold"><i class="pi pi-user text-primary"></i> Dados pessoais</h2>
+        <div class="bg-background w-full rounded-md shadow p-6 gap-5 flex flex-col">
+            <h2 class="text-primary font-bold text-xl">Dados pessoais</h2>
+            <img src="assets/user.png" alt="user" class="w-24 self-center">
             <div class="w-full grid grid-cols-2 gap-4">
-                <p class="text-paragraph font-semibold">Nome: <span class="text-primary">Teste</span></p>
-                <p class="text-paragraph font-semibold">Idade (anos): <span class="text-primary">20</span></p>
-                <p class="text-paragraph font-semibold">Telefone: <span class="text-primary">Teste</span></p>
-                <p class="text-paragraph font-semibold">Email: <span class="text-primary">Teste</span></p>
-
+                <p class="text-paragraph font-semibold"><i class="pi pi-user text-primary"></i> Nome: <span class="text-primary">Teste</span></p>
+                <p class="text-paragraph font-semibold"><i class="pi pi-id-card text-primary"></i> CPF: <span class="text-primary">0000000000000</span></p>
+                <p class="text-paragraph font-semibold"><i class="pi pi-gift text-primary"></i> Idade (anos): <span class="text-primary">20</span></p>
+                <p class="text-paragraph font-semibold"><i class="pi pi-phone text-primary"></i> Telefone: <span class="text-primary">Teste</span></p>
+                <p class="text-paragraph font-semibold"><i class="pi pi-envelope text-primary"></i> Email: <span class="text-primary">Teste</span></p>
             </div>
         </div>
-        <div class="bg-background w-full rounded-md shadow p-5 gap-3 flex flex-col">
-            <h2 class="text-lg text-paragraph font-semibold"><i class="pi pi-heart text-primary"></i> Dados de saúde</h2>
+        <div class="bg-background w-full rounded-md shadow p-6 gap-5 flex flex-col">
+            <h2 class="text-xl text-primary font-bold">Dados de saúde</h2>
             <div class="w-full grid grid-cols-2 gap-4">
-                <p class="text-paragraph font-semibold">Objetivo: <span class="text-primary">Teste</span></p>
-                <p class="text-paragraph font-semibold">Indicação: <span class="text-primary">20</span></p>
-                <p class="text-paragraph font-semibold col-span-2">Tipo de lesão: <span class="text-primary">Teste</span></p>
-                <p class="text-paragraph font-semibold">Altura (cm): <span class="text-primary">Teste</span></p>
-                <p class="text-paragraph font-semibold">Peso (kg): <span class="text-primary">Teste</span></p>
+                <p class="text-paragraph font-semibold"><i class="pi pi-bullseye text-primary"></i> Objetivo: <span class="text-primary">Teste</span></p>
+                <p class="text-paragraph font-semibold"><i class="pi pi-heart text-primary"></i> Indicação médica: <span class="text-primary">20</span></p>
+                <p class="text-paragraph font-semibold"><i class="pi pi-arrows-v text-primary"></i> Altura (cm): <span class="text-primary">Teste</span></p>
+                <p class="text-paragraph font-semibold"><i class="pi pi-gauge text-primary"></i> Peso (kg): <span class="text-primary">Teste</span></p>
+                <p class="text-paragraph font-semibold col-span-2"><i class="pi pi-exclamation-triangle text-primary"></i> Tipo de lesão: <span class="text-primary">Teste</span></p>
             </div>
         </div>
         <div class="w-full flex flex-row justify-center gap-3">
-            <button class="bg-error text-white rounded-md p-2"><i class="pi pi-times"></i> EXCLUIR</button>
-            <button class="bg-info text-white rounded-md p-2"><i class="pi pi-user-edit"></i> EDITAR</button>
+            <button class="bg-error text-white rounded-md p-2 font-medium"><i class="pi pi-times"></i> EXCLUIR</button>
+            <button class="bg-info text-white rounded-md p-2 font-semibold"><i class="pi pi-user-edit"></i> EDITAR</button>
         </div>
     </div>
 </div>
