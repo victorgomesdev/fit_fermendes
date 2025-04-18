@@ -6,7 +6,7 @@ import { Component } from "@angular/core";
     standalone: false
 })
 export class SessionDetailsComponent { 
-    show = true
+    show = false
 
     toogleModal() {
         this.show = !this.show
