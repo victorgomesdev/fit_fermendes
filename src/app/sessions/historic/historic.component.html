@@ -30,14 +30,15 @@
                 </select>
             </div>
             <div class="w-full grid grid-cols-3 gap-3">
-                <session-card/>
-                <session-card/>
-                <session-card/>
-                <session-card/>
+                <session-card (selected)="openModal()"/>
+                <session-card (selected)="openModal()"/>
+                <session-card (selected)="openModal()"/>
+                <session-card (selected)="openModal()"/>
             </div>
         </div>
     </div>
 </div>
+<session-details/>
 <!--
 <button class="text-sm font-semibold px-3 py-1 border rounded-2xl border-info text-info">TODAS</button>
 -->

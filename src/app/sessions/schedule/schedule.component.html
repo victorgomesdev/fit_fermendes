@@ -23,13 +23,13 @@
                         <span class="flex flex-col w-1/2">
                             <label class="text-paragraph font-semibold mb-2" for="data"><i
                                     class="pi pi-calendar text-primary text-lg"></i>
-                                Data</label>
+                                Data<span class="text-error">*</span></label>
                                 <input id="data" [value]="today.toISOString().split('T')[0]" (change)="changeCurrentDate($event)" type="date" class="p-2 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer" placeholder="Data da aula"/>
                         </span>
                         <span class="flex flex-col w-1/2">
                             <label class="text-paragraph font-semibold mb-2" for="horario"><i
                                     class="pi pi-clock text-primary text-lg"></i>
-                                Horário</label>
+                                Horário<span class="text-error">*</span></label>
                             <select id="horario"
                                 class="p-2 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer">
                                 <optgroup class="border-none outline-none">
@@ -46,7 +46,7 @@
                     <span class="flex flex-col">
                         <label class="text-paragraph font-semibold mb-1" for="modalidade"><i
                                 class="pi pi-wrench text-primary text-lg"></i>
-                            Modalidade</label>
+                            Modalidade<span class="text-error">*</span></label>
                         <select id="horario"
                             class="p-3 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer">
                             <optgroup class="border-none outline-none">
@@ -60,7 +60,7 @@
                     </span>
                     <span class="flex flex-col">
                         <h2 class="text-paragraph font-semibold mb-2"><i class="pi pi-users text-lg text-primary"></i>
-                            Alunos</h2>
+                            Alunos<span class="text-error">*</span></h2>
 
                         <div class="bg-white shadow rounded-lg p-3 flex flex-col gap-5">
                                 <input type="text"
