@@ -9,6 +9,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { PatientModal } from "./schedule/patient-modal/patient-modal";
 import { SessionsHistoricComponent } from "./historic/historic.component";
 import { SharedModule } from "@shared/shared.module";
+import { SessionDetailsComponent } from "./session-details/session-details.component";
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import { SharedModule } from "@shared/shared.module";
         ScheduleComponent,
         PatientModal,
         SessionsHistoricComponent,
+        SessionDetailsComponent
     ]
 })
 export class SessionsModule { }
