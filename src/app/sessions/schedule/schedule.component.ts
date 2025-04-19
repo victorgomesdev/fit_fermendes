@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { DateFormat } from "@shared/enums/date.enum";
 import { CalendarEvent } from 'angular-calendar'
 import { addDays, addMonths, subMonths } from 'date-fns'
 
@@ -9,6 +11,7 @@ import { addDays, addMonths, subMonths } from 'date-fns'
 })
 export class ScheduleComponent implements OnInit {
 
+    dateFormats = DateFormat
     today!: Date
     targetDate!: Date
 
@@ -16,8 +19,9 @@ export class ScheduleComponent implements OnInit {
 
     showActiveDay: boolean = false
     showModal: boolean = false
-
-    constructor() { }
+    showSelectionTab: boolean = false
+    
+    constructor(private router: Router) { }
 
     ngOnInit(): void {
         this.today = new Date()
@@ -74,5 +78,9 @@ export class ScheduleComponent implements OnInit {
 
     toggleModal(): void {
         this.showModal = !this.showModal
+    }
+
+    redirectToRegistration(): void {
+        this.router.navigate(['/alunos/cadastrar'])
     }
 }

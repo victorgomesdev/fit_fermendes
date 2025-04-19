@@ -1,4 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 import { ClientDetails } from "./client-details/client-details.component";
 
 @Component({
@@ -10,6 +11,12 @@ export class ClienteHomeComponent {
 
   @ViewChild(ClientDetails) details!: ClientDetails
   
+  constructor(private router: Router) {}
+
+  redirectToRegistration(): void {
+    this.router.navigate(['/alunos/cadastrar'])
+  }
+
   clientSelected(): void {
     this.details.openModal()
   }
