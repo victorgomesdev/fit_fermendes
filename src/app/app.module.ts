@@ -8,6 +8,7 @@ import { SessionsModule } from "@sessions/sessions.module";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing.module";
 import { ClientModule } from "./client/client.module";
+import { ManagementModule } from "./management/management.module";
 
 registerLocaleData(pt)
 
@@ -19,7 +20,8 @@ registerLocaleData(pt)
         BrowserAnimationsModule,
         ClientModule,
         SharedModule,
-        SessionsModule
+        SessionsModule,
+        ManagementModule
     ],
     bootstrap: [AppComponent]
 })

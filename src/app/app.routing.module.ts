@@ -14,6 +14,10 @@ const routes: Route[] = [
     {
         path: 'alunos',
         loadChildren: () => import("@client/client.module").then(c => c.ClientModule)
+    },
+    {
+        path: 'gestao',
+        loadChildren: () => import("@management/management.module").then(m => m.ManagementModule)
     }
 ]
 
