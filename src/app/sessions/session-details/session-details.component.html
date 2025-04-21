@@ -1,5 +1,5 @@
 <div *ngIf="show" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-    <div class="w-3/5 flex flex-col p-4 bg-white rounded-md gap-3">
+    <div class="w-3/5 flex flex-col p-4 bg-white rounded-md gap-3 max-h-[90vh] overflow-scroll scrollable">
         <div class="flex flex-row w-full justify-between px-2">
             <h2 class="text-2xl font-bold">Detalhes da aula</h2>
             <button class="bg-background px-2 rounded-full" (click)="toogleModal()"><i class="pi pi-times"></i></button>
@@ -18,7 +18,7 @@
             </div>
             <div class="w-full flex flex-col gap-2">
                 <h2 class="text-primary font-semibold text-lg">Alunos</h2>
-                <div class="w-full grid grid-cols-3 gap-3 max-h-[13rem] overflow-y-scroll scrollable">
+                <div class="w-full grid grid-cols-3 gap-3">
                     <div
                         class="flex flex-col gap-1 items-center bg-white p-2 rounded-md shadow text-center font-medium transition transform hover:-translate-y-1 duration-300">
                         <img src="assets/user.png" class="w-16"/>
