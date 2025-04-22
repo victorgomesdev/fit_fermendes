@@ -1,19 +1,19 @@
 <div *ngIf="show" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-    <div class="w-3/5 flex flex-col p-4 bg-white rounded-md gap-3 max-h-[90vh] overflow-y-scroll">
+    <div class="w-11/12 sm:w-3/5 flex flex-col p-2 sm:p-4 bg-white rounded-md gap-3 max-h-[90vh] overflow-y-scroll">
         <div class="flex flex-row w-full justify-between px-2">
-            <h2 class="text-2xl font-bold">Detalhes da aula</h2>
+            <h2 class="text-lg sm:text-2xl font-bold">Detalhes da aula</h2>
             <button class="bg-background px-2 rounded-full" (click)="toogleModal()"><i class="pi pi-times"></i></button>
         </div>
-        <div class="w-full flex flex-col bg-background p-4 rounded-md shadow gap-5">
+        <div class="w-full flex flex-col bg-background p-4 rounded-md shadow gap-1 sm:gap-5">
             <h2 class="text-primary font-semibold text-lg">Informações</h2>
             <div class="w-full grid grid-cols-3 gap-2">
-                <span class="text-paragraph font-semibold"><i class="pi pi-calendar text-primary"></i> Data:
+                <span class="text-paragraph font-semibold text-sm sm:text-base"><i class="pi pi-calendar text-primary"></i> Data:
                     <span class="text-primary">22/02/2025</span></span>
-                <span class="text-paragraph font-semibold"><i class="pi pi-clock text-primary"></i> Horário: <span
+                <span class="text-paragraph font-semibold text-sm sm:text-base"><i class="pi pi-clock text-primary"></i> Horário: <span
                         class="text-primary">10:00</span></span>
-                <span class="text-paragraph font-semibold"><i class="pi pi-wrench text-primary"></i> Modalidade: <span
+                <span class="text-paragraph font-semibold text-sm sm:text-base"><i class="pi pi-wrench text-primary"></i> Modalidade: <span
                         class="bg-info text-white font-normal px-2 py-1 text-sm rounded-full">Neopilates</span></span>
-                <span class="text-paragraph font-semibold"><i class="pi pi-info-circle text-primary"></i> Status: <span
+                <span class="text-paragraph font-semibold text-sm sm:text-base"><i class="pi pi-info-circle text-primary"></i> Status: <span
                         class="bg-yellow text-white font-normal px-2 py-1 text-sm rounded-full">Agendada</span></span>
             </div>
             <div class="w-full flex flex-col gap-2">

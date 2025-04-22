@@ -9,8 +9,13 @@ import { SessionDetailsComponent } from "@sessions/session-details/session-detai
 export class SummaryComponent {
 
     @ViewChild(SessionDetailsComponent) details!: SessionDetailsComponent
+    showDropdown = false 
 
     openModal(): void {
         this.details.toogleModal()
     }
+
+    toogleDropdown(): void {
+        this.showDropdown = !this.showDropdown
+    } 
 }

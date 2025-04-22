@@ -11,4 +11,11 @@ import { Component } from "@angular/core";
     selector: 'layout',
     standalone: false
 })
-export class LayoutComponent { }
+export class LayoutComponent {
+
+    showDropDown = false
+
+    toggleDropdown(): void {
+        this.showDropDown = !this.showDropDown
+    }
+}

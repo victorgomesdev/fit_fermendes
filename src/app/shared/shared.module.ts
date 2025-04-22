@@ -3,6 +3,7 @@ import { LayoutComponent } from "./layout/layout.component";
 import { RouterModule } from "@angular/router";
 import { DateFormatPipe } from "./pipes/date-format.pipe";
 import { AutofocusDirective } from "./directives/autofocus.directive";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
     declarations: [
@@ -15,6 +16,9 @@ import { AutofocusDirective } from "./directives/autofocus.directive";
         DateFormatPipe,
         AutofocusDirective
     ],
-    imports: [RouterModule]
+    imports: [
+        RouterModule,
+        CommonModule
+    ]
 })
 export class SharedModule { }
