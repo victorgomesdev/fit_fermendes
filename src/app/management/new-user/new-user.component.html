@@ -1,0 +1,29 @@
+<div *ngIf="show" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+  <div class="w-1/4 bg-white p-3 rounded-md flex flex-col items-center gap-3">
+    <div class="flex flex-row justify-between px-3 w-full">
+      <h2 class="text-2xl font-bold">Novo usuário</h2>
+      <button class="bg-background px-2 py-1 rounded-full" (click)="toogleModal()"><i class="pi pi-times"></i></button>
+    </div>
+    <div class="flex flex-col w-full bg-background rounded-md p-3 gap-3">
+      <div class="flex flex-col gap-1">
+        <label for="nome" class="text-paragraph font-semibold"><i class="pi pi-user text-primary"></i> Nome:</label>
+        <input inputAutofocus type="text" id="nome" class="p-2 rounded-md shadow focus:shadow-input-focus outline-none" placeholder="Nome">
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="email" class="text-paragraph font-semibold"><i class="pi pi-envelope text-primary"></i> Email:</label>
+        <input type="email" id="email" class="p-2 rounded-md shadow focus:shadow-input-focus outline-none" placeholder="Email">
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="senha" class="text-paragraph font-semibold"><i class="pi pi-lock text-primary"></i> Senha:</label>
+        <input type="password" id="senha" class="p-2 rounded-md shadow focus:shadow-input-focus outline-none" placeholder="Senha">
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="cargo" class="text-paragraph font-semibold"><i class="pi pi-crown text-primary"></i> Cargo:</label>
+        <select name="cargo" id="cargo" class="p-2 rounded-md outline-none focus:shadow-input-focus shadow">
+          <option value="">Selecione um cargo</option>
+          <option value="Administrador">Administrador</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
