@@ -1,5 +1,5 @@
-<div *ngIf="show" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-    <div class="bg-white w-1/2 rounded-md p-6 flex flex-col gap-4 max-h-[90vh] overflow-y-scroll">
+<div *ngIf="show" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 animate-fadeIn">
+    <div class="bg-white w-11/12 md:w-3/4 xl:w-1/2 rounded-md p-6 flex flex-col gap-4 max-h-[90vh] overflow-y-scroll">
         <div class="flex flex-row items-center w-full justify-between px-3">
             <h2 class="text-2xl font-bold">Detalhes do aluno</h2>
             <button class="px-2 py-1 shadow bg-background rounded-full" (click)="closeModal()"><i class="pi pi-times"></i></button>
@@ -18,11 +18,11 @@
         <div class="bg-background w-full rounded-md shadow p-6 gap-5 flex flex-col">
             <h2 class="text-xl text-primary font-bold">Dados de saúde</h2>
             <div class="w-full grid grid-cols-2 gap-4">
-                <p class="text-paragraph font-semibold"><i class="pi pi-bullseye text-primary"></i> Objetivo: <span class="text-primary">Teste</span></p>
-                <p class="text-paragraph font-semibold"><i class="pi pi-heart text-primary"></i> Indicação médica: <span class="text-primary">20</span></p>
                 <p class="text-paragraph font-semibold"><i class="pi pi-arrows-v text-primary"></i> Altura (cm): <span class="text-primary">Teste</span></p>
                 <p class="text-paragraph font-semibold"><i class="pi pi-gauge text-primary"></i> Peso (kg): <span class="text-primary">Teste</span></p>
-                <p class="text-paragraph font-semibold col-span-2"><i class="pi pi-exclamation-triangle text-primary"></i> Tipo de lesão: <span class="text-primary">Teste</span></p>
+                <p class="text-paragraph font-semibold col-span-2"><i class="pi pi-bullseye text-primary"></i> Objetivo: <span class="text-primary">Teste</span></p>
+                <p class="text-paragraph font-semibold"><i class="pi pi-heart text-primary"></i> Indicação médica: <span class="text-primary">20</span></p>
+                <p class="text-paragraph font-semibold"><i class="pi pi-exclamation-triangle text-primary"></i> Tipo de lesão: <span class="text-primary">Teste</span></p>
             </div>
         </div>
         <div class="w-full flex flex-row justify-center gap-3">

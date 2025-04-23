@@ -1,21 +1,21 @@
-<div class="w-full flex flex-col items-center p-4">
-  <div class="flex flex-col bg-white p-4 rounded-md shadow w-1/2 gap-3">
+<div class="w-full flex flex-col items-center p-2 md:p-4 animate-fadeIn">
+  <div class="flex flex-col bg-white p-4 rounded-md shadow w-full lg:w-2/3 gap-3">
     <h2 class="text-2xl font-bold">Configurações</h2>
     <div class="w-full flex flex-col bg-background rounded-md shadow p-3 gap-3">
       <h2 class="text-paragraph font-semibold text-lg"><i class="pi pi-users text-primary"></i> Usuários</h2>
-      <div class="grid grid-cols-3 gap-3">
+      <div class="grid grid-cols-2 xl:grid-cols-3 gap-3">
         <div
           class="flex flex-col items-center bg-white p-2 rounded-md shadow gap-2 transition hover:-translate-y-1 duration-300">
           <img src="assets/user.png" alt="user" class="w-24">
           <div class="w-full flex flex-col bg-background rounded-md p-3 gap-1">
             <span class="text-paragraph font-semibold"><i class="pi pi-user text-primary"></i> Nome: Victor</span>
-            <span class="text-paragraph font-semibold"><i class="pi pi-envelope text-primary"></i> Email:
+            <span class="text-paragraph font-semibold hidden md:block"><i class="pi pi-envelope text-primary"></i> Email:
               victor&#64;teste.com</span>
-              <span class="text-paragraph font-semibold"><i class="pi pi-crown text-primary"></i> Cargo: Administrador</span>
+              <span class="text-paragraph font-semibold hidden md:block"><i class="pi pi-crown text-primary"></i> Cargo: Administrador</span>
           </div>
         </div>
         <div class="flex flex-row justify-center items-center p-2  gap-2">
-          <span class="text-paragraph font-semibold">Novo usuário</span>
+          <span class="text-paragraph font-semibold text-sm sm:text-base">Novo usuário</span>
           <button class="bg-primary px-2 py-1 rounded-md text-white" (click)="openModal()"><i class="pi pi-plus"></i></button>
         </div>
       </div>

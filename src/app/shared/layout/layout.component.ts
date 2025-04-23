@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, inject, QueryList, ViewChild, ViewChildren } from "@angular/core";
 
 @Component({
     templateUrl: './layout.component.html',
@@ -11,9 +11,14 @@ import { Component, ElementRef, ViewChild } from "@angular/core";
     selector: 'layout',
     standalone: false
 })
-export class LayoutComponent {
+export class LayoutComponent implements AfterViewInit {
 
-    @ViewChild('dropDown') dropDown!: ElementRef<HTMLDivElement>    
+    @ViewChild('dropDown') dropDown!: ElementRef<HTMLDivElement>
+    @ViewChildren('link') links!: QueryList<ElementRef<HTMLAnchorElement>>
+
+    ngAfterViewInit(): void {
+        this.links.forEach(l => l.nativeElement.addEventListener('click', () => this.toggleDropdown()))
+    }
 
     toggleDropdown(): void {
         this.dropDown.nativeElement.classList.toggle('hidden')

@@ -1,11 +1,11 @@
-<div class="w-full flex flex-col items-center p-4">
-  <div class="flex flex-col bg-white p-5 w-3/5 rounded-md gap-6">
-    <div class="w-full flex flex-row justify-between px-4">
+<div class="w-full flex flex-col items-center md:p-4 p-2 animate-fadeIn">
+  <div class="flex flex-col bg-white p-3 md:p-5 xl:w-3/5 md:w-full rounded-md gap-6">
+    <div class="w-full flex flex-row justify-between items-center px-4">
       <h2 class="text-2xl font-bold">Alunos</h2>
-      <input inputAutofocus type="text" class="p-2 w-1/2 rounded-lg shadow focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer bg-background" placeholder="Pesquisar">
-      <button class="bg-primary p-2 rounded-md text-white font-semibold" (click)="redirectToRegistration()"><i class="pi pi-user-plus"></i> CADASTRAR</button>
+      <button class="text-sm bg-primary p-2 rounded-md text-white font-semibold" (click)="redirectToRegistration()"><i class="pi pi-user-plus"></i> CADASTRAR</button>
     </div>
-    <div class="w-full grid grid-cols-3 bg-background rounded-md shadow p-5 gap-3">
+    <div class="w-full grid grid-cols-2 xl:grid-cols-3 bg-background rounded-md shadow p-2 md:p-5 gap-3">
+      <input inputAutofocus type="text" class="p-2 w-3/4 rounded-lg shadow focus:shadow-input-focus col-span-2 xl:col-span-3 outline-none transition-all duration-100 cursor-pointer bg-white" placeholder="Pesquisar">
       <client-card (selected)="clientSelected()"/>
       <client-card (selected)="clientSelected()"/>
       <client-card (selected)="clientSelected()"/>
