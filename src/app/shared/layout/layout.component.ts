@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 
 @Component({
     templateUrl: './layout.component.html',
@@ -13,9 +13,10 @@ import { Component } from "@angular/core";
 })
 export class LayoutComponent {
 
-    showDropDown = false
+    @ViewChild('dropDown') dropDown!: ElementRef<HTMLDivElement>    
 
     toggleDropdown(): void {
-        this.showDropDown = !this.showDropDown
+        this.dropDown.nativeElement.classList.toggle('hidden')
+        this.dropDown.nativeElement.classList.toggle('flex')
     }
 }

@@ -1,25 +1,25 @@
 <div class="w-full flex flex-col pt-4">
-    <div class="flex flex-col bg-white rounded-md w-[70%] self-center p-5 gap-6">
+    <div class="flex flex-col bg-white rounded-md w-full xl:w-[70%] self-center p-5 gap-6">
         <h2 class="text-2xl font-bold">Histórico de aulas</h2>
-        <div class="flex flex-row w-full justify-center gap-5">
-            <div class="bg-info flex flex-col items-center p-2 rounded-md">
-                <span class="text-white font-semibold">TOTAL DE AULAS</span>
+        <div class="flex flex-col md:flex-row w-full justify-center gap-2 md:gap-5">
+            <div class="bg-info flex flex-row lg:flex-col justify-center gap-1 items-center p-2 rounded-md">
+                <span class="text-white font-semibold text-sm">TOTAL DE AULAS:</span>
+                <span class="text-white font-semibold text-sm">0</span>
+            </div>
+            <div class="bg-yellow flex flex-row lg:flex-col justify-center gap-1 items-center p-2 rounded-md">
+                <span class="text-white font-semibold">AGENDADAS:</span>
                 <span class="text-white font-semibold">0</span>
             </div>
-            <div class="bg-yellow flex flex-col items-center p-2 rounded-md">
-                <span class="text-white font-semibold">AGENDADAS</span>
+            <div class="bg-success flex flex-row lg:flex-col justify-center gap-1 items-center p-2 rounded-md">
+                <span class="text-white font-semibold">CONCLUÍDAS:</span>
                 <span class="text-white font-semibold">0</span>
             </div>
-            <div class="bg-success flex flex-col items-center p-2 rounded-md">
-                <span class="text-white font-semibold">CONCLUÍDAS</span>
-                <span class="text-white font-semibold">0</span>
-            </div>
-            <div class="bg-error flex flex-col items-center p-2 rounded-md">
-                <span class="text-white font-semibold">CANCELADAS</span>
+            <div class="bg-error flex flex-row lg:flex-col justify-center gap-1 items-center p-2 rounded-md">
+                <span class="text-white font-semibold">CANCELADAS:</span>
                 <span class="text-white font-semibold">0</span>
             </div>
         </div>
-        <div class="flex flex-col w-full bg-background rounded-md shadow p-5 gap-4">
+        <div class="flex flex-col w-full bg-background rounded-md shadow p-3 md:p-5 gap-4">
             <div class="flex flex-row gap-5 items-center">
                 <h2 class="text-paragraph font-medium text-lg"><i class="pi pi-filter text-primary"></i> Filtrar</h2>
                 <select class="text-sm p-2 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer">
@@ -29,7 +29,7 @@
                     <option value="Canceladas" class="text-sm">Canceladas</option>
                 </select>
             </div>
-            <div class="w-full grid grid-cols-3 gap-3">
+            <div class="w-full flex flex-col md:grid grid-cols-3 gap-3">
                 <session-card (selected)="openModal()"/>
                 <session-card (selected)="openModal()"/>
                 <session-card (selected)="openModal()"/>

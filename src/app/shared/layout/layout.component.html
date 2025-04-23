@@ -5,8 +5,8 @@
         <span class="text-white sm:text-xs hidden sm:block">STUDIO DE PILATES</span>
     </div>
     <div class="flex flex-row relative">
-        <button class="text-white sm:hidden" (click)="toggleDropdown()"><i class="pi pi-bars"></i></button>
-        <nav [ngClass]="{'flex': showDropDown, 'hidden': !showDropDown}" class="sm:flex flex-col sm:flex-row gap-3 items-center absolute sm:static z-50 right-0 top-7 sm:border-none bg-primary p-2 border border-secondary rounded-md animate-fadeIn">
+        <button class="text-white sm:hidden" (click)="toggleDropdown()" #controlButton><i class="pi pi-bars"></i></button>
+        <nav class="hidden sm:flex flex-col sm:flex-row gap-3 items-center absolute sm:static z-50 right-0 top-7 sm:border-none bg-primary p-2 border border-secondary rounded-md animate-fadeIn" #dropDown>
             <a [routerLink]="'aulas'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                 class="py-1 px-3 rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300">Aulas</a>
             <a [routerLink]="'aulas/agendar'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
@@ -26,6 +26,6 @@
         </nav>
     </div>
 </header>
-<main class="w-full bg-background px-5 py-5 static mt-11">
+<main class="w-full bg-background px-3 sm:px-5 py-5 static mt-12 md:mt-32 lg:mt-24 overflow-hidden">
     <ng-content></ng-content>
 </main>

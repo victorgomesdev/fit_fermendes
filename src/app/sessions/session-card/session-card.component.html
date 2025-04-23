@@ -1,6 +1,6 @@
-<div class="flex sm:flex-col w-full bg-white rounded-lg px-4 sm:px-6 py-4 shadow transition duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-4">
-    <div class="bg-background flex flex-col py-1 px-2 sm:p-4 rounded-md shadow gap-4">
-        <div class="w-full flex flex-row sm:flex-col gap-3">
+<div class="flex sm:flex-col w-full items-center justify-center bg-white rounded-lg px-3 py-2 md:pb-4 shadow overflow-hidden transition duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-4">
+    <div class="bg-background flex flex-col py-1 px-2 sm:p-4 shadow gap-4 w-full rounded-md">
+        <div class="w-full flex flex-row sm:flex-col gap-3 justify-center">
             <p class="font-bold sm:text-lg text-center text-paragraph"><i class="pi pi-calendar text-primary"></i> 10/04/2025</p>
             <p class="font-bold sm:text-lg text-center text-paragraph"><i class="pi pi-clock text-primary"></i> 10:00</p>
         </div>
@@ -14,4 +14,5 @@
     </div>
     <button class="bg-primary px-2 py-1 rounded-full text-white sm:hidden" (click)="clicked()"><i class="pi pi-plus"></i></button>
     <button class="bg-primary hidden sm:block text-white font-semibold rounded-md max-w-28 p-1 self-center" (click)="clicked()"><i class="pi pi-plus"></i> Detalhes</button>
+    <i class="pi pi-clock bg-yellow text-white p-1 rounded-full sm:hidden"></i>
 </div>
