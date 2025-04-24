@@ -22,7 +22,8 @@
       "@sessions/*": ["./src/app/sessions/*"],
       "@shared/*": ["./src/app/shared/*"],
       "@client/*": ["./src/app/client/*"],
-      "@management/*": ["./src/app/management/*"]
+      "@management/*": ["./src/app/management/*"],
+      "@auth/*": ["./src/app/auth/*"]
     } 
   },
   "angularCompilerOptions": {

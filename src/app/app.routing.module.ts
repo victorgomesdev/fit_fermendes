@@ -18,6 +18,10 @@ const routes: Route[] = [
     {
         path: 'gestao',
         loadChildren: () => import("@management/management.module").then(m => m.ManagementModule)
+    },
+    {
+        path: 'auth',
+        loadChildren: () => import("@auth/auth.module").then(a => a.AuthModule)
     }
 ]
 

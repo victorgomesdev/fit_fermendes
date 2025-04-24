@@ -5,15 +5,18 @@ import { BrowserModule } from "@angular/platform-browser";
 import pt from '@angular/common/locales/pt'
 import { SharedModule } from "@shared/shared.module";
 import { SessionsModule } from "@sessions/sessions.module";
+import { ClientModule } from "@client/client.module"
+import { AuthModule } from "@auth/auth.module";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing.module";
-import { ClientModule } from "./client/client.module";
 import { ManagementModule } from "./management/management.module";
 
 registerLocaleData(pt)
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [
+        AppComponent
+    ],
     imports: [
         AppRoutingModule,
         BrowserModule,
@@ -21,7 +24,8 @@ registerLocaleData(pt)
         ClientModule,
         SharedModule,
         SessionsModule,
-        ManagementModule
+        ManagementModule,
+        AuthModule
     ],
     bootstrap: [AppComponent]
 })
