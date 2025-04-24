@@ -4,7 +4,7 @@
       <h2 class="text-2xl font-bold">Novo usuário</h2>
       <button class="bg-background px-2 py-1 rounded-full" (click)="toogleModal()"><i class="pi pi-times"></i></button>
     </div>
-    <div class="flex flex-col w-full bg-background rounded-md p-3 gap-3">
+    <form class="flex flex-col w-full bg-background rounded-md p-3 gap-3">
       <div class="flex flex-col gap-1">
         <label for="nome" class="text-paragraph font-semibold"><i class="pi pi-user text-primary"></i> Nome<span class="text-error">*</span></label>
         <input inputAutofocus type="text" id="nome" class="p-2 rounded-md shadow focus:shadow-input-focus outline-none" placeholder="Nome">
@@ -24,6 +24,6 @@
           <option value="Administrador">Administrador</option>
         </select>
       </div>
-    </div>
+    </form>
   </div>
 </div>
