@@ -7,15 +7,17 @@ import { SharedModule } from "@shared/shared.module";
 import { SessionsModule } from "@sessions/sessions.module";
 import { ClientModule } from "@client/client.module"
 import { AuthModule } from "@auth/auth.module";
+import { ManagementModule } from "@management/management.module";
 import { AppComponent } from "./app.component";
+import { HomeComponent } from "./home/home-component";
 import { AppRoutingModule } from "./app.routing.module";
-import { ManagementModule } from "./management/management.module";
 
 registerLocaleData(pt)
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        HomeComponent
     ],
     imports: [
         AppRoutingModule,
