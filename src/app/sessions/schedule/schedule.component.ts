@@ -67,8 +67,8 @@ export class ScheduleComponent implements OnInit {
         }
     }
 
-    changeCurrentDate(event: Event): void {
-        const date = new Date((<HTMLInputElement>event.target).value)
+    changeCurrentDate(input: EventTarget | null): void {
+        const date = (<HTMLInputElement>input).value ? new Date((<HTMLInputElement>input).value): new Date()
         this.today = date
     }
 

@@ -42,7 +42,7 @@
                                     class="pi pi-calendar text-primary text-lg"></i>
                                 Data<span class="text-error">*</span></label>
                             <input id="data" [value]="today | date_input: dateFormats.INPUT"
-                                (change)="changeCurrentDate($event)" type="date"
+                                (change)="changeCurrentDate($event.target)" type="date"
                                 class="p-2 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer"
                                 placeholder="Data da aula" />
                         </span>

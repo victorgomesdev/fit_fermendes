@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
 import { DateFormat, Months } from "@shared/enums/date.enum";
-import { subHours } from 'date-fns'
 
 @Pipe({
     name: 'date_input',
@@ -11,7 +10,7 @@ export class DateFormatPipe implements PipeTransform {
         let date!: string
         switch (format) {
             case 'INPUT': {
-                date = subHours(value, 3).toISOString().split('T')[0]
+                date = value.toISOString().split('T')[0];
                 break
             }
             case 'SMLL_TITLE': {
