@@ -7,6 +7,7 @@ import { ClientCardComponent } from "./client-card/client-card.component";
 import { NoClientCardComponent } from "./no-client-card/no-client-card.component";
 import { ClientDetails } from "./home/client-details/client-details.component";
 import { ClientRegistrationComponent } from "./registration/client-registration.component";
+import { ClientComponent } from "./client.component";
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ClientRegistrationComponent } from "./registration/client-registration.
     SharedModule
   ],
   declarations: [
+    ClientComponent,
     ClienteHomeComponent,
     ClientCardComponent,
     NoClientCardComponent,

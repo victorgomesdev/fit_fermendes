@@ -6,6 +6,7 @@ import { ManagementHomeComponent } from "./management-home/management-home.compo
 import { EditCategoryComponent } from "./edit-category/edit-catyegory.component";
 import { ConfigurationsComponent } from "./configurations/configurations.component";
 import { NewUserComponent } from "./new-user/new-user.component";
+import { ManagementComponent } from "./management.component";
 
 @NgModule({
     imports: [
@@ -14,6 +15,7 @@ import { NewUserComponent } from "./new-user/new-user.component";
         SharedModule
     ],
     declarations: [
+        ManagementComponent,
         ManagementHomeComponent,
         EditCategoryComponent,
         ConfigurationsComponent,

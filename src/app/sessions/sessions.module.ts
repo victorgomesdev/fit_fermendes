@@ -9,6 +9,7 @@ import { SummaryComponent } from "./summary/summary.component";
 import { ScheduleComponent } from "./schedule/schedule.component";
 import { SessionsHistoricComponent } from "./historic/historic.component";
 import { SessionDetailsComponent } from "./session-details/session-details.component";
+import { SessionsComponent } from "./sessions.component";
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { SessionDetailsComponent } from "./session-details/session-details.compo
         })
     ],
     declarations: [
+        SessionsComponent,
         SessionCardComponet,
         SummaryComponent,
         ScheduleComponent,

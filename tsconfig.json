@@ -23,7 +23,7 @@
       "@shared/*": ["./src/app/shared/*"],
       "@client/*": ["./src/app/client/*"],
       "@management/*": ["./src/app/management/*"],
-      "@auth/*": ["./src/app/auth/*"]
+      "@home/*": ["./src/app/home/*"]
     } 
   },
   "angularCompilerOptions": {

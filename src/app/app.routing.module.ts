@@ -1,12 +1,10 @@
 import { NgModule } from "@angular/core";
 import { Route, RouterModule } from "@angular/router";
-import { AppComponent } from "./app.component";
-import { HomeComponent } from "./home/home-component";
 
 const routes: Route[] = [
     {
         path: '',
-        component: HomeComponent,
+        loadComponent: () => import('@home/home.component').then(h => h.HomeComponent)
     },
     {
         path: 'aulas',
@@ -22,7 +20,11 @@ const routes: Route[] = [
     },
     {
         path: 'auth',
-        loadChildren: () => import("@auth/auth.module").then(a => a.AuthModule)
+        loadComponent: () => import('@home/login/login.component').then(l => l.LoginComponent)
+    },
+    {
+        path: '**',
+        loadComponent: () => import("@shared/not-found/not-found.component").then(nf => nf.NotFoundComponent)
     }
 ]
 
