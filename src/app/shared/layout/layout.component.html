@@ -5,24 +5,36 @@
         <span class="text-white sm:text-xs hidden sm:block">STUDIO DE PILATES</span>
     </div>
     <div class="flex flex-row relative">
-        <button class="text-white sm:hidden" (click)="toggleDropdown()" #controlButton><i class="pi pi-bars"></i></button>
-        <nav class="hidden sm:flex flex-col sm:flex-row gap-3 items-center absolute sm:static z-50 right-0 top-7 sm:border-none bg-primary p-2 border border-secondary rounded-md animate-fadeIn" #dropDown>
-            <a [routerLink]="'/aulas'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                class="py-1 px-3 rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300" #link>Aulas</a>
-            <a [routerLink]="'/aulas/agendar'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300" #link>Agendar</a>
-            <a [routerLink]="'/aulas/historico'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                class=" py-1 px-3 rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300" #link>Histórico</a>
-            <a
-                [routerLink]="'/alunos'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300" #link>Alunos</a>
-            <a
-                [routerLink]="'/gestao'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300" #link>Gestão</a>
-            <a
-                [routerLink]="'/gestao/configuracoes'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer" #link>Configurações</a>
-            <a class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300" #link>Sair</a>
+        <button class="text-white sm:hidden" (click)="toggleDropdown()" #controlButton><i
+                class="pi pi-bars"></i></button>
+        <nav class="hidden sm:flex flex-col sm:flex-row gap-3 items-center absolute sm:static z-50 right-0 top-7 sm:border-none bg-primary p-2 border border-secondary rounded-md animate-fadeIn"
+            #dropDown>
+            <a href="javascript: void(0);" [routerLink]="'/aulas'" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="py-1 px-3 rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300"
+                #link>Aulas</a>
+            <a href="javascript: void(0);" [routerLink]="'/aulas/agendar'" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300"
+                #link>Agendar</a>
+            <a href="javascript: void(0);" [routerLink]="'/aulas/historico'" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                class=" py-1 px-3 rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300"
+                #link>Histórico</a>
+            <a href="javascript: void(0);" [routerLink]="'/alunos'" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300"
+                #link>Alunos</a>
+            <a href="javascript: void(0);" [routerLink]="'/gestao'" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300"
+                #link>Gestão</a>
+            <a href="javascript: void(0);" [routerLink]="'/gestao/configuracoes'" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer"
+                #link>Configurações</a>
+            <a class="py-1 px-3  rounded-3xl text-center text-white font-semibold bg-secondary cursor-pointer transition-colors duration-300"
+                #link (click)="logOut()">Sair</a>
         </nav>
     </div>
 </header>

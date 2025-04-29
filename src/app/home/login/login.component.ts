@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
+import { Router } from "@angular/router";
 import { SharedModule } from "@shared/shared.module";
 
 @Component({
@@ -6,4 +7,11 @@ import { SharedModule } from "@shared/shared.module";
   selector: 'login',
   imports: [SharedModule]
 })
-export class LoginComponent { }
+export class LoginComponent {
+
+  private router = inject(Router)
+
+  redirectToHome(): void {
+    this.router.navigate(['/aulas'])
+  }
+}
