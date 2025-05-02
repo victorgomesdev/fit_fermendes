@@ -4,7 +4,7 @@ import { Observable } from "rxjs"
 
 export abstract class BaseService {
 
-  protected readonly API_URL: string = 'http://localhost:3000/'
+  protected readonly API_URL: string = 'http://localhost:3000'
   protected client = inject(HttpClient)
 
   protected get<T>(url: string): Observable<T> {
