@@ -1,4 +1,4 @@
-import { Session } from "@models/sessions";
+import { Session } from "@shared/types/session.type";
 import { BaseService } from "@services/base-service.service";
 import { Observable } from "rxjs";
 

@@ -1,5 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { Session } from "@shared/types/session.type";
+import { SessionService } from "@services/sessions";
 import { DateFormat } from "@shared/enums/date.enum";
 import { CalendarEvent } from 'angular-calendar'
 import { addDays, addMonths, subMonths } from 'date-fns'
@@ -15,13 +18,16 @@ export class ScheduleComponent implements OnInit {
     today!: Date
     targetDate!: Date
 
-    sessions!: CalendarEvent[]
+    sessions!: CalendarEvent<Session>[]
+    formGroup!: FormGroup
+    formBuilder!: FormBuilder
 
     showActiveDay: boolean = false
     showModal: boolean = false
     showSelectionTab: boolean = false
-    
-    constructor(private router: Router) { }
+
+    sessionService: SessionService = inject(SessionService)
+    router: Router = inject(Router)
 
     ngOnInit(): void {
         this.today = new Date()
@@ -52,6 +58,10 @@ export class ScheduleComponent implements OnInit {
                 start: addDays(this.today, 100),
             }
         ]
+
+        this.formGroup = this.formBuilder.group({
+            date: this.formBuilder.control('')
+        })
     }
 
     dayClicked(day: any): void {
@@ -68,7 +78,7 @@ export class ScheduleComponent implements OnInit {
     }
 
     changeCurrentDate(input: EventTarget | null): void {
-        const date = (<HTMLInputElement>input).value ? new Date((<HTMLInputElement>input).value): new Date()
+        const date = (<HTMLInputElement>input).value ? new Date((<HTMLInputElement>input).value) : new Date()
         this.today = date
     }
 
@@ -76,9 +86,9 @@ export class ScheduleComponent implements OnInit {
         return this.sessions.some(s => s.start.getDate() === target.getDate())
     }
 
-    toggleModal(): void {
-        this.showModal = !this.showModal
-    }
+    // toggleModal(): void {
+    //     this.showModal = !this.showModal
+    // }
 
     redirectToRegistration(): void {
         this.router.navigate(['/alunos/cadastrar'])

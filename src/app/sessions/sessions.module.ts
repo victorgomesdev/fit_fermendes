@@ -10,6 +10,7 @@ import { ScheduleComponent } from "./schedule/schedule.component";
 import { SessionsHistoricComponent } from "./historic/historic.component";
 import { SessionDetailsComponent } from "./session-details/session-details.component";
 import { SessionsComponent } from "./sessions.component";
+import { SessionService } from "@services/sessions";
 
 @NgModule({
     imports: [
@@ -28,6 +29,7 @@ import { SessionsComponent } from "./sessions.component";
         ScheduleComponent,
         SessionsHistoricComponent,
         SessionDetailsComponent
-    ]
+    ],
+    providers: [SessionService]
 })
 export class SessionsModule { }

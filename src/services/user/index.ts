@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { UserLoginRequest } from "@models/user";
+import { UserLoginRequest } from "@shared/types/user.type";
 import { BaseService } from "@services/base-service.service";
 
 @Injectable({
@@ -13,7 +13,7 @@ export class UserService extends BaseService {
     return this.post<string>(this.PATH + '/loginEmail', { email, password })
   }
 
-  authenticateWith2F(token: string) {
+  authenticateWith2F(twoFactorToken: string) {
     return this.post(this.PATH + '/2fa', {})
   }
 
@@ -26,6 +26,6 @@ export class UserService extends BaseService {
   }
 
   updateUserData(id: number) {
-    return this.put(this.PATH + `${id}`, {})
+    return this.put(this.PATH + `/${id}`, {})
   }
 }

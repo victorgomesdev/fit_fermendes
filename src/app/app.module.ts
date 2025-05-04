@@ -8,7 +8,6 @@ import { SharedModule } from "@shared/shared.module";
 import { SessionsModule } from "@sessions/sessions.module";
 import { ClientModule } from "@client/client.module"
 import { ManagementModule } from "@management/management.module";
-import { ServicesModule } from "@services/services.module";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing.module";
 
@@ -27,7 +26,6 @@ registerLocaleData(pt)
         SessionsModule,
         ManagementModule,
         RouterModule,
-        ServicesModule
     ],
     bootstrap: [AppComponent]
 })
