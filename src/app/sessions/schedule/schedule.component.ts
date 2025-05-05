@@ -26,7 +26,7 @@ export class ScheduleComponent implements OnInit {
     showModal: boolean = false
     showSelectionTab: boolean = false
 
-    sessionService: SessionService = inject(SessionService)
+    //sessionService: SessionService = inject(SessionService)
     router: Router = inject(Router)
 
     ngOnInit(): void {
@@ -85,10 +85,6 @@ export class ScheduleComponent implements OnInit {
     private hasEventInThisDate(target: Date): boolean {
         return this.sessions.some(s => s.start.getDate() === target.getDate())
     }
-
-    // toggleModal(): void {
-    //     this.showModal = !this.showModal
-    // }
 
     redirectToRegistration(): void {
         this.router.navigate(['/alunos/cadastrar'])

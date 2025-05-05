@@ -1,4 +1,4 @@
-import { Client } from "@models/client"
+import { Client } from "@shared/types/client.type"
 
 export type Session = {
   id: string,

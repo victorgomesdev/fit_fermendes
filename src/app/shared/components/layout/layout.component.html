@@ -1,3 +1,4 @@
+<alert/>
 <header class="w-full flex flex-row justify-between bg-primary p-3 sm:p-6 fixed top-0 z-50">
     <div class="flex flex-col">
         <span class="text-white sm:text-2xl text-lg font-extrabold">Fit Fermendes</span>
@@ -5,9 +6,9 @@
         <span class="text-white sm:text-xs hidden sm:block">STUDIO DE PILATES</span>
     </div>
     <div class="flex flex-row relative">
-        <button class="text-white sm:hidden" (click)="toggleDropdown()" #controlButton><i
+        <button class="text-white text-lg lg:hidden" (click)="toggleDropdown()" #controlButton><i
                 class="pi pi-bars"></i></button>
-        <nav class="hidden sm:flex flex-col sm:flex-row gap-3 items-center absolute sm:static z-50 right-0 top-7 sm:border-none bg-primary p-2 border border-secondary rounded-md animate-fadeIn"
+        <nav class="hidden lg:flex flex-col lg:flex-row gap-3 items-center absolute lg:static z-50 right-0 top-7 lg:border-none bg-primary p-2 border border-secondary rounded-md animate-fadeIn"
             #dropDown>
             <a href="javascript: void(0);" [routerLink]="'/aulas'" routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}"
