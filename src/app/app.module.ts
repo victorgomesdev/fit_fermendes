@@ -7,6 +7,7 @@ import { RouterModule } from "@angular/router";
 import { SharedModule } from "@shared/shared.module";
 import { SessionsModule } from "@sessions/sessions.module";
 import { ClientModule } from "@client/client.module"
+import { ToastrModule } from "ngx-toastr";
 import { ManagementModule } from "@management/management.module";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing.module";
@@ -26,6 +27,12 @@ registerLocaleData(pt)
         SessionsModule,
         ManagementModule,
         RouterModule,
+        ToastrModule.forRoot({
+            progressBar: true,
+            progressAnimation: 'decreasing',
+            timeOut: 3000,
+            closeButton: true,
+        })
     ],
     bootstrap: [AppComponent]
 })

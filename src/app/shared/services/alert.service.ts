@@ -9,7 +9,19 @@ export class AlertService {
 
   observable = new Subject<{ message: string, type: AlertEnum }>()
 
-  display(message: string, type: AlertEnum) {
-    this.observable.next({ message, type })
+  error(message: string): void {
+    this.observable.next({ message: message, type: AlertEnum.ERROR })
+  }
+
+  info(message: string): void {
+    this.observable.next({ message: message, type: AlertEnum.INFO })
+  }
+
+  warn(message: string): void {
+    this.observable.next({ message: message, type: AlertEnum.WARN })
+  }
+
+  success(message: string): void {
+    this.observable.next({ message: message, type: AlertEnum.SUCCESS })
   }
 }

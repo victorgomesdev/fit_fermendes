@@ -1,7 +1,6 @@
-import { ChangeDetectorRef, Component, ComponentRef, inject, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
-import { AlertEnum } from "@shared/enums/alert.enum";
+import { Component, inject, OnInit, } from "@angular/core";
 import { AlertService } from "@shared/services/alert.service";
-import { AlertMessageComponent } from "./alert-message/alert.message.component";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   templateUrl: './alert.component.html',
@@ -10,40 +9,21 @@ import { AlertMessageComponent } from "./alert-message/alert.message.component";
 })
 export class AlertComponent implements OnInit {
 
-  @ViewChild('vcr', { read: ViewContainerRef, static: true }) container!: ViewContainerRef
-
-  show: boolean = false
-
-  messages: ComponentRef<AlertMessageComponent>[] = []
   alertService = inject(AlertService)
-  cd = inject(ChangeDetectorRef)
+  toatsrService = inject(ToastrService)
 
   ngOnInit(): void {
     this.alertService.observable
       .subscribe({
         next: (event) => {
-          const ref = this.container.createComponent(AlertMessageComponent)
-          ref.setInput('type', event.type)
-          ref.setInput('message', event.message)
-          ref.setInput('index', this.messages.length == 0 ? this.messages.length : this.messages.length + 1)
+          switch (event.type) {
+            case 'ERROR': this.toatsrService.error(event.message, 'ERRO!'); break;
+            case 'WARN': this.toatsrService.warning(event.message, 'ALERTA!'); break;
+            case 'SUCCESS': this.toatsrService.success(event.message, 'SUCESSO!'); break;
+            case 'INFO': this.toatsrService.info(event.message, 'INFO!'); break;
+          }
         }
       })
   }
 
 }
-
-/*
-event => {
-        switch (event.type) {
-          case 'ERROR': this.title = 'ERRO!'; break;
-          case 'WARN': this.title = 'ALERTA!'; break;
-          case 'SUCCESS': this.title = 'SUCESSO!'; break;
-          case 'INFO': this.title = 'SALVO!'; break;
-        }
-
-        this.type = event.type
-        this.message = event.message
-        this.show = true
-        setTimeout(() => this.show = false, 3000)
-      }
-*/

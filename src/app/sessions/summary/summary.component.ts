@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, ViewChild } from "@angular/core";
 import { SessionDetailsComponent } from "@sessions/session-details/session-details.component";
-import { AlertEnum } from "@shared/enums/alert.enum";
 import { AlertService } from "@shared/services/alert.service";
 
 @Component({
@@ -24,6 +23,6 @@ export class SummaryComponent implements OnInit {
     }
 
     ngOnInit(): void {
-       //setInterval(()=> this.alert.display('Isso é um teste com mensagem bem grande', AlertEnum.SUCCESS), 1000) 
+        
     }
 }
