@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { AlertComponent } from "@components/alert/alert.component";
 import { LayoutComponent } from "@components/layout/layout.component";
+import { AlertMessageComponent } from "@components/alert/alert-message/alert.message.component";
 import { DateFormatPipe } from "./pipes/date-format.pipe";
 import { AutofocusDirective } from "./directives/autofocus.directive";
 
@@ -12,6 +13,7 @@ import { AutofocusDirective } from "./directives/autofocus.directive";
         DateFormatPipe,
         AutofocusDirective,
         AlertComponent,
+        AlertMessageComponent
     ],
     exports: [
         LayoutComponent,

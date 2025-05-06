@@ -24,7 +24,6 @@ export class SummaryComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.alert.display('Isso é um teste com mensagem bem grande', AlertEnum.SUCCESS)
-        this.alert.display('Isso é um teste com mensagem bem grande', AlertEnum.WARN)
+       //setInterval(()=> this.alert.display('Isso é um teste com mensagem bem grande', AlertEnum.SUCCESS), 1000) 
     }
 }
