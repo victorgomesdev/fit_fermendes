@@ -2,13 +2,29 @@
     <div class="bg-white rounded-md p-3 md:p-4 xl:w-1/2 w-full shadow flex flex-col gap-3">
         <h2 class="text-2xl font-bold">Gestão</h2>
         <div class="flex flex-col bg-background rounded-md p-2 lg:p-4 gap-3">
-            <h2 class="text-paragraph font-semibold text-lg"><i class="pi pi-wrench text-primary"></i> Editar modalidades</h2>
+            <h2 class="text-paragraph font-semibold text-lg"><i class="pi pi-wrench text-primary"></i> Editar
+                modalidades</h2>
             <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
-                <div class="flex flex-col lg:flex-row justify-center items-center gap-3 p-3 bg-white shadow rounded-md transition hover:-translate-y-1 duration-300">
-                    <span class="bg-info px-2 py-1 rounded-full text-white text-sm md:text-base text-center">Neopilates</span>
-                    <button class="bg-primary py-1 px-2 rounded-md" (click)="openModal()"><i class="pi pi-pencil text-white"></i></button>
+                <div *ngFor="let cat of categories"
+                    class="flex flex-col lg:flex-row justify-center items-center gap-3 p-3 bg-white shadow rounded-md transition hover:-translate-y-1 duration-300">
+                    <span
+                        class="bg-info px-2 py-1 rounded-full text-white text-sm md:text-base text-center">{{cat.nome}}</span>
+                    <button class="bg-primary py-1 px-2 rounded-md" (click)="openModal(cat)"><i
+                            class="pi pi-pencil text-white"></i></button>
                 </div>
-                <div class="flex flex-col lg:flex-row justify-center items-center gap-3 p-3 bg-white shadow rounded-md transition hover:-translate-y-1 duration-300">
+                <div class="flex flex-col lg:flex-row justify-center items-center gap-3 p-3 rounded-md">
+                    <span class="font-semibold text-paragraph text-sm md:text-base text-center">Nova modalidade</span>
+                    <button class="bg-primary py-1 px-2 rounded-md" (click)="openModal()"><i
+                            class="pi pi-plus text-white"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<edit-category (saveCategory)="newCategorySaved($event)"/>
+
+<!--
+<div class="flex flex-col lg:flex-row justify-center items-center gap-3 p-3 bg-white shadow rounded-md transition hover:-translate-y-1 duration-300">
                     <span class="bg-yellow px-2 py-1 rounded-full text-white text-sm md:text-base text-center">Personal Pilates</span>
                     <button class="bg-primary py-1 px-2 rounded-md" (click)="openModal()"><i class="pi pi-pencil text-white"></i></button>
                 </div>
@@ -20,12 +36,4 @@
                     <span class="bg-error px-2 py-1 rounded-full text-white text-sm md:text-base text-center">Elastic Training</span>
                     <button class="bg-primary py-1 px-2 rounded-md" (click)="openModal()"><i class="pi pi-pencil text-white"></i></button>
                 </div>
-                <div class="flex flex-col lg:flex-row justify-center items-center gap-3 p-3 rounded-md">
-                    <span class="font-semibold text-paragraph text-sm md:text-base text-center">Nova modalidade</span>
-                    <button class="bg-primary py-1 px-2 rounded-md" (click)="openModal()"><i class="pi pi-plus text-white"></i></button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<edit-category/>
+-->

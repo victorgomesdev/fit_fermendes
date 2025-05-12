@@ -7,12 +7,14 @@ import { EditCategoryComponent } from "./edit-category/edit-catyegory.component"
 import { ConfigurationsComponent } from "./configurations/configurations.component";
 import { NewUserComponent } from "./new-user/new-user.component";
 import { ManagementComponent } from "./management.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
     imports: [
         ManagementRoutingModule,
         CommonModule,
-        SharedModule
+        SharedModule,
+        ReactiveFormsModule
     ],
     declarations: [
         ManagementComponent,

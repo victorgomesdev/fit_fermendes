@@ -13,8 +13,3 @@ export enum SessionStatus {
   CONCLUIDA = "CONCLUIDA",
   CANCELADA = "CANCELADA"
 }
-
-export type Category = {
-  id: string,
-  name: string
-}
