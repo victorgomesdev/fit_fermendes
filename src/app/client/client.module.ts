@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { SharedModule } from "@shared/shared.module";
+import { ReactiveFormsModule } from "@angular/forms";
 import { ClientRoutingModule } from "./client.rounting.module";
 import { ClienteHomeComponent } from "./home/client-home.component";
 import { ClientCardComponent } from "./client-card/client-card.component";
@@ -13,7 +14,8 @@ import { ClientComponent } from "./client.component";
   imports: [
     CommonModule,
     ClientRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ClientComponent,
