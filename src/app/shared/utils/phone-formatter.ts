@@ -1,4 +1,4 @@
-export function phoneValidator(numero: string): string {
+export function phoneFormatterUtil(numero: string): string {
 
     const numeros = numero.replace(/\D/g, '').slice(0, 11);
     let formatado = '';

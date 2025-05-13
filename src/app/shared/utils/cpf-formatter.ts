@@ -1,4 +1,4 @@
-export function cpfValidator(cpf: string): string {
+export function cpfFormatterUtil(cpf: string): string {
   const numeros = cpf.replace(/\D/g, '');
 
   let formatado = '';
