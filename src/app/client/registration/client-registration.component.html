@@ -1,8 +1,8 @@
 <div class="w-full flex flex-col lg:p-4 items-center animate-fadeIn">
   <div class="flex flex-col bg-white rounded-md shadow p-3 lg:p-5 xl:w-3/4 w-full gap-4" [formGroup]="formGroup">
-    <div class="w-full flex flex-row justify-between">
-      <h2 class="font-bold text-2xl">Cadastrar novo aluno</h2>
-      <button class="bg-error p-2 rounded-md text-white" (click)="cancelRegistration()"><i class="pi pi-times"></i>
+    <div class="w-full flex flex-row justify-between items-center">
+      <h2 class="font-bold text-2xl">Novo aluno</h2>
+      <button class="bg-error p-2 rounded-md text-white text-xs" (click)="cancelRegistration()"><i class="pi pi-times"></i>
         CANCELAR</button>
     </div>
     <div class="bg-background shadow grid grid-cols-2 w-full rounded-md p-5 lg:gap-5 gap-2">
@@ -38,10 +38,12 @@
           placeholder="email@email.com" formControlName="email">
       </span>
       <span class="flex flex-col items-center justify-center gap-1">
-        <div class="w-24 relative">
-          <button *ngIf="clientImageUrl" class="rounded-full bg-white px-1 absolute -right-5" (click)="cancelImage()"><p class="pi pi-times text-sm"></p></button>
-          <img [src]=" clientImageUrl? clientImageUrl:'assets/user.png'" alt="User" class="w-full rounded-md">
-          <label for="foto" class="bg-primary px-1 rounded-full absolute z-50 bottom-0 -right-5 cursor-pointer"><i
+        <div class="relative">
+          <button *ngIf="clientImageUrl" class="rounded-full bg-white px-1 absolute right-2 top-1" (click)="cancelImage()"><p class="pi pi-times text-sm"></p></button>
+          <div class=" p-2 rounded-full overflow-hidden w-24 h-24 md:w-32 sm:h-32 flex flex-col justify-center">
+            <img [src]=" clientImageUrl? clientImageUrl:'assets/user.png'" alt="User" class="">
+          </div>
+          <label for="foto" class="bg-primary px-1 rounded-full absolute z-50 bottom-1 right-2 cursor-pointer"><i
               class="pi pi-camera text-white"></i>
           </label>
           <input type="file" id="foto" class="hidden w-[1%]" accept="image/*" (change)="onImageSelection($event)">
@@ -83,7 +85,7 @@
       </span>
     </div>
     <div class="self-end">
-      <button class="bg-info text-white p-2 rounded-md font-semibold mr-5" (click)="saveForm()"><i
+      <button class="bg-info text-white p-2 rounded-md mr-5 text-sm md:text-base" (click)="saveForm()"><i
           class="pi pi-user-plus"></i>
         CADASTRAR</button>
     </div>

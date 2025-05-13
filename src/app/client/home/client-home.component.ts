@@ -22,7 +22,6 @@ export class ClienteHomeComponent extends BaseComponent {
       .subscribe({
         next: (res: any) => {
           this.clients = res.data
-          console.log(res)
         }
       })
   }
