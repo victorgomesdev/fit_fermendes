@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Client } from "@shared/types/client.type";
 
 @Component({
   templateUrl: './client-details.component.html',
@@ -7,9 +8,11 @@ import { Component } from "@angular/core";
 })
 export class ClientDetails { 
 
+  client!: Client
   show = false
 
-  openModal() {
+  openModal(client: Client) {
+    this.client = client
     this.show = true
   }
 

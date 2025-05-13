@@ -1,5 +1,7 @@
-import { Component, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, inject, ViewChild } from "@angular/core";
+import { BaseComponent } from "@components/base/base.component";
+import { ClientService } from "@services/client";
+import { Client } from "@shared/types/client.type";
 import { ClientDetails } from "./client-details/client-details.component";
 
 @Component({
@@ -7,17 +9,29 @@ import { ClientDetails } from "./client-details/client-details.component";
   selector: 'client-home',
   standalone: false
 })
-export class ClienteHomeComponent { 
+export class ClienteHomeComponent extends BaseComponent {
 
   @ViewChild(ClientDetails) details!: ClientDetails
-  
-  constructor(private router: Router) {}
+
+  clients: Client[] = []
+
+  clientService = inject(ClientService)
+
+  override ngOnInit(): void {
+    this.clientService.listAllCLients()
+      .subscribe({
+        next: (res: any) => {
+          this.clients = res.data
+          console.log(res)
+        }
+      })
+  }
 
   redirectToRegistration(): void {
     this.router.navigate(['/alunos/cadastrar'])
   }
 
-  clientSelected(): void {
-    this.details.openModal()
+  clientSelected(client: Client): void {
+    this.details.openModal(client)
   }
 }

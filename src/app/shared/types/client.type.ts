@@ -1,21 +1,15 @@
 export type Client = {
     id?: string,
-    personalInformation: PersonalInformation,
-    healthInformation: HealthInformation,
-    goal: string,
-    imageURL: string | undefined
-}
-
-export type HealthInformation = {
-    height: number,
-    weight: number,
-    injury?: string,
-    medicalIndication: string
-}
-
-export type PersonalInformation = {
     email: string,
-    name: string,
-    CPF: string,
-    phone: string,
+    nome: string,
+    cpf: string,
+    telefone: string,
+    dataNascimento: string,
+    objetivo: string,
+    peso: number,
+    altura: number,
+    lesao?: string,
+    indicacaoMedica: string
+    base64Imagem?: string,
+    nomeImagem?: string
 }

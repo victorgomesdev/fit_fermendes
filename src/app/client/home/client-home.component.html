@@ -5,12 +5,8 @@
       <button class="text-sm bg-primary p-2 rounded-md text-white font-semibold" (click)="redirectToRegistration()"><i class="pi pi-user-plus"></i> CADASTRAR</button>
     </div>
     <div class="w-full grid grid-cols-2 xl:grid-cols-3 bg-background rounded-md shadow p-2 md:p-5 gap-3">
-      <input inputAutofocus type="text" class="p-2 w-3/4 rounded-lg shadow focus:shadow-input-focus col-span-2 xl:col-span-3 outline-none transition-all duration-100 cursor-pointer bg-white" placeholder="Pesquisar">
-      <client-card (selected)="clientSelected()"/>
-      <client-card (selected)="clientSelected()"/>
-      <client-card (selected)="clientSelected()"/>
-      <client-card (selected)="clientSelected()"/>
-      <no-client-card/>
+      <client-card (selected)="clientSelected($event)" *ngFor="let client of clients; let index = index" [client]="client"/>
+      <no-client-card *ngIf="clients.length == 0"/>
     </div>
   </div>
 </div>

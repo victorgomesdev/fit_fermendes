@@ -7,6 +7,7 @@ import pt from '@angular/common/locales/pt'
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "@shared/shared.module";
 import { apiAuthenticationInterceptor } from "@shared/interceptors/api-authentication.interceptor";
+import { globalErrorInterceptor } from "@shared/interceptors/global-error.interceptor";
 import { SessionsModule } from "@sessions/sessions.module";
 import { ManagementModule } from "@management/management.module";
 import { ClientModule } from "@client/client.module"
@@ -34,13 +35,15 @@ registerLocaleData(pt)
             progressAnimation: 'decreasing',
             timeOut: 3000,
             closeButton: true,
+            preventDuplicates: true
         })
     ],
     bootstrap: [AppComponent],
     providers: [
         provideHttpClient(
             withInterceptors([
-                apiAuthenticationInterceptor
+                apiAuthenticationInterceptor,
+                globalErrorInterceptor
             ])
         )
     ]

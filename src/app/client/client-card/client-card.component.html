@@ -1,9 +1,9 @@
 <div class="flex flex-col items-center bg-white w-full rounded-md px-2 py-3 md:py-8 md:px-5 shadow gap-5 transition duration-300 transform hover:-translate-y-1">
   <img src="assets/user.png" alt="user" class="w-14 md:w-28 shadow-md rounded-full"/>
   <div class="flex flex-col w-full bg-background rounded-md px-1 md:px-5 py-6 gap-3 shadow">
-    <p class="text-paragraph font-semibold text-center"><i class="pi pi-user text-primary"></i><span> Nome:</span> Vitor</p>
-    <p class="text-paragraph font-semibold text-center hidden md:block"><i class="pi pi-phone text-primary"></i><span> Telefone:</span> 99999999999999</p>
-    <p class="text-paragraph font-semibold text-center hidden md:block"><i class="pi pi-envelope text-primary"></i><span> Email:</span> teste&#64;teste.com</p>
+    <p class="text-paragraph font-semibold text-center"><i class="pi pi-user text-primary"></i><span> Nome:</span> {{client()?.nome}}</p>
+    <p class="text-paragraph font-semibold text-center hidden md:block"><i class="pi pi-phone text-primary"></i><span> Telefone:</span> {{client()?.telefone}}</p>
+    <p class="text-paragraph font-semibold text-center hidden md:block"><i class="pi pi-envelope text-primary"></i><span> Email:</span> {{client()?.email}}</p>
     <button class="bg-primary text-sm md:text-base text-white py-1 px-2 rounded-md shadow max-w-[80%] self-center" (click)="clientSelected()"><i class="pi pi-plus"></i> Detalhes</button>
   </div>
 </div>

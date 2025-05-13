@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, inject, OnInit, output } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { CategoryService } from "@services/category";
@@ -34,13 +35,15 @@ export class EditCategoryComponent implements OnInit {
   }
 
   private saveEditing(): void {
-    this.categoryService.editCategory(<number>this.category?.id, this.form.get('name')?.value)
-      .subscribe({
-        next: (res: any) => {
-          this.saveCategory.emit(res.data as Category)
-        },
-        complete: ()=> this.alertService.success('Modalidade editada com sucesso!')
-      })
+    if (this.form.valid) {
+      this.categoryService.editCategory(<number>this.category?.id, this.form.get('name')?.value)
+        .subscribe({
+          next: (res: any) => {
+            this.saveCategory.emit(res.data as Category)
+          },
+          complete: () => this.alertService.success('Modalidade editada com sucesso!')
+        })
+    }
   }
 
   private createNewCategory() {
@@ -50,12 +53,12 @@ export class EditCategoryComponent implements OnInit {
           next: (res: any) => {
             this.saveCategory.emit(res.data as Category)
           },
-          error: err => this.alertService.error(err),
-          complete: ()=> this.alertService.success('Modalidade adicionada com sucesso!')
+          error: (err: HttpErrorResponse) => this.alertService.error(err.message),
+          complete: () => this.alertService.success('Modalidade adicionada com sucesso!')
         })
       return
     }
-    this.alertService.error('Preencha os campos obrigatórios!')
+    this.alertService.warn('Preencha todos os campos obrigatórios!')
     return
   }
 
