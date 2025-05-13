@@ -4,7 +4,7 @@ import { Observable } from "rxjs"
 
 export abstract class BaseService {
 
-  protected readonly API_URL: string = 'https://fitfermendes-api.onrender.com'
+  protected readonly API_URL: string = '/api'
   protected client = inject(HttpClient)
 
   protected get<T>(url: string): Observable<T> {

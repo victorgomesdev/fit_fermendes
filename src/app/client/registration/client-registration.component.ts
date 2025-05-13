@@ -1,10 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { Validators } from "@angular/forms";
 import { BaseComponent } from "@components/base/base.component";
+import { ClientService } from "@services/client";
 import { Client } from "@shared/types/client.type";
-import { cpfValidator } from "@shared/utils/cpf-formatter";
-import { imageToBase64 } from "@shared/utils/image-to-base64";
-import { phoneValidator } from "@shared/utils/phone-formatter";
+import { cpfFormatterUtil } from "@shared/utils/cpf-formatter";
+import { imageToBase64Util } from "@shared/utils/image-to-base64";
+import { phoneFormatterUtil } from "@shared/utils/phone-formatter";
 
 @Component({
   templateUrl: './client-registration.component.html',
@@ -16,6 +17,8 @@ export class ClientRegistrationComponent extends BaseComponent {
   client!: Client
   clientImageUrl!: string
   clientImageName!: string
+
+  clientService = inject(ClientService)
 
   override ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -36,33 +39,42 @@ export class ClientRegistrationComponent extends BaseComponent {
 
   saveForm(): void {
     if (this.formGroup.valid) {
+      this.clientService.registerNewClient(this.formGroup.value as Client)
+        .subscribe({
+          next: (res) => {
+            this.alertService.success('Aluno cadastrado com sucesso.')
+          },
+          error: (err)=> this.alertService.error(err.message),
+          complete: ()=> this.router.navigate(['/alunos'])
+        })
+
       return
     }
-    this.alertService.warn('Preencha todos os campos obrigatórios!')
+    this.alertService.warn('Verifique novamente os dados!')
+    return
   }
 
   onCpfChanges(event: Event): void {
-    this.formGroup.get('cpf')?.setValue(cpfValidator((<HTMLInputElement>event.target).value))
+    this.formGroup.get('cpf')?.setValue(cpfFormatterUtil((<HTMLInputElement>event.target).value))
   }
 
   onPhoneChanges(event: Event): void {
-    this.formGroup.get('telefone')?.setValue(phoneValidator((<HTMLInputElement>event.target).value))
+    this.formGroup.get('telefone')?.setValue(phoneFormatterUtil((<HTMLInputElement>event.target).value))
   }
 
   async onImageSelection(event: Event) {
-
-    const { base64, imageName, file } = await imageToBase64(event)
-
-    this.formGroup.get('base64Imagem')?.setValue(base64)
-    this.formGroup.get('nomeImagem')?.setValue(imageName)
-    this.clientImageUrl = URL.createObjectURL(file)
-    this.clientImageName = imageName
+    try{
+      const { base64, imageName } = await imageToBase64Util(event)
+      this.formGroup.get('base64Imagem')?.setValue(base64)
+      this.formGroup.get('nomeImagem')?.setValue(imageName)
+      this.clientImageUrl = base64
+      this.clientImageName = imageName
+    }catch(err){ }
   }
 
   cancelImage() {
     this.formGroup.get('nomeImagem')?.setValue('')
     this.formGroup.get('base64Imagem')?.setValue('')
-    URL.revokeObjectURL(this.clientImageUrl)
     this.clientImageUrl = ''
     this.clientImageName = ''
   }
