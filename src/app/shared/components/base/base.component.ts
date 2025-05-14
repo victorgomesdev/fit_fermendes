@@ -2,6 +2,7 @@ import { inject, Injectable, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AlertService } from "@shared/services/alert.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Injectable()
 export abstract class BaseComponent implements OnInit {
@@ -11,7 +12,10 @@ export abstract class BaseComponent implements OnInit {
   router = inject(Router)
   activeRoute = inject(ActivatedRoute)
   alertService = inject(AlertService)
-
+  loadingService = inject(NgxSpinnerService)
+  
+  isLoading!: boolean
+  
   ngOnInit(): void { }
   createForm(): void { }
   saveFormEditing(): void { }
