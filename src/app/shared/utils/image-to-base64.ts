@@ -14,6 +14,9 @@ export function imageToBase64Util(event: Event) {
       reject(null)
     }
 
+    if(file.size > 100000){
+      reject(-1)
+    }
     const reader = new FileReader()
 
     reader.onload = () => resolve({ base64: reader.result as string, imageName: file.name })
