@@ -1,5 +1,5 @@
 export type Client = {
-    id?: string,
+    id?: number,
     email: string,
     nome: string,
     cpf: string,
@@ -11,5 +11,6 @@ export type Client = {
     lesao?: string,
     indicacaoMedica: string
     base64Imagem?: string,
-    nomeImagem?: string
+    nomeImagem?: string,
+    ativo?: any
 }

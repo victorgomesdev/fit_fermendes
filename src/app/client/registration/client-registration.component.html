@@ -1,8 +1,9 @@
 <div class="w-full flex flex-col lg:p-4 items-center animate-fadeIn">
   <div class="flex flex-col bg-white rounded-md shadow p-3 lg:p-5 xl:w-3/4 w-full gap-4" [formGroup]="formGroup">
     <div class="w-full flex flex-row justify-between items-center">
-      <h2 class="font-bold text-2xl">Novo aluno</h2>
-      <button class="bg-error p-2 rounded-md text-white text-xs" (click)="cancelRegistration()"><i class="pi pi-times"></i>
+      <h2 class="font-bold text-2xl">{{client? 'Editar aluno': 'Novo aluno'}}</h2>
+      <button class="bg-error p-2 rounded-md text-white text-xs md:text-base" (click)="cancelRegistration()"><i
+          class="pi pi-times"></i>
         CANCELAR</button>
     </div>
     <div class="bg-background shadow grid grid-cols-2 w-full rounded-md p-5 lg:gap-5 gap-2">
@@ -39,9 +40,14 @@
       </span>
       <span class="flex flex-col items-center justify-center gap-1">
         <div class="relative">
-          <button *ngIf="clientImageUrl" class="rounded-full bg-white px-1 absolute right-2 top-1" (click)="cancelImage()"><p class="pi pi-times text-sm"></p></button>
-          <div class=" p-2 rounded-full overflow-hidden w-24 h-24 md:w-32 sm:h-32 flex flex-col justify-center">
-            <img [src]=" clientImageUrl? clientImageUrl:'assets/user.png'" alt="User" class="">
+          <button *ngIf="clientImageUrl" class="rounded-full bg-error text-white px-1 absolute right-2 top-1"
+            (click)="cancelImage()">
+            <p class="pi pi-times text-sm"></p>
+          </button>
+          <div
+            class="flex flex-col justify-center items-center rounded-full w-28 h-28 md:w-32 md:h-32 self-center overflow-hidden">
+            <img [src]=" clientImageUrl? clientImageUrl:'assets/user.png'" alt="User"
+              class="w-full h-full object-cover">
           </div>
           <label for="foto" class="bg-primary px-1 rounded-full absolute z-50 bottom-1 right-2 cursor-pointer"><i
               class="pi pi-camera text-white"></i>
@@ -85,9 +91,12 @@
       </span>
     </div>
     <div class="self-end">
-      <button class="bg-info text-white p-2 rounded-md mr-5 text-sm md:text-base" (click)="saveForm()"><i
+      <button *ngIf="!client" class="bg-info text-white p-2 rounded-md mr-5 text-xs md:text-base" (click)="saveForm()"><i
           class="pi pi-user-plus"></i>
         CADASTRAR</button>
+      <button *ngIf="client" class="bg-info text-white p-2 rounded-md mr-5 text-xs md:text-base" (click)="saveForm()"><i
+          class="pi pi-save"></i>
+        SALVAR</button>
     </div>
   </div>
 </div>

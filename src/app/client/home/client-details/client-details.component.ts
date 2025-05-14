@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { BaseComponent } from "@components/base/base.component";
 import { Client } from "@shared/types/client.type";
 
 @Component({
@@ -6,7 +7,7 @@ import { Client } from "@shared/types/client.type";
   selector: 'client-details',
   standalone: false
 })
-export class ClientDetails { 
+export class ClientDetails extends BaseComponent {
 
   client!: Client
   show = false
@@ -18,5 +19,17 @@ export class ClientDetails {
 
   closeModal(): void {
     this.show = false
+  }
+
+  redirectToEdit(clientId: number | undefined): void {
+    if (clientId) {
+      this.router.navigate(['cadastrar'], {
+        queryParams: {
+          edit: clientId
+        },
+        relativeTo: this.activeRoute
+      })
+    }
+    return
   }
 }
