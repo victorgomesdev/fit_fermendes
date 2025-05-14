@@ -20,6 +20,8 @@ export class ClientRegistrationComponent extends BaseComponent {
   clientImageUrl!: string
   clientImageName!: string
 
+  override isLoading = false
+
   clientService = inject(ClientService)
 
   override ngOnInit(): void {
@@ -28,6 +30,7 @@ export class ClientRegistrationComponent extends BaseComponent {
       .pipe(
         filter((params) => params.has('edit'))
       ).subscribe((param) => {
+        this.loadingService.show()
         this.clientService.getClientById(Number(param.get('edit')))
           .subscribe({
             next: (res: any) => {
@@ -35,6 +38,9 @@ export class ClientRegistrationComponent extends BaseComponent {
               this.clientImageName = <string>this.client.nomeImagem
               this.clientImageUrl = <string>this.client.base64Imagem
               this.initializeFormOnEditing()
+            },
+            complete: ()=> {
+              this.loadingService.hide()
             }
           })
       })
@@ -69,6 +75,8 @@ export class ClientRegistrationComponent extends BaseComponent {
   }
 
   saveForm(): void {
+    this.isLoading = true
+    console.log(this.isLoading)
     if (!this.client) {
       this.saveFormRestering()
       return
@@ -102,6 +110,7 @@ export class ClientRegistrationComponent extends BaseComponent {
         complete: ()=> this.router.navigate(['alunos']),
         error: ()=> this.alertService.error('Ocorreu um erro no servidor!')
       })
+      this.isLoading = false
       return
     }
     this.alertService.warn('Campos inválidos ou não preenchidos!')

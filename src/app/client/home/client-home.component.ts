@@ -18,11 +18,15 @@ export class ClienteHomeComponent extends BaseComponent {
   clientService = inject(ClientService)
 
   override ngOnInit(): void {
+    this.isLoading = true
+    this.loadingService.show()
     this.clientService.listAllCLients()
       .subscribe({
         next: (res: any) => {
           this.clients = res.data
-        }
+          this.isLoading = false
+        },
+        complete: ()=> this.loadingService.hide()
       })
   }
 

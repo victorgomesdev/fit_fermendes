@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, ViewChild } from "@angular/core";
+import { BaseComponent } from "@components/base/base.component";
 import { EditCategoryComponent } from "@management/edit-category/edit-catyegory.component";
 import { CategoryService } from "@services/category";
-import { AlertService } from "@shared/services/alert.service";
 import { Category } from "@shared/types/category.type";
 
 @Component({
@@ -9,16 +9,16 @@ import { Category } from "@shared/types/category.type";
     selector: 'management-home',
     standalone: false
 })
-export class ManagementHomeComponent implements OnInit {
+export class ManagementHomeComponent extends BaseComponent implements OnInit {
 
     @ViewChild(EditCategoryComponent) editCategory!: EditCategoryComponent
 
     categories: Category[] = []
 
     categoryService = inject(CategoryService)
-    alertService = inject(AlertService)
 
-    ngOnInit(): void {
+    override ngOnInit(): void {
+        this.loadingService.show()
         this.categoryService.listAllCategories()
             .subscribe({
                 next: (res: any) => {
@@ -26,7 +26,8 @@ export class ManagementHomeComponent implements OnInit {
                 },
                 error: (error) => {
                     this.alertService.error(error)
-                }
+                },
+                complete: ()=> this.loadingService.hide()
             })
     }
 

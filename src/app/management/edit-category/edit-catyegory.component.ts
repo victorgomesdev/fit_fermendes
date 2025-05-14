@@ -43,7 +43,10 @@ export class EditCategoryComponent implements OnInit {
           },
           complete: () => this.alertService.success('Modalidade editada com sucesso!')
         })
+        return
     }
+    this.alertService.warn('Preencha todos os campos obrigatórios!')
+    return
   }
 
   private createNewCategory() {
