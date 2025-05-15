@@ -1,5 +1,6 @@
 <div class="w-full flex flex-col lg:p-4 items-center">
-  <div class="flex flex-col bg-white rounded-md shadow p-3 lg:p-5 xl:w-3/4 w-full gap-4 animate-fadeIn" [formGroup]="formGroup">
+  <div class="flex flex-col bg-white rounded-md shadow p-3 lg:p-5 xl:w-3/4 w-full gap-4 animate-fadeIn"
+    [formGroup]="formGroup">
     <div class="w-full flex flex-row justify-between items-center">
       <h2 class="font-bold text-2xl">{{client? 'Editar aluno': 'Novo aluno'}}</h2>
       <button class="bg-error p-2 rounded-md text-white text-xs md:text-base" (click)="cancelRegistration()"><i
@@ -91,12 +92,9 @@
       </span>
     </div>
     <div class="self-end">
-      <button *ngIf="!client" class="bg-info text-white p-2 rounded-md mr-5 text-xs md:text-base" (click)="saveForm()"><i
-          class="pi pi-user-plus"></i>
-        CADASTRAR</button>
-      <button *ngIf="client" class="bg-info text-white p-2 rounded-md mr-5 text-xs md:text-base" (click)="saveForm()">
-        <i class="pi pi-save"></i>
-        SALVAR</button>
+      <button class="bg-success text-white p-2 rounded-md mr-5 text-xs md:text-base" (click)="saveForm()">
+        <i class="pi pi-check"></i>
+        {{client? 'SALVAR': 'CADASTRAR'}}</button>
     </div>
   </div>
 </div>
