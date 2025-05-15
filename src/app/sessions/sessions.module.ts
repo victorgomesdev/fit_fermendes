@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { ReactiveFormsModule } from "@angular/forms";
 import { CalendarModule, DateAdapter } from 'angular-calendar'
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { SharedModule } from "@shared/shared.module";
@@ -20,7 +21,8 @@ import { SessionService } from "@services/sessions";
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory
-        })
+        }),
+        ReactiveFormsModule
     ],
     declarations: [
         SessionsComponent,

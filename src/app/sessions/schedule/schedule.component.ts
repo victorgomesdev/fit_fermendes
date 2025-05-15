@@ -1,35 +1,34 @@
 import { Component, inject, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Session } from "@shared/types/session.type";
 import { SessionService } from "@services/sessions";
 import { DateFormat } from "@shared/enums/date.enum";
+import { BaseComponent } from "@components/base/base.component";
 import { CalendarEvent } from 'angular-calendar'
 import { addDays, addMonths, subMonths } from 'date-fns'
+import { dateFormatterUtil } from "@shared/utils/date-input-formatter";
 
 @Component({
     templateUrl: './schedule.component.html',
     selector: 'schedule',
     standalone: false
 })
-export class ScheduleComponent implements OnInit {
+export class ScheduleComponent extends BaseComponent implements OnInit {
 
     dateFormats = DateFormat
     today!: Date
     targetDate!: Date
 
     sessions!: CalendarEvent<Session>[]
-    formGroup!: FormGroup
-    formBuilder!: FormBuilder
 
     showActiveDay: boolean = false
     showModal: boolean = false
     showSelectionTab: boolean = false
 
-    //sessionService: SessionService = inject(SessionService)
-    router: Router = inject(Router)
+    sessionService: SessionService = inject(SessionService)
 
-    ngOnInit(): void {
+    override ngOnInit(): void {
         this.today = new Date()
         this.sessions = [
             {
@@ -59,9 +58,7 @@ export class ScheduleComponent implements OnInit {
             }
         ]
 
-        this.formGroup = this.formBuilder.group({
-            date: this.formBuilder.control('')
-        })
+        this.createForm()
     }
 
     dayClicked(day: any): void {
@@ -71,15 +68,23 @@ export class ScheduleComponent implements OnInit {
 
     changeCurrentMonth(index: number): void {
         switch (index) {
-            case 1: this.today = addMonths(this.today, 1); break;
-            case -1: this.today = subMonths(this.today, 1); break;
+            case 1: {
+                this.today = addMonths(this.today, 1);
+                break;
+            }
+            case -1: {
+               this.today = subMonths(this.today, 1);
+               break; 
+            }
             case 0: this.today = new Date()
         }
+        this.formGroup.get('data')?.setValue(dateFormatterUtil(this.today));
     }
 
     changeCurrentDate(input: EventTarget | null): void {
         const date = (<HTMLInputElement>input).value ? new Date((<HTMLInputElement>input).value) : new Date()
         this.today = date
+        this.formGroup.get('data')?.setValue(dateFormatterUtil(date))
     }
 
     private hasEventInThisDate(target: Date): boolean {
@@ -88,5 +93,11 @@ export class ScheduleComponent implements OnInit {
 
     redirectToRegistration(): void {
         this.router.navigate(['/alunos/cadastrar'])
+    }
+
+    override createForm(): void {
+        this.formGroup = this.formBuilder.group({
+            data: [dateFormatterUtil(new Date()), Validators.required]
+        })
     }
 }

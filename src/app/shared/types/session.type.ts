@@ -1,11 +1,12 @@
 import { Client } from "@shared/types/client.type"
 
 export type Session = {
-  id: string,
-  observation?: string,
-  date: Date,
-  clients: Client[],
-  status: SessionStatus
+  id?: number,
+  observacao?: string,
+  data: string,
+  statusAulaId: number,
+  statusAulaNome: string,
+  alunos: Client[] | number[]
 }
 
 export enum SessionStatus {

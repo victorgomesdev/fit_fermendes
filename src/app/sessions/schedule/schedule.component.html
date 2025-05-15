@@ -33,7 +33,7 @@
                     (dayClicked)="dayClicked($event.day)" [activeDayIsOpen]="showActiveDay" locale="pt" />
             </div>
             <div class="xl:flex flex-col bg-background rounded-md py-5 px-2 sm:px-6 gap-4 shadow xl:w-2/5 md:w-full hidden"
-                #detailsDiv>
+                #detailsDiv [formGroup]="formGroup">
                 <h2 class="text-primary font-bold text-xl">Detalhes da Aula</h2>
                 <div class="flex flex-col gap-5 w-full">
                     <div class="w-full flex flex-col sm:flex-row items-center justify-between gap-2">
@@ -41,10 +41,10 @@
                             <label class="text-paragraph font-semibold mb-2" for="data"><i
                                     class="pi pi-calendar text-primary text-lg"></i>
                                 Data<span class="text-error">*</span></label>
-                            <input id="data" [value]="today | date_input: dateFormats.INPUT"
+                            <input id="data"
                                 (change)="changeCurrentDate($event.target)" type="date"
                                 class="p-2 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer"
-                                placeholder="Data da aula" />
+                                placeholder="Data da aula" formControlName="data"/>
                         </span>
                         <span class="flex flex-col w-full sm:w-1/2">
                             <label class="text-paragraph font-semibold mb-2" for="horario"><i
