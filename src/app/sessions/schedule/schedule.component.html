@@ -41,25 +41,22 @@
                             <label class="text-paragraph font-semibold mb-2" for="data"><i
                                     class="pi pi-calendar text-primary text-lg"></i>
                                 Data<span class="text-error">*</span></label>
-                            <input id="data"
-                                (change)="changeCurrentDate($event.target)" type="date"
+                            <input id="data" (change)="changeCurrentDate($event.target)" type="date"
                                 class="p-2 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer"
-                                placeholder="Data da aula" formControlName="data"/>
+                                placeholder="Data da aula" formControlName="data" />
                         </span>
                         <span class="flex flex-col w-full sm:w-1/2">
                             <label class="text-paragraph font-semibold mb-2" for="horario"><i
                                     class="pi pi-clock text-primary text-lg"></i>
                                 Horário<span class="text-error">*</span></label>
                             <select id="horario"
-                                class="p-2 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer">
-                                <optgroup class="border-none outline-none">
-                                    <option value="">Selecione um horário</option>
-                                    <option value="10:00">10:00</option>
-                                    <option value="11:00">11:00</option>
-                                    <option value="12:00">12:00</option>
-                                    <option value="13:00">13:00</option>
-                                    <option value="14:00">14:00</option>
-                                </optgroup>
+                                class="p-2 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer" formControlName="horario">
+                                <option value="">Selecione um horário</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
                             </select>
                         </span>
                     </div>
@@ -68,14 +65,9 @@
                                 class="pi pi-wrench text-primary text-lg"></i>
                             Modalidade<span class="text-error">*</span></label>
                         <select id="horario"
-                            class="p-3 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer">
-                            <optgroup class="border-none outline-none">
-                                <option value="">Selecione uma modalidade</option>
-                                <option value="Personal Pilates">Personal Pilates</option>
-                                <option value="Neopilates">Neopilates</option>
-                                <option value="Elastic Training">Elastic Training</option>
-                                <option value="Bungee Fusion">Bungee Fusion</option>
-                            </optgroup>
+                            class="p-3 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer" formControlName="modalidadeId">
+                            <option value="">Selecione uma modalidade</option>
+                            <option *ngFor="let cat of categories" [value]="cat.id">{{cat.nome}}</option>
                         </select>
                     </span>
                     <span class="flex flex-col">
@@ -86,53 +78,33 @@
                             <div class="w-full relative">
                                 <input type="text"
                                     class="outline-none shadow-md focus:shadow-input-focus rounded-lg p-2 w-full bg-background"
-                                    placeholder="Pesquisar">
-                                <div *ngIf="showSelectionTab" class="absolute z-50 w-full bg-white flex flex-col gap-1">
-                                    <span
-                                        class="text-paragraph cursor-pointer p-2 hover:shadow-input-focus">Victor</span>
-                                    <span
-                                        class="text-paragraph cursor-pointer p-2 hover:shadow-input-focus">Victor</span>
-                                    <span
-                                        class="text-paragraph cursor-pointer p-2 hover:shadow-input-focus">Victor</span>
+                                    placeholder="Pesquisar" formControlName="buscaAluno">
+                                <div *ngIf="searchResult.length > 0" class="absolute z-50 w-full bg-white flex flex-col gap-1 p-2 shadow">
+                                    <button
+                                        class="truncate text-paragraph cursor-pointer p-2 rounded-md border hover:bg-primary hover:text-white transition-colors duration-300" *ngFor="let c of searchResult" (click)="onClientSelected(c)">{{c.nome}}</button>
                                 </div>
                             </div>
-                            <div class="w-full flex flex-col bg-background rounded-md p-3 gap-2 shadow">
+                            <div class="w-full flex flex-col bg-background rounded-md p-3 gap-3 shadow">
                                 <p class="text-paragraph font-semibold">Alunos selecionados:</p>
-                                <span class="text-paragraph"><i class="pi pi-exclamation-circle"></i> Nenhum aluno
+                                <span *ngIf="clients.length == 0" class="text-paragraph text-center"><i class="pi pi-exclamation-circle"></i> Nenhum aluno
                                     selecionado</span>
                                 <div class="w-full grid grid-cols-2 sm:grid-cols-3 gap-2">
                                     <div
-                                        class="flex flex-row items-center justify-between bg-white max-w rounded-full transition hover:-translate-y-1 duration-300">
-                                        <span class="text-paragraph text-center w-full">Victor</span>
-                                        <button class="bg-primary rounded-r-full text-white px-2 py-1"><i
-                                                class="pi pi-times"></i></button>
+                                        *ngFor="let client of clients"
+                                        class="flex flex-row items-center relative justify-between bg-white max-w shadow rounded-full transition hover:-translate-y-1 duration-300">
+                                        <span class="text-paragraph text-center w-full truncate p-1">{{client.nome}}</span>
+                                        <button class="bg-primary rounded-full text-white px-1 absolute -top-3 -right-1"><i
+                                                class="pi pi-times" (click)="cancelClientSchedule(client.id)"></i></button>
                                     </div>
-                                    <div
-                                        class="flex flex-row items-center justify-between bg-white max-w rounded-full transition hover:-translate-y-1 duration-300">
-                                        <span class="text-paragraph text-center w-full">Victor</span>
-                                        <button class="bg-primary rounded-r-full text-white px-2 py-1"><i
-                                                class="pi pi-times"></i></button>
-                                    </div>
-                                    <div
-                                        class="flex flex-row items-center justify-between bg-white max-w rounded-full transition hover:-translate-y-1 duration-300">
-                                        <span class="text-paragraph text-center w-full">Victor</span>
-                                        <button class="bg-primary rounded-r-full text-white px-2 py-1"><i
-                                                class="pi pi-times"></i></button>
-                                    </div>
-                                    <div
-                                        class="flex flex-row items-center justify-between bg-white max-w rounded-full transition hover:-translate-y-1 duration-300">
-                                        <span class="text-paragraph text-center w-full">Victor</span>
-                                        <button class="bg-primary rounded-r-full text-white px-2 py-1"><i
-                                                class="pi pi-times"></i></button>
-                                    </div>
+                                    
                                 </div>
                             </div>
-                            <div class="w-full flex flex-col items-center bg-background rounded-md p-3 gap-2 shadow">
+                            <div *ngIf="showClientNotFound" class="w-full flex flex-col items-center bg-background rounded-md p-3 gap-2 shadow">
                                 <p class="text-paragraph"><i class="pi pi-exclamation-circle"></i> Nenhum aluno
-                                    encontrado para ""</p>
+                                    encontrado para {{formGroup.get('buscaAluno')?.value}}</p>
                                 <button
                                     class="bg-primary rounded-lg p-2 text-white text-sm max-w-[80%] self-center transition duration-300 transform hover:-translate-y-1"
-                                    (click)="redirectToRegistration()"><i class="pi pi-plus"></i> Adicionar "" como
+                                    (click)="redirectToRegistration()"><i class="pi pi-plus"></i> Adicionar {{formGroup.get('buscaAluno')?.value}} como
                                     aluno?</button>
                             </div>
                         </div>
@@ -143,7 +115,7 @@
                             Observações</h2>
                         <textarea rows="3"
                             class="w-full flex shadow flex-col bg-white rounded-md p-4 outline-none focus:shadow-input-focus"
-                            placeholder="Observações da aula"></textarea>
+                            placeholder="Observações da aula" formControlName="observacao"></textarea>
                     </span>
                     <button
                         class="bg-primary rounded-lg p-2 text-white text-sm max-w-[80%] self-center transition duration-300 transform hover:-translate-y-1"><i

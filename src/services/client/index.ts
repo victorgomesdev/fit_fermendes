@@ -15,7 +15,7 @@ export class ClientService extends BaseService {
     return this.get(this.PATH + '/lista')
   }
 
-  getClientById(id: number): Observable<Client> {
+  getClientById(id: number): Observable<any> {
     return this.get(this.PATH + `/${id}`)
   }
 

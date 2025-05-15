@@ -1,34 +1,54 @@
-import { Component, inject, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Component, inject } from "@angular/core";
+import { Validators } from '@angular/forms'
 import { Session } from "@shared/types/session.type";
 import { SessionService } from "@services/sessions";
+import { CategoryService } from "@services/category";
+import { ClientService } from "@services/client";
 import { DateFormat } from "@shared/enums/date.enum";
+import { Category } from "@shared/types/category.type";
+import { Client } from "@shared/types/client.type";
+import { dateFormatterUtil } from "@shared/utils/date-input-formatter";
 import { BaseComponent } from "@components/base/base.component";
 import { CalendarEvent } from 'angular-calendar'
 import { addDays, addMonths, subMonths } from 'date-fns'
-import { dateFormatterUtil } from "@shared/utils/date-input-formatter";
+import { debounceTime, distinctUntilChanged } from "rxjs";
 
 @Component({
     templateUrl: './schedule.component.html',
     selector: 'schedule',
     standalone: false
 })
-export class ScheduleComponent extends BaseComponent implements OnInit {
+export class ScheduleComponent extends BaseComponent {
 
     dateFormats = DateFormat
     today!: Date
     targetDate!: Date
 
+    sessionToEdit!: Session
+
     sessions!: CalendarEvent<Session>[]
+    categories!: Category[]
+    searchResult: Client[] = []
+    clients: Client[] = []
 
     showActiveDay: boolean = false
     showModal: boolean = false
     showSelectionTab: boolean = false
+    showClientNotFound: boolean = false
 
-    sessionService: SessionService = inject(SessionService)
+    sessionService = inject(SessionService)
+    categoryService = inject(CategoryService)
+    clientService = inject(ClientService)
 
     override ngOnInit(): void {
+        this.createForm()
+        this.categoryService.listAllCategories()
+            .subscribe({
+                next: (res: any) => this.categories = res.data,
+            })
+
+        this.subscribeToSearchInputChanges()
+
         this.today = new Date()
         this.sessions = [
             {
@@ -57,8 +77,6 @@ export class ScheduleComponent extends BaseComponent implements OnInit {
                 start: addDays(this.today, 100),
             }
         ]
-
-        this.createForm()
     }
 
     dayClicked(day: any): void {
@@ -73,8 +91,8 @@ export class ScheduleComponent extends BaseComponent implements OnInit {
                 break;
             }
             case -1: {
-               this.today = subMonths(this.today, 1);
-               break; 
+                this.today = subMonths(this.today, 1);
+                break;
             }
             case 0: this.today = new Date()
         }
@@ -97,7 +115,56 @@ export class ScheduleComponent extends BaseComponent implements OnInit {
 
     override createForm(): void {
         this.formGroup = this.formBuilder.group({
-            data: [dateFormatterUtil(new Date()), Validators.required]
+            data: [dateFormatterUtil(new Date()), Validators.required],
+            modalidadeId: ['', Validators.required],
+            observacao: '',
+            alunos: [[], Validators.required],
+            horario: ['', Validators.required],
+            buscaAluno: ''
         })
+    }
+
+    private subscribeToSearchInputChanges(): void {
+        this.formGroup.get('buscaAluno')?.valueChanges
+            .pipe(
+                debounceTime(500),
+                distinctUntilChanged()
+            ).subscribe(id => {
+                if (id) {
+                    this.clientService.getClientById(id)
+                        .subscribe({
+                            next: (val) => {
+                                this.searchResult.push(val.data)
+                            },
+                            error: ()=>{
+                                this.showClientNotFound = true
+                            }
+                        })
+                    return
+                }
+                this.searchResult = []
+                this.showClientNotFound = false
+            })
+    }
+
+    onClientSelected(client: Client): void {
+        const control = <number[]>this.formGroup.get('alunos')?.value;
+        if (control.some(c => c === client.id)) {
+            this.searchResult = []
+            return
+        }
+        control.push(client.id as number)
+        this.searchResult = []
+        this.clients.push(client)
+        this.formGroup.get('buscaAluno')?.reset()
+        return
+    }
+
+    cancelClientSchedule(clientId: number | undefined): void {
+        let control = <number[]>this.formGroup.get('alunos')?.value;
+        control = control.filter(c => c !== clientId)
+        this.formGroup.get('alunos')?.setValue(control)
+        this.clients = this.clients.filter(c => c.id !== clientId)
+        return
     }
 }
