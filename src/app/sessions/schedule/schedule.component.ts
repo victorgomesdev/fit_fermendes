@@ -42,6 +42,11 @@ export class ScheduleComponent extends BaseComponent {
 
     override ngOnInit(): void {
         this.createForm()
+        if(this.sessionService.savedSessionPartial) {
+            this.formGroup.setValue(this.sessionService.getSessionPartial())
+            this.sessionService.resetSessionPartial()
+            return
+        }
         this.categoryService.listAllCategories()
             .subscribe({
                 next: (res: any) => this.categories = res.data,
@@ -109,8 +114,13 @@ export class ScheduleComponent extends BaseComponent {
         return this.sessions.some(s => s.start.getDate() === target.getDate())
     }
 
-    redirectToRegistration(): void {
-        this.router.navigate(['/alunos/cadastrar'])
+    redirectToRegistration(clientName: string | undefined): void {
+        this.sessionService.saveSessionDueRegistration(this.formGroup.value)
+        this.router.navigate(['/alunos/cadastrar'], {
+            queryParams: {
+                name: clientName
+            }
+        })
     }
 
     override createForm(): void {

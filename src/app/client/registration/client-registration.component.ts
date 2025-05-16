@@ -2,6 +2,7 @@ import { Component, inject } from "@angular/core";
 import { Validators } from "@angular/forms";
 import { BaseComponent } from "@components/base/base.component";
 import { ClientService } from "@services/client";
+import { SessionService } from "@services/sessions";
 import { Client } from "@shared/types/client.type";
 import { cpfFormatterUtil } from "@shared/utils/cpf-formatter";
 import { imageToBase64Util } from "@shared/utils/image-to-base64";
@@ -23,26 +24,31 @@ export class ClientRegistrationComponent extends BaseComponent {
   override isLoading = false
 
   clientService = inject(ClientService)
+  sessionService = inject(SessionService)
 
   override ngOnInit(): void {
     this.createForm()
     this.activeRoute.queryParamMap
       .pipe(
-        filter((params) => params.has('edit'))
+        filter((params) => params.has('edit') || params.has('name'))
       ).subscribe((param) => {
-        this.loadingService.show()
-        this.clientService.getClientById(Number(param.get('edit')))
-          .subscribe({
-            next: (res: any) => {
-              this.client = this.filterClientUnusedData(res.data)
-              this.clientImageName = <string>this.client.nomeImagem
-              this.clientImageUrl = <string>this.client.base64Imagem
-              this.initializeFormOnEditing()
-            },
-            complete: ()=> {
-              this.loadingService.hide()
-            }
-          })
+        if (param.get('edit')) {
+          this.loadingService.show()
+          this.clientService.getClientById(Number(param.get('edit')))
+            .subscribe({
+              next: (res: any) => {
+                this.client = this.filterClientUnusedData(res.data)
+                this.clientImageName = <string>this.client.nomeImagem
+                this.clientImageUrl = <string>this.client.base64Imagem
+                this.initializeFormOnEditing()
+              },
+              complete: () => {
+                this.loadingService.hide()
+              }
+            })
+          return
+        }
+        this.formGroup.get('nome')?.setValue(param.get('name'))
       })
   }
 
@@ -87,12 +93,21 @@ export class ClientRegistrationComponent extends BaseComponent {
 
   override saveFormRestering(): void {
     if (this.formGroup.valid) {
+      this.loadingService.show()
       this.clientService.registerNewClient(this.formGroup.value as Client)
         .subscribe({
           next: () => {
             this.alertService.success('Aluno cadastrado com sucesso!')
           },
-          complete: () => this.router.navigate(['/alunos'])
+          complete: () => {
+            if(this.sessionService.savedSessionPartial){
+              this.loadingService.hide()
+              this.router.navigate(['/aulas/agendar'])
+              return
+            }
+            this.loadingService.hide()
+            this.router.navigate(['/alunos'])
+          }
         })
       return
     }
@@ -103,13 +118,13 @@ export class ClientRegistrationComponent extends BaseComponent {
   override saveFormEditing(): void {
     if (this.formGroup.valid) {
       this.clientService.updateClientById(this.clientId, this.formGroup.value)
-      .subscribe({
-        next: ()=> {
-          this.alertService.info('Aluno atualizado com sucesso!')
-        },
-        complete: ()=> this.router.navigate(['alunos']),
-        error: ()=> this.alertService.error('Ocorreu um erro no servidor!')
-      })
+        .subscribe({
+          next: () => {
+            this.alertService.info('Aluno atualizado com sucesso!')
+          },
+          complete: () => this.router.navigate(['alunos']),
+          error: () => this.alertService.error('Ocorreu um erro no servidor!')
+        })
       this.isLoading = false
       return
     }
@@ -133,7 +148,7 @@ export class ClientRegistrationComponent extends BaseComponent {
       this.clientImageUrl = base64
       this.clientImageName = imageName
     } catch (err) {
-      if(err === -1){
+      if (err === -1) {
         this.alertService.warn('Imagem muito grande!')
       }
     }
