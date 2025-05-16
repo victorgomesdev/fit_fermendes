@@ -11,7 +11,7 @@ import { dateFormatterUtil } from "@shared/utils/date-input-formatter";
 import { BaseComponent } from "@components/base/base.component";
 import { CalendarEvent } from 'angular-calendar'
 import { addDays, addMonths, subMonths } from 'date-fns'
-import { debounceTime, distinctUntilChanged } from "rxjs";
+import { debounceTime, distinctUntilChanged, filter } from "rxjs";
 
 @Component({
     templateUrl: './schedule.component.html',
@@ -29,7 +29,7 @@ export class ScheduleComponent extends BaseComponent {
     sessions!: CalendarEvent<Session>[]
     categories!: Category[]
     searchResult: Client[] = []
-    clients: Client[] = []
+    clients: Partial<Client>[] = []
 
     showActiveDay: boolean = false
     showModal: boolean = false
@@ -42,19 +42,13 @@ export class ScheduleComponent extends BaseComponent {
 
     override ngOnInit(): void {
         this.createForm()
-        if(this.sessionService.savedSessionPartial) {
-            this.formGroup.setValue(this.sessionService.getSessionPartial())
-            this.sessionService.resetSessionPartial()
-            return
-        }
+        this.subscribeToSearchInputChanges()
         this.categoryService.listAllCategories()
             .subscribe({
                 next: (res: any) => this.categories = res.data,
             })
-
-        this.subscribeToSearchInputChanges()
-
         this.today = new Date()
+
         this.sessions = [
             {
                 title: "Aula 1",
@@ -82,6 +76,24 @@ export class ScheduleComponent extends BaseComponent {
                 start: addDays(this.today, 100),
             }
         ]
+
+        this.activeRoute.queryParamMap
+            .pipe(
+                filter(params => params.has('newClientId'))
+            ).subscribe({
+                next: (params) => {
+                    if (params.get('newClientId') && params.get('newClientName')) {
+                        this.showClientNotFound = false
+                        this.onClientSelected({ id: Number(params.get('newClientId')), nome: <string>params.get('newClientName') })
+                        return
+                    }
+                }
+            })
+
+        if (this.sessionService.savedSessionPartial) {
+            this.formGroup.setValue(this.sessionService.getSessionPartial())
+            this.sessionService.resetSessionPartial()
+        }
     }
 
     dayClicked(day: any): void {
@@ -115,7 +127,9 @@ export class ScheduleComponent extends BaseComponent {
     }
 
     redirectToRegistration(clientName: string | undefined): void {
-        this.sessionService.saveSessionDueRegistration(this.formGroup.value)
+        const formValues = this.formGroup.value
+        formValues.buscaAluno = ''
+        this.sessionService.saveSessionDueRegistration(formValues)
         this.router.navigate(['/alunos/cadastrar'], {
             queryParams: {
                 name: clientName
@@ -146,7 +160,7 @@ export class ScheduleComponent extends BaseComponent {
                             next: (val) => {
                                 this.searchResult.push(val.data)
                             },
-                            error: ()=>{
+                            error: () => {
                                 this.showClientNotFound = true
                             }
                         })
@@ -157,7 +171,7 @@ export class ScheduleComponent extends BaseComponent {
             })
     }
 
-    onClientSelected(client: Client): void {
+    onClientSelected(client: Partial<Client>): void {
         const control = <number[]>this.formGroup.get('alunos')?.value;
         if (control.some(c => c === client.id)) {
             this.searchResult = []

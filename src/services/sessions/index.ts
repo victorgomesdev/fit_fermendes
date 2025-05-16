@@ -1,7 +1,11 @@
 import { Session } from "@shared/types/session.type";
 import { BaseService } from "@services/base-service.service";
 import { Observable } from "rxjs";
+import { Injectable } from "@angular/core";
 
+@Injectable({
+  providedIn: 'root'
+})
 export class SessionService extends BaseService {
 
   protected readonly PATH = this.API_URL + '/aulas'

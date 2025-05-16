@@ -31,7 +31,6 @@ import { SessionService } from "@services/sessions";
         ScheduleComponent,
         SessionsHistoricComponent,
         SessionDetailsComponent
-    ],
-    providers: [SessionService]
+    ]
 })
 export class SessionsModule { }

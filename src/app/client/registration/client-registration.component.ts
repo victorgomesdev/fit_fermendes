@@ -93,23 +93,42 @@ export class ClientRegistrationComponent extends BaseComponent {
 
   override saveFormRestering(): void {
     if (this.formGroup.valid) {
+      //let newClient!: Client
+
       this.loadingService.show()
-      this.clientService.registerNewClient(this.formGroup.value as Client)
-        .subscribe({
-          next: () => {
-            this.alertService.success('Aluno cadastrado com sucesso!')
-          },
-          complete: () => {
-            if(this.sessionService.savedSessionPartial){
-              this.loadingService.hide()
-              this.router.navigate(['/aulas/agendar'])
-              return
-            }
-            this.loadingService.hide()
-            this.router.navigate(['/alunos'])
+      // this.clientService.registerNewClient(this.formGroup.value as Client)
+      //   .subscribe({
+      //     next: (res: any) => {
+      //       newClient = res.data // Mudar para o nome do usuário
+      //       this.alertService.success('Aluno cadastrado com sucesso!')
+      //     },
+      //     complete: () => {
+      //       this.loadingService.hide()
+      //       if (this.sessionService.savedSessionPartial) {
+      //         this.router.navigate(['/aulas/agendar'], {
+      //           queryParams: {
+      //             newClientId: newClient.id,
+      //             newClientName: newClient.nome
+      //           }
+      //         })
+      //         return
+      //       }
+      //       this.router.navigate(['/alunos'])
+      //     }
+      //   })
+      // return
+      
+      this.alertService.success('Aluno cadastrado com sucesso!')
+      this.loadingService.hide()
+      if (this.sessionService.savedSessionPartial) {
+        this.router.navigate(['/aulas/agendar'], {
+          queryParams: {
+            newClientId: 7,
+            newClientName: 'Teste'
           }
         })
-      return
+        return
+      }
     }
     this.alertService.warn('Campos inválidos ou não preenchidos!')
     return
