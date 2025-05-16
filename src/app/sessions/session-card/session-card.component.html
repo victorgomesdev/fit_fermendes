@@ -1,15 +1,15 @@
 <div class="flex sm:flex-col w-full items-center justify-center bg-white rounded-lg px-3 py-2 md:pb-4 shadow overflow-hidden transition duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-4">
     <div class="bg-background flex flex-col py-1 px-2 sm:p-4 shadow gap-4 w-full rounded-md">
         <div class="w-full flex flex-row sm:flex-col gap-3 justify-center">
-            <p class="font-bold sm:text-lg text-center text-paragraph"><i class="pi pi-calendar text-primary"></i> 10/04/2025</p>
-            <p class="font-bold sm:text-lg text-center text-paragraph"><i class="pi pi-clock text-primary"></i> 10:00</p>
+            <p class="font-bold sm:text-lg text-center text-paragraph"><i class="pi pi-calendar text-primary"></i> {{session()?.data | date: 'dd/MM/yyyy' }}</p>
+            <p class="font-bold sm:text-lg text-center text-paragraph"><i class="pi pi-clock text-primary"></i> {{session()?.data | date: 'HH:mm': 'UTC'}}
         </div>
         <div class="w-full hidden sm:flex flex-row justify-center gap-4">
-            <span class="text-sm bg-info text-white py-1 px-3 rounded-2xl">Personal</span>
-            <span class="text-sm bg-yellow text-white py-1 px-3 rounded-2xl">Agendada</span>
+            <span class="text-sm bg-info text-white py-1 px-3 rounded-2xl text-center truncate">{{session()?.modalidadeNome}}</span>
+            <span class="text-sm bg-yellow text-white py-1 px-3 rounded-2xl">{{session()?.statusAulaNome}}</span>
         </div>
         <div class="w-full sm:flex justify-center hidden">
-            <span class="text-paragraph"><i class="pi pi-users text-primary"></i> Victor, victor, victor, victor</span>
+            <span class="text-paragraph w-10/12 text-center truncate"><i class="pi pi-users text-primary truncate"></i> {{session()?.alunos | clients }}</span>
         </div>
     </div>
     <button class="bg-primary px-2 py-1 rounded-full text-white sm:hidden" (click)="clicked()"><i class="pi pi-plus"></i></button>

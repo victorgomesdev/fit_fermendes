@@ -1,4 +1,5 @@
-import { Component, output } from "@angular/core";
+import { Component, input, output } from "@angular/core";
+import { Session } from "@shared/types/session.type";
 
 @Component({
     templateUrl: './session-card.component.html',
@@ -7,9 +8,10 @@ import { Component, output } from "@angular/core";
 })
 export class SessionCardComponet {
 
-    selected = output()
+    session = input<Session>()
+    selected = output<Session>()
 
-    clicked(): void {
-        this.selected.emit()
+    clicked() {
+        this.selected.emit(this.session() as Session)
     }
 }

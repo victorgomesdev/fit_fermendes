@@ -4,19 +4,19 @@
         <div class="flex flex-col md:flex-row w-full justify-center gap-2 md:gap-5">
             <div class="bg-info flex flex-row lg:flex-col justify-center gap-1 items-center p-2 rounded-md">
                 <span class="text-white font-semibold text-sm">TOTAL DE AULAS:</span>
-                <span class="text-white font-semibold text-sm">0</span>
+                <span class="text-white font-semibold text-sm">{{sessions.length}}</span>
             </div>
             <div class="bg-yellow flex flex-row lg:flex-col justify-center gap-1 items-center p-2 rounded-md">
                 <span class="text-white font-semibold">AGENDADAS:</span>
-                <span class="text-white font-semibold">0</span>
+                <span class="text-white font-semibold">{{scheduled}}</span>
             </div>
             <div class="bg-success flex flex-row lg:flex-col justify-center gap-1 items-center p-2 rounded-md">
                 <span class="text-white font-semibold">CONCLUÍDAS:</span>
-                <span class="text-white font-semibold">0</span>
+                <span class="text-white font-semibold">{{concluded}}</span>
             </div>
             <div class="bg-error flex flex-row lg:flex-col justify-center gap-1 items-center p-2 rounded-md">
                 <span class="text-white font-semibold">CANCELADAS:</span>
-                <span class="text-white font-semibold">0</span>
+                <span class="text-white font-semibold">{{canceled}}</span>
             </div>
         </div>
         <div class="flex flex-col w-full bg-background rounded-md shadow p-3 md:p-5 gap-4">
@@ -30,10 +30,7 @@
                 </select>
             </div>
             <div class="w-full flex flex-col md:grid grid-cols-3 gap-3">
-                <session-card (selected)="openModal()"/>
-                <session-card (selected)="openModal()"/>
-                <session-card (selected)="openModal()"/>
-                <session-card (selected)="openModal()"/>
+                <session-card *ngFor="let session of sessions" [session]="session" (selected)="openModal($event)"/>
             </div>
         </div>
     </div>

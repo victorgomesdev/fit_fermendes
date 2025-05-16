@@ -19,6 +19,6 @@ export abstract class BaseComponent implements OnInit {
   ngOnInit(): void { }
   createForm(): void { }
   saveFormEditing(): void { }
-  saveFormRestering(): void { }
+  saveFormRegistering(): void { }
 
 }

@@ -81,73 +81,55 @@ export class ClientRegistrationComponent extends BaseComponent {
   }
 
   saveForm(): void {
-    this.isLoading = true
-    console.log(this.isLoading)
-    if (!this.client) {
-      this.saveFormRestering()
-      return
-    }
-    this.saveFormEditing()
-    return
-  }
-
-  override saveFormRestering(): void {
     if (this.formGroup.valid) {
-      //let newClient!: Client
-
-      this.loadingService.show()
-      // this.clientService.registerNewClient(this.formGroup.value as Client)
-      //   .subscribe({
-      //     next: (res: any) => {
-      //       newClient = res.data // Mudar para o nome do usuário
-      //       this.alertService.success('Aluno cadastrado com sucesso!')
-      //     },
-      //     complete: () => {
-      //       this.loadingService.hide()
-      //       if (this.sessionService.savedSessionPartial) {
-      //         this.router.navigate(['/aulas/agendar'], {
-      //           queryParams: {
-      //             newClientId: newClient.id,
-      //             newClientName: newClient.nome
-      //           }
-      //         })
-      //         return
-      //       }
-      //       this.router.navigate(['/alunos'])
-      //     }
-      //   })
-      // return
-      
-      this.alertService.success('Aluno cadastrado com sucesso!')
-      this.loadingService.hide()
-      if (this.sessionService.savedSessionPartial) {
-        this.router.navigate(['/aulas/agendar'], {
-          queryParams: {
-            newClientId: 7,
-            newClientName: 'Teste'
-          }
-        })
+      if (!this.client) {
+        this.saveFormRegistering()
         return
       }
+      this.saveFormEditing()
+      return
     }
     this.alertService.warn('Campos inválidos ou não preenchidos!')
+  }
+
+  override saveFormRegistering(): void {
+
+    let newClient!: Client
+
+    this.loadingService.show()
+    this.clientService.registerNewClient(this.formGroup.value as Client)
+      .subscribe({
+        next: (res: any) => {
+          newClient = res.data // Mudar para o nome do usuário
+          this.alertService.success('Aluno cadastrado com sucesso!')
+        },
+        complete: () => {
+          this.loadingService.hide()
+          if (this.sessionService.savedSessionPartial) {
+            this.router.navigate(['/aulas/agendar'], {
+              queryParams: {
+                newClientId: newClient.id,
+                newClientName: newClient.nome
+              }
+            })
+            return
+          }
+          this.router.navigate(['/alunos'])
+        }
+      })
     return
   }
 
   override saveFormEditing(): void {
-    if (this.formGroup.valid) {
-      this.clientService.updateClientById(this.clientId, this.formGroup.value)
-        .subscribe({
-          next: () => {
-            this.alertService.info('Aluno atualizado com sucesso!')
-          },
-          complete: () => this.router.navigate(['alunos']),
-          error: () => this.alertService.error('Ocorreu um erro no servidor!')
-        })
-      this.isLoading = false
-      return
-    }
-    this.alertService.warn('Campos inválidos ou não preenchidos!')
+
+    this.clientService.updateClientById(this.clientId, this.formGroup.value)
+      .subscribe({
+        next: () => {
+          this.alertService.info('Aluno atualizado com sucesso!')
+        },
+        complete: () => this.router.navigate(['alunos']),
+        error: () => this.alertService.error('Ocorreu um erro no servidor!')
+      })
     return
   }
 

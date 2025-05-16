@@ -8,6 +8,7 @@ import { LoadingComponent } from "@components/loading/loading.component";
 import { DateFormatPipe } from "./pipes/date-format.pipe";
 import { AutofocusDirective } from "./directives/autofocus.directive";
 import { DateToAgePipe } from "./pipes/date-to-age.pipe";
+import { ClientsPipe } from "./pipes/extract-clients.pipe";
 
 @NgModule({
     declarations: [
@@ -16,14 +17,16 @@ import { DateToAgePipe } from "./pipes/date-to-age.pipe";
         AutofocusDirective,
         AlertComponent,
         DateToAgePipe,
-        LoadingComponent
+        LoadingComponent,
+        ClientsPipe
     ],
     exports: [
         LayoutComponent,
         DateFormatPipe,
         AutofocusDirective,
         AlertComponent,
-        DateToAgePipe
+        DateToAgePipe,
+        ClientsPipe
     ],
     imports: [
         RouterModule,

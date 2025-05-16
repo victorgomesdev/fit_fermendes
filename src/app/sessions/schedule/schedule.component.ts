@@ -8,10 +8,11 @@ import { DateFormat } from "@shared/enums/date.enum";
 import { Category } from "@shared/types/category.type";
 import { Client } from "@shared/types/client.type";
 import { dateFormatterUtil } from "@shared/utils/date-input-formatter";
+import { sessionScheduleFactory } from "@shared/utils/schedule-request-factory";
 import { BaseComponent } from "@components/base/base.component";
 import { CalendarEvent } from 'angular-calendar'
-import { addDays, addMonths, subMonths } from 'date-fns'
 import { debounceTime, distinctUntilChanged, filter } from "rxjs";
+import { addMonths, subMonths } from 'date-fns'
 
 @Component({
     templateUrl: './schedule.component.html',
@@ -41,6 +42,7 @@ export class ScheduleComponent extends BaseComponent {
     clientService = inject(ClientService)
 
     override ngOnInit(): void {
+
         this.createForm()
         this.subscribeToSearchInputChanges()
         this.categoryService.listAllCategories()
@@ -49,37 +51,11 @@ export class ScheduleComponent extends BaseComponent {
             })
         this.today = new Date()
 
-        this.sessions = [
-            {
-                title: "Aula 1",
-                start: this.today,
-
-            },
-            {
-                title: "Aula 2",
-                start: addDays(this.today, 3),
-            },
-            {
-                title: "Aula 3",
-                start: addDays(this.today, 4),
-            },
-            {
-                title: "Aula 4",
-                start: addDays(this.today, 6),
-            },
-            {
-                title: "Aula 5",
-                start: addDays(this.today, 10),
-            },
-            {
-                title: "Aula 6",
-                start: addDays(this.today, 100),
-            }
-        ]
+        this.sessions = []
 
         this.activeRoute.queryParamMap
             .pipe(
-                filter(params => params.has('newClientId'))
+                filter(params => params.has('newClientId') || params.has('edit'))
             ).subscribe({
                 next: (params) => {
                     if (params.get('newClientId') && params.get('newClientName')) {
@@ -87,6 +63,17 @@ export class ScheduleComponent extends BaseComponent {
                         this.onClientSelected({ id: Number(params.get('newClientId')), nome: <string>params.get('newClientName') })
                         return
                     }
+                    this.loadingService.show()
+                    this.sessionService.getSessionById(Number(params.get('edit')))
+                        .subscribe({
+                            next: (res: any) => {
+                                this.sessionToEdit = res.data
+                                this.initializeFormOnEditing()
+                            },
+                            complete: ()=>{
+                                this.loadingService.hide()
+                            }
+                        })
                 }
             })
 
@@ -151,7 +138,7 @@ export class ScheduleComponent extends BaseComponent {
     private subscribeToSearchInputChanges(): void {
         this.formGroup.get('buscaAluno')?.valueChanges
             .pipe(
-                debounceTime(500),
+                debounceTime(300),
                 distinctUntilChanged()
             ).subscribe(id => {
                 if (id) {
@@ -172,12 +159,15 @@ export class ScheduleComponent extends BaseComponent {
     }
 
     onClientSelected(client: Partial<Client>): void {
-        const control = <number[]>this.formGroup.get('alunos')?.value;
-        if (control.some(c => c === client.id)) {
+        const control = this.formGroup.get('alunos');
+        const currentValue = <number[]>control?.value
+
+        if (currentValue.some(c => c === client.id)) {
             this.searchResult = []
             return
         }
-        control.push(client.id as number)
+        currentValue.push(<number>client.id)
+        control?.setValue(currentValue)
         this.searchResult = []
         this.clients.push(client)
         this.formGroup.get('buscaAluno')?.reset()
@@ -190,5 +180,59 @@ export class ScheduleComponent extends BaseComponent {
         this.formGroup.get('alunos')?.setValue(control)
         this.clients = this.clients.filter(c => c.id !== clientId)
         return
+    }
+
+    saveForm(): void {
+        if (this.formGroup.valid) {
+            if (!this.sessionToEdit) {
+                this.saveFormRegistering()
+                return
+            }
+            this.saveFormEditing()
+            return
+        }
+        this.alertService.warn('Campos não preenchidos ou inválidos!')
+    }
+
+    override saveFormRegistering(): void {
+        this.loadingService.show()
+        delete this.formGroup.value.buscaAluno
+        this.sessionService.scheduleSession(sessionScheduleFactory(this.formGroup.value))
+            .subscribe({
+                next: (res: any) => {
+                    this.alertService.success('Aula agendada com sucesso!')
+                },
+                complete: () => {
+                    this.loadingService.hide()
+                    this.router.navigate(['/aulas'])
+                }
+            })
+    }
+
+    override saveFormEditing(): void {
+        this.loadingService.show()
+        delete this.formGroup.value.buscaAluno
+        this.sessionService.updateSession(<number>this.sessionToEdit.id, sessionScheduleFactory(this.formGroup.value))
+        .subscribe({
+            next: ()=>{
+                this.alertService.success('Aula atualizada com sucesso!')
+            },
+            complete: ()=> {
+                this.loadingService.hide()
+                this.router.navigate(['/aulas'])
+            }
+        })
+    }
+
+    private initializeFormOnEditing(): void {
+        this.formGroup.setValue({
+            data: this.sessionToEdit.data.split('T')[0],
+            horario: this.sessionToEdit.data.split('T')[1].substring(0, 5),
+            modalidadeId: this.sessionToEdit.modalidadeId,
+            alunos: this.sessionToEdit.alunos.map((a: Client)=> a.id),
+            observacao: this.sessionToEdit.observacao,
+            buscaAluno: ''
+        })
+        this.clients = this.sessionToEdit.alunos
     }
 }

@@ -4,9 +4,11 @@ export type Session = {
   id?: number,
   observacao?: string,
   data: string,
-  statusAulaId: number,
-  statusAulaNome: string,
-  alunos: Client[] | number[]
+  statusAulaId?: number,
+  statusAulaNome?: string,
+  modalidadeId: number,
+  modalidadeNome?: string,
+  alunos: any
 }
 
 export enum SessionStatus {

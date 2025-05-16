@@ -1,30 +1,36 @@
 import { Session } from "@shared/types/session.type";
 import { BaseService } from "@services/base-service.service";
-import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { subYears, addYears } from 'date-fns'
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService extends BaseService {
 
-  protected readonly PATH = this.API_URL + '/aulas'
+  protected readonly PATH = this.API_URL + '/aula'
   savedSessionPartial!: Session | undefined
 
   scheduleSession(session: Session): Observable<Session> {
     return this.post<Session>(this.PATH, session)
   }
 
-  updateSession(sessionId: number): Observable<Session> {
-    return this.put(this.PATH + `${sessionId}`, {})
+  updateSession(sessionId: number, session: Session): Observable<Session> {
+    
+    return this.put(this.PATH + `/${sessionId}`, session)
   }
 
-  getSessionById(sessionId: number): Observable<unknown> {
-    return this.get(this.PATH + `${sessionId}`)
+  getSessionById(sessionId: number): Observable<any> {
+    return this.get(this.PATH + `/${sessionId}`)
   }
 
-  getSessionsByPeriod(dateStart: string, dateEnd: string): Observable<any[]> {
+  getSessionsByPeriod(dateStart: string, dateEnd: string): Observable<any> {
     return this.get(this.PATH + `/lista?dataInicio=${dateStart}&dataFim=${dateEnd}`)
+  }
+
+  getAllSessions() {
+    return this.get(this.PATH + `/lista?dataInicio=${subYears(new Date(), 10)}&dataFim=${addYears(new Date(), 10)}`)
   }
 
   saveSessionDueRegistration(session: Session): void {
