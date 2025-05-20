@@ -53,7 +53,8 @@ export class LoginComponent extends BaseComponent {
     this.userService.authenticateWith2F(this.formGroup.get('code')?.value, this.validator)
       .subscribe({
         next: (res: any) => {
-          this.userService.saveSessionToken(res.token)
+          console.log(res)
+          this.userService.saveSessionToken(res.data.token)
           this.router.navigate(['/aulas'])
         },
         error: (err: HttpErrorResponse) => {
