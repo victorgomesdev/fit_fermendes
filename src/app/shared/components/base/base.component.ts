@@ -14,7 +14,7 @@ export abstract class BaseComponent implements OnInit {
   alertService = inject(AlertService)
   loadingService = inject(NgxSpinnerService)
   
-  isLoading!: boolean
+  isLoading = false
   
   ngOnInit(): void { }
   createForm(): void { }

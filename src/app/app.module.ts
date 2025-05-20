@@ -11,6 +11,7 @@ import { globalErrorInterceptor } from "@shared/interceptors/global-error.interc
 import { SessionsModule } from "@sessions/sessions.module";
 import { ManagementModule } from "@management/management.module";
 import { ClientModule } from "@client/client.module"
+import { PublicModule } from "@public/public.module";
 import { ToastrModule } from "ngx-toastr";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing.module";
@@ -30,6 +31,7 @@ registerLocaleData(pt)
         SessionsModule,
         ManagementModule,
         RouterModule,
+        PublicModule,
         ToastrModule.forRoot({
             progressBar: true,
             progressAnimation: 'decreasing',

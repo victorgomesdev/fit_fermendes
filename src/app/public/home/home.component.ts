@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 @Component({
   templateUrl: './home.component.html',
   selector: 'home',
+  standalone: false
 })
 export class HomeComponent {
 

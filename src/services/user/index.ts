@@ -10,11 +10,11 @@ export class UserService extends BaseService {
   protected readonly PATH = this.API_URL + '/usuario'
 
   loginWithEmail({ email, password }: UserLoginRequest) {
-    return this.post<string>(this.PATH + '/loginEmail', { email, password })
+    return this.post(this.PATH + '/loginEmail', { email, senha: password })
   }
 
-  authenticateWith2F(twoFactorToken: string) {
-    return this.post(this.PATH + '/2fa', {})
+  authenticateWith2F(codigo: string, verificador: string) {
+    return this.post(this.PATH + '/2fa', { codigo, verificador })
   }
 
   listRegisteredUsers() {
@@ -27,5 +27,17 @@ export class UserService extends BaseService {
 
   updateUserData(id: number) {
     return this.put(this.PATH + `/${id}`, {})
+  }
+
+  saveSessionToken(token: string): void {
+    localStorage.setItem('FIT_TOKEN', token)
+  }
+
+  getSessionToken() {
+    const token = localStorage.getItem('FIT_TOKEN')
+    if (token) {
+      return token
+    }
+    return null
   }
 }

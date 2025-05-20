@@ -4,7 +4,7 @@ import { Route, RouterModule } from "@angular/router";
 const routes: Route[] = [
     {
         path: '',
-        loadComponent: () => import('@home/home.component').then(h => h.HomeComponent)
+        loadChildren: () => import('@public/public.module').then(p => p.PublicModule)
     },
     {
         path: 'aulas',
@@ -17,10 +17,6 @@ const routes: Route[] = [
     {
         path: 'gestao',
         loadChildren: () => import("@management/management.module").then(m => m.ManagementModule)
-    },
-    {
-        path: 'auth',
-        loadComponent: () => import('@home/login/login.component').then(l => l.LoginComponent)
     },
     {
         path: '**',

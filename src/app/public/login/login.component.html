@@ -1,0 +1,27 @@
+<div class="w-full h-screen justify-center items-center flex flex-col p-3 gap-3 animate-fadeIn" [formGroup]="formGroup">
+    <img src="assets/FitFermendes.png"  alt="logo">
+    <div *ngIf="!validator" class="bg-white p-5 rounded-md flex flex-col w-full md:w-1/2 xl:w-2/5 shadow gap-3">
+        <h2 class="text-xl font-bold">Entrar</h2>
+        <div class="w-full flex flex-col bg-background shadow">
+            <div class="w-full flex flex-col p-2 rounded-md gap-1">
+                <label for="email" class="text-paragraph font-semibold"><i class="pi pi-envelope text-primary"></i> Email</label>
+                <input inputAutofocus type="email" name="email" id="email" class="p-2 rounded-md outline-none focus:shadow-input-focus shadow" placeholder="Email" formControlName="email">
+            </div>
+            <div class="w-full flex flex-col p-2 rounded-md gap-1">
+                <label for="senha" class="text-paragraph font-semibold"><i class="pi pi-lock text-primary"></i> Senha</label>
+                <input type="password" name="senha" id="senha" class="p-2 rounded-md outline-none focus:shadow-input-focus shadow" placeholder="Senha" formControlName="senha">
+            </div>
+        </div>
+        <div class="w-full flex flex-row justify-end gap-3">
+            <button class="bg-primary p-2 text-white rounded-md" (click)="loginWithEmail()" [disabled]="isLoading"><i class="pi" [ngClass]="{'pi-spinner animate-loading': isLoading, 'pi-sign-in': !isLoading}"></i> ENTRAR</button>
+        </div>
+    </div>
+    <div *ngIf="validator" class="bg-white p-5 rounded-md flex flex-col w-full md:w-1/2 xl:w-2/5 shadow gap-10">
+        <h2 class="text-xl font-bold">Validação em dois passos</h2>
+        <div class="w-1/2 self-center flex flex-col gap-1">
+            <label for="code" class="text-paragraph font-semibold"><i class="pi pi-lock text-primary"></i> Código de validação</label>
+            <input type="text" id="code" placeholder="Código" class="p-2 rounded-md outline-none focus:shadow-input-focus shadow bg-background" inputAutofocus formControlName="code">
+        </div>
+        <button class="bg-primary p-2 text-white rounded-md font-semibold" (click)="validateTwoFactors()"><i class="pi" [ngClass]="{'pi-check': !isLoading, 'pi-spinner animate-loading': isLoading}"></i> Verificar</button>
+    </div>
+</div>

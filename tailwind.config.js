@@ -1,3 +1,5 @@
+const { transform } = require('typescript');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -50,12 +52,21 @@ module.exports = {
             transform: 'translateY(0)',
           },
         },
+        loading: {
+          '0%': {
+            transform: 'rotate(0deg)'
+          },
+          '100%': {
+            transform: 'rotate(360deg)'
+          }
+        }
 
       },
       animation: {
         fadeIn: 'fadeIn 0.3s ease-out forwards',
         fadeOut: 'fadeOut 0.3s ease-out forwards',
-        slideUp: 'slideUp 2s linear infinite'
+        slideUp: 'slideUp 2s linear infinite',
+        loading: 'loading 1s linear infinite'
       }
     },
     plugins: [],

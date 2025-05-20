@@ -23,7 +23,7 @@
       "@shared/*": ["./src/app/shared/*"],
       "@client/*": ["./src/app/client/*"],
       "@management/*": ["./src/app/management/*"],
-      "@home/*": ["./src/app/home/*"],
+      "@public/*": ["./src/app/public/*"],
       "@services/*": ["./src/services/*"],
       "@models/*": ["./src/models/*"]
     } 
