@@ -42,7 +42,6 @@ export class ScheduleComponent extends BaseComponent {
     clientService = inject(ClientService)
 
     override ngOnInit(): void {
-
         this.createForm()
         this.subscribeToSearchInputChanges()
         this.categoryService.listAllCategories()
@@ -70,7 +69,7 @@ export class ScheduleComponent extends BaseComponent {
                                 this.sessionToEdit = res.data
                                 this.initializeFormOnEditing()
                             },
-                            complete: ()=>{
+                            complete: () => {
                                 this.loadingService.hide()
                             }
                         })
@@ -213,15 +212,15 @@ export class ScheduleComponent extends BaseComponent {
         this.loadingService.show()
         delete this.formGroup.value.buscaAluno
         this.sessionService.updateSession(<number>this.sessionToEdit.id, sessionScheduleFactory(this.formGroup.value))
-        .subscribe({
-            next: ()=>{
-                this.alertService.success('Aula atualizada com sucesso!')
-            },
-            complete: ()=> {
-                this.loadingService.hide()
-                this.router.navigate(['/aulas'])
-            }
-        })
+            .subscribe({
+                next: () => {
+                    this.alertService.success('Aula atualizada com sucesso!')
+                },
+                complete: () => {
+                    this.loadingService.hide()
+                    this.router.navigate(['/aulas'])
+                }
+            })
     }
 
     private initializeFormOnEditing(): void {
@@ -229,7 +228,7 @@ export class ScheduleComponent extends BaseComponent {
             data: this.sessionToEdit.data.split('T')[0],
             horario: this.sessionToEdit.data.split('T')[1].substring(0, 5),
             modalidadeId: this.sessionToEdit.modalidadeId,
-            alunos: this.sessionToEdit.alunos.map((a: Client)=> a.id),
+            alunos: this.sessionToEdit.alunos.map((a: Client) => a.id),
             observacao: this.sessionToEdit.observacao,
             buscaAluno: ''
         })

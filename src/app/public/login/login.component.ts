@@ -4,6 +4,7 @@ import { Validators } from "@angular/forms";
 import { BaseComponent } from "@components/base/base.component";
 import { UserService } from "@services/user";
 import { AuthService } from "@shared/services/auth.service";
+import { emailValidator } from "@shared/validators/email.validator";
 import { filter } from "rxjs";
 
 @Component({
@@ -20,17 +21,17 @@ export class LoginComponent extends BaseComponent {
 
   override ngOnInit(): void {
     this.activeRoute.queryParamMap
-    .pipe(
-      filter(params=> params.has('loginExpired'))
-    ).subscribe(()=> this.alertService.error('Você não fez login!'))
+      .pipe(
+        filter(params => params.has('loginExpired'))
+      ).subscribe(() => this.alertService.error('Você não fez login!'))
 
-    if(this.auth.getToken()) {
+    if (this.auth.getToken()) {
       this.auth.endSession()
     }
 
     this.formGroup = this.formBuilder.group({
-      email: ['', Validators.required],
-      senha: ['', Validators.required],
+      email: this.formBuilder.control('', [Validators.required, emailValidator]),
+      senha: this.formBuilder.control('', [Validators.required, Validators.minLength(8)]),
       code: ''
     })
   }
@@ -68,6 +69,6 @@ export class LoginComponent extends BaseComponent {
           this.alertService.error(err.error.message)
           this.isLoading = !this.isLoading
         }
-    })
+      })
   }
 }

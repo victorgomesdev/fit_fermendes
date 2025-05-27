@@ -29,6 +29,6 @@ export class LayoutComponent implements AfterViewInit {
     }
 
     logOut(): void {
-        this.router.navigate(['/'])
+        this.router.navigate(['/auth'])
     }
 }

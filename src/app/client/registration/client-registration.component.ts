@@ -7,6 +7,7 @@ import { Client } from "@shared/types/client.type";
 import { cpfFormatterUtil } from "@shared/utils/cpf-formatter";
 import { imageToBase64Util } from "@shared/utils/image-to-base64";
 import { phoneFormatterUtil } from "@shared/utils/phone-formatter";
+import { emailValidator } from "@shared/validators/email.validator";
 import { filter } from "rxjs";
 
 @Component({
@@ -56,7 +57,7 @@ export class ClientRegistrationComponent extends BaseComponent {
     this.formGroup = this.formBuilder.group({
       nome: ['', Validators.required],
       cpf: ['', Validators.required],
-      email: ['', Validators.required],
+      email: this.formBuilder.control('', [Validators.required, emailValidator]),
       telefone: ['', Validators.required],
       peso: [0, Validators.required],
       altura: [0, Validators.required],
