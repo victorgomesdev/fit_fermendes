@@ -29,15 +29,4 @@ export class UserService extends BaseService {
     return this.put(this.PATH + `/${id}`, {})
   }
 
-  saveSessionToken(token: string): void {
-    localStorage.setItem('FIT_TOKEN', token)
-  }
-
-  getSessionToken() {
-    const token = localStorage.getItem('FIT_TOKEN')
-    if (token) {
-      return token
-    }
-    return null
-  }
 }

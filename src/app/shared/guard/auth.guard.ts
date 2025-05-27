@@ -1,6 +1,5 @@
 import { inject, Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, GuardResult, MaybeAsync, Router } from "@angular/router";
-import { AlertService } from "@shared/services/alert.service";
 import { AuthService } from "@shared/services/auth.service";
 
 @Injectable({
@@ -16,19 +15,18 @@ export class AuthGuard implements CanActivate {
 
     router = inject(Router)
     auth = inject(AuthService)
-    alertService = inject(AlertService)
 
     canActivate(route: ActivatedRouteSnapshot): MaybeAsync<GuardResult> {
-        if (this.protectedRoutes.includes(<string>route.routeConfig?.path)) {
-            if (!this.auth.getToken()) {
-                this.router.navigate(['/auth'], {
-                    queryParams: {
-                        loginExpired: true
-                    }
-                })
-                return false
-            }
+        if (!this.protectedRoutes.includes(<string>route.routeConfig?.path)) {
             return true
+        }
+        if (!this.auth.getToken()) {
+            this.router.navigate(['/auth'], {
+                queryParams: {
+                    loginExpired: 1
+                }
+            })
+            return false
         }
         return true
     }
