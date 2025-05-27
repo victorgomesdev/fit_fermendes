@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Route, RouterModule } from "@angular/router";
+import { AuthGuard } from "@shared/guard/auth.guard";
 
 const routes: Route[] = [
     {
@@ -8,14 +9,17 @@ const routes: Route[] = [
     },
     {
         path: 'aulas',
+        canActivate: [AuthGuard],
         loadChildren: () => import('@sessions/sessions.module').then(s => s.SessionsModule)
     },
     {
         path: 'alunos',
+        canActivate: [AuthGuard],
         loadChildren: () => import("@client/client.module").then(c => c.ClientModule)
     },
     {
         path: 'gestao',
+        canActivate: [AuthGuard],
         loadChildren: () => import("@management/management.module").then(m => m.ManagementModule)
     },
     {

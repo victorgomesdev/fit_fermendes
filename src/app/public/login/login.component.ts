@@ -3,6 +3,8 @@ import { Component, inject } from "@angular/core";
 import { Validators } from "@angular/forms";
 import { BaseComponent } from "@components/base/base.component";
 import { UserService } from "@services/user";
+import { AuthService } from "@shared/services/auth.service";
+import { filter } from "rxjs";
 
 @Component({
   templateUrl: './login.component.html',
@@ -14,17 +16,23 @@ export class LoginComponent extends BaseComponent {
   validator!: string
 
   userService = inject(UserService)
+  auth = inject(AuthService)
 
   override ngOnInit(): void {
+    this.activeRoute.queryParamMap
+    .pipe(
+      filter(params=> params.has('loginExpired'))
+    ).subscribe(()=> this.alertService.error('Você não fez login!'))
+
+    if(this.auth.getToken()) {
+      this.auth.endSession()
+    }
+
     this.formGroup = this.formBuilder.group({
       email: ['', Validators.required],
       senha: ['', Validators.required],
       code: ''
     })
-  }
-
-  redirectToHome(): void {
-    this.router.navigate(['/aulas'])
   }
 
   loginWithEmail(): void {
@@ -53,8 +61,7 @@ export class LoginComponent extends BaseComponent {
     this.userService.authenticateWith2F(this.formGroup.get('code')?.value, this.validator)
       .subscribe({
         next: (res: any) => {
-          console.log(res)
-          this.userService.saveSessionToken(res.data.token)
+          this.auth.setToken(res.data.token)
           this.router.navigate(['/aulas'])
         },
         error: (err: HttpErrorResponse) => {

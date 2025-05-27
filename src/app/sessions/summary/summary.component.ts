@@ -13,8 +13,8 @@ export class SummaryComponent extends BaseComponent {
 
     @ViewChild(SessionDetailsComponent) details!: SessionDetailsComponent
 
-    todaySessions!: Session[]
-    otherSessions!: Session[]
+    todaySessions: Session[] = []
+    otherSessions: Session[] = []
     today = new Date().toISOString().split('T')[0]
 
     showDropdown = false
