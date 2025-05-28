@@ -6,6 +6,6 @@ export function emailValidator(): ValidatorFn {
         
         const isValid = regex.test(control.value)
 
-        return isValid ? {isValidEmail: control.value}: null
+        return !isValid ? {invalidEmail: control.value}: null
     }
 }

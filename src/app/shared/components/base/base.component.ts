@@ -13,12 +13,20 @@ export abstract class BaseComponent implements OnInit {
   activeRoute = inject(ActivatedRoute)
   alertService = inject(AlertService)
   loadingService = inject(NgxSpinnerService)
-  
+
   isLoading = false
-  
+
   ngOnInit(): void { }
   createForm(): void { }
   saveFormEditing(): void { }
   saveFormRegistering(): void { }
+
+  isFieldValid(formControl: string) {
+    const control = this.formGroup.get(formControl);
+    const invalid = control && control.invalid && (control.dirty || control.touched)
+    return {
+      'border-error': invalid
+    };
+  }
 
 }

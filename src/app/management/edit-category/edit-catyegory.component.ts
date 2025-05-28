@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, inject, OnInit, output } from "@angular/core";
+import { Component, inject, output } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { BaseComponent } from "@components/base/base.component";
 import { CategoryService } from "@services/category";
-import { AlertService } from "@shared/services/alert.service";
 import { Category } from "@shared/types/category.type";
 
 @Component({
@@ -10,18 +10,16 @@ import { Category } from "@shared/types/category.type";
   selector: 'edit-category',
   standalone: false
 })
-export class EditCategoryComponent implements OnInit {
+export class EditCategoryComponent extends BaseComponent {
 
   show = false
   category?: Category
   saveCategory = output<Category>()
 
-  form!: FormGroup
   categoryService = inject(CategoryService)
-  alertService = inject(AlertService)
 
-  ngOnInit(): void {
-    this.form = new FormBuilder().group({
+  override ngOnInit(): void {
+    this.formGroup = this.formBuilder.group({
       name: ['', Validators.required]
     })
   }
@@ -35,8 +33,8 @@ export class EditCategoryComponent implements OnInit {
   }
 
   private saveEditing(): void {
-    if (this.form.valid) {
-      this.categoryService.editCategory(<number>this.category?.id, this.form.get('name')?.value)
+    if (this.formGroup.valid) {
+      this.categoryService.editCategory(<number>this.category?.id, this.formGroup.get('name')?.value)
         .subscribe({
           next: (res: any) => {
             this.saveCategory.emit(res.data as Category)
@@ -50,8 +48,8 @@ export class EditCategoryComponent implements OnInit {
   }
 
   private createNewCategory() {
-    if (this.form.valid) {
-      this.categoryService.createNewCategory(this.form.get('name')?.value)
+    if (this.formGroup.valid) {
+      this.categoryService.createNewCategory(this.formGroup.get('name')?.value)
         .subscribe({
           next: (res: any) => {
             this.saveCategory.emit(res.data as Category)
@@ -69,13 +67,13 @@ export class EditCategoryComponent implements OnInit {
     this.show = !this.show
     if (category) {
       this.category = category
-      this.form.get('name')?.setValue(category.nome)
+      this.formGroup.get('name')?.setValue(category.nome)
       return
     }
 
     if (this.category) {
       this.category = undefined
-      this.form.reset()
+      this.formGroup.reset()
     }
   }
 

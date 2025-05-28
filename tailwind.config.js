@@ -20,8 +20,9 @@ module.exports = {
         'orange': 'rgba(255, 255, 255, 0)',
         'paragraph': '#444'
       },
-      fontFamily: {
-
+      borderColor: {
+        'error': '#e74c3c',
+        'primary': '#ff69b4'
       },
       boxShadow: {
         "input-focus": "0 0 5px #ff69b4"

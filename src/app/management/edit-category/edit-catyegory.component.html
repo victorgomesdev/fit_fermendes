@@ -4,12 +4,12 @@
       <h2 class="text-2xl font-bold">Modalidade</h2>
       <button class="bg-background px-2 py-1 rounded-full" (click)="toogleModal()"><i class="pi pi-times"></i></button>
     </span>
-    <div class="w-full bg-background p-5 rounded-md flex flex-col gap-5" [formGroup]="form">
+    <div class="w-full bg-background p-5 rounded-md flex flex-col gap-5" [formGroup]="formGroup">
       <span class="flex flex-col gap-1">
         <label for="nome" class="text-paragraph font-semibold"><i class="pi pi-wrench text-primary"></i> Nome da
           modalidade<span class="text-error">*</span></label>
         <input inputAutofocus type="text" placeholder="Nova modalidade"
-          class="p-2 rounded-md outline-none focus:shadow-input-focus" formControlName="name" />
+          class="p-2 rounded-md outline-none border-2 focus:border-primary" formControlName="name" [ngClass]="isFieldValid('name')"/>
       </span>
       <span class="flex flex-col gap-1">
         <label for="cor" class="text-paragraph font-semibold"><i class="pi pi-palette text-primary"></i> Cor<span

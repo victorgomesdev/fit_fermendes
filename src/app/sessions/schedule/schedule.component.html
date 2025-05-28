@@ -42,15 +42,15 @@
                                     class="pi pi-calendar text-primary text-lg"></i>
                                 Data<span class="text-error">*</span></label>
                             <input id="data" (change)="changeCurrentDate($event.target)" type="date"
-                                class="p-2 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer"
-                                placeholder="Data da aula" formControlName="data" />
+                                class="p-2 rounded-lg border-2 focus:border-primary outline-none transition-all duration-100 cursor-pointer"
+                                placeholder="Data da aula" formControlName="data" [ngClass]="isFieldValid('data')"/>
                         </span>
                         <span class="flex flex-col w-full sm:w-1/2">
                             <label class="text-paragraph font-semibold mb-2" for="horario"><i
                                     class="pi pi-clock text-primary text-lg"></i>
                                 Horário<span class="text-error">*</span></label>
                             <select id="horario"
-                                class="p-2 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer" formControlName="horario">
+                                class="p-2 rounded-lg border-2 focus:border-primary outline-none transition-all duration-100 cursor-pointer" formControlName="horario" [ngClass]="isFieldValid('horario')">
                                 <option value="">Selecione um horário</option>
                                 <option value="10:00">10:00</option>
                                 <option value="11:00">11:00</option>
@@ -65,7 +65,7 @@
                                 class="pi pi-wrench text-primary text-lg"></i>
                             Modalidade<span class="text-error">*</span></label>
                         <select id="horario"
-                            class="p-3 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer" formControlName="modalidadeId">
+                            class="p-2 rounded-lg border-2 focus:border-primary outline-none transition-all duration-100 cursor-pointer" formControlName="modalidadeId" [ngClass]="isFieldValid('modalidadeId')">
                             <option value="">Selecione uma modalidade</option>
                             <option *ngFor="let cat of categories" [value]="cat.id">{{cat.nome}}</option>
                         </select>
@@ -77,7 +77,7 @@
                         <div class="bg-white shadow rounded-lg p-3 flex flex-col gap-5">
                             <div class="w-full relative">
                                 <input type="text"
-                                    class="outline-none shadow-md focus:shadow-input-focus rounded-lg p-2 w-full bg-background"
+                                    class="outline-none border-2 focus:border-primary rounded-lg p-2 w-full bg-background"
                                     placeholder="Pesquisar" formControlName="buscaAluno">
                                 <div *ngIf="searchResult.length > 0" class="absolute z-50 w-full bg-white flex flex-col gap-1 p-2 shadow">
                                     <button
@@ -114,7 +114,7 @@
                                 class="pi pi-exclamation-circle text-lg text-primary"></i>
                             Observações</h2>
                         <textarea rows="3"
-                            class="w-full flex shadow flex-col bg-white rounded-md p-4 outline-none focus:shadow-input-focus"
+                            class="w-full flex border-2 flex-col bg-white rounded-md p-4 outline-none focus:border-primary"
                             placeholder="Observações da aula" formControlName="observacao"></textarea>
                     </span>
                     <button
