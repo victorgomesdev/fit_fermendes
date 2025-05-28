@@ -22,4 +22,8 @@ export abstract class BaseService {
   protected delete<T>(url: string): Observable<T> {
     return this.client.delete<T>(url)
   }
+
+  protected patch<T>(url: string, body?: any): Observable<T> {
+    return this.client.patch<T>(url, body)
+  }
 }

@@ -14,6 +14,7 @@ export class SessionsHistoricComponent extends BaseComponent {
     @ViewChild(SessionDetailsComponent) details!: SessionDetailsComponent
 
     sessions: Session[] = []
+    selectedSessions: Session[] = []
     scheduled!: number
     canceled!: number
     concluded!: number
@@ -26,6 +27,7 @@ export class SessionsHistoricComponent extends BaseComponent {
             .subscribe({
                 next: (res: any) => {
                     this.sessions = res.data
+                    this.selectedSessions = [...this.sessions]
                 },
                 complete: ()=> {
                     this.loadingService.hide()
@@ -37,6 +39,15 @@ export class SessionsHistoricComponent extends BaseComponent {
 
     openModal(session: Session): void {
         this.details.toogleModal(session)
+    }
+
+    onFilterChange(event: any): void {
+        switch(event.target.value) {
+            case 'Todas': this.selectedSessions = [...this.sessions]; break;
+            case 'Concluídas': this.selectedSessions = this.sessions.filter(s=> s.statusAulaNome == 'Concluido'); break;
+            case 'Canceladas': this.selectedSessions = this.sessions.filter(s=> s.statusAulaNome == 'Cancelado'); break;
+            case 'Agendadas': this.selectedSessions = this.sessions.filter(s=> s.statusAulaNome == 'Agendado'); break;
+        }
     }
 
     private populateSummary() {

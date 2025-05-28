@@ -22,7 +22,7 @@
         <div class="flex flex-col w-full bg-background rounded-md shadow p-3 md:p-5 gap-4">
             <div class="flex flex-row gap-5 items-center">
                 <h2 class="text-paragraph font-medium text-lg"><i class="pi pi-filter text-primary"></i> Filtrar</h2>
-                <select class="text-sm p-2 rounded-lg shadow-sm focus:shadow-input-focus outline-none transition-all duration-100 cursor-pointer">
+                <select class="text-sm p-2 rounded-lg border-2 focus:border-primary outline-none transition-all duration-100 cursor-pointer" (change)="onFilterChange($event)">
                     <option value="Todas" class="text-sm">Todas</option>
                     <option value="Agendadas" class="text-sm">Agendadas</option>
                     <option value="Concluídas" class="text-sm">Concluídas</option>
@@ -30,7 +30,7 @@
                 </select>
             </div>
             <div class="w-full flex flex-col md:grid grid-cols-3 gap-3">
-                <session-card *ngFor="let session of sessions" [session]="session" (selected)="openModal($event)"/>
+                <session-card *ngFor="let session of selectedSessions" [session]="session" (selected)="openModal($event)"/>
             </div>
         </div>
     </div>

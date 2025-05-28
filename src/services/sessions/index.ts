@@ -17,7 +17,6 @@ export class SessionService extends BaseService {
   }
 
   updateSession(sessionId: number, session: Session): Observable<Session> {
-    
     return this.put(this.PATH + `/${sessionId}`, session)
   }
 
@@ -31,6 +30,14 @@ export class SessionService extends BaseService {
 
   getAllSessions() {
     return this.get(this.PATH + `/lista?dataInicio=${subYears(new Date(), 10)}&dataFim=${addYears(new Date(), 10)}`)
+  }
+
+  terminateSession(sessionId: number): Observable<any> {
+    return this.patch(this.PATH + `/concluir/${sessionId}`)
+  }
+
+  cancelSession(sessionId: number): Observable<any> {
+    return this.patch(this.PATH + `/cancelar/${sessionId}`)
   }
 
   saveSessionDueRegistration(session: Session): void {

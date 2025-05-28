@@ -30,7 +30,7 @@
                         dateFormats.SMLL_TITLE}}</span>
                 </div>
                 <mwl-calendar-month-view [viewDate]="today" [events]="sessions" [activeDay]="targetDate"
-                    (dayClicked)="dayClicked($event.day)" [activeDayIsOpen]="showActiveDay" locale="pt" />
+                    (dayClicked)="dayClicked($event.day)" (eventClicked)="onEventSelected($event.event)" [activeDayIsOpen]="showActiveDay" locale="pt" />
             </div>
             <div class="xl:flex flex-col bg-background rounded-md py-5 px-2 sm:px-6 gap-4 shadow xl:w-2/5 md:w-full hidden"
                 #detailsDiv [formGroup]="formGroup">
@@ -118,10 +118,11 @@
                             placeholder="Observações da aula" formControlName="observacao"></textarea>
                     </span>
                     <button
-                        class="bg-primary rounded-lg p-2 text-white text-sm max-w-[80%] self-center transition duration-300 transform hover:-translate-y-1" (click)="saveForm()"><i
-                            class="pi pi-calendar-plus"></i> Confirmar agendamento</button>
+                        class="bg-success rounded-md p-2 text-white text-sm md:text-base max-w-[80%] self-end" (click)="saveForm()"><i
+                            class="pi pi-calendar-plus"></i> {{sessionToEdit? 'SALVAR': 'AGENDAR'}}</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<session-details/>

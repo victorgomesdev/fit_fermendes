@@ -30,7 +30,7 @@ export class LoginComponent extends BaseComponent {
     }
 
     this.formGroup = this.formBuilder.group({
-      email: this.formBuilder.control('', [Validators.required, emailValidator]),
+      email: this.formBuilder.control('', [Validators.required, emailValidator()]),
       senha: this.formBuilder.control('', [Validators.required, Validators.minLength(8)]),
       code: ''
     })

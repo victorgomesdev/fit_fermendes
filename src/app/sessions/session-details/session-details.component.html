@@ -1,20 +1,26 @@
-<div *ngIf="show" class="fixed inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 z-50 animate-fadeIn">
-    <div class="w-11/12 sm:w-3/5 md:w-3/5 flex flex-col p-3 sm:p-4 bg-white rounded-md gap-3 max-h-[90vh] overflow-y-scroll">
+<div *ngIf="show"
+    class="fixed inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 z-50 animate-fadeIn">
+    <div
+        class="w-11/12 sm:w-3/5 md:w-3/5 flex flex-col p-3 sm:p-4 bg-white rounded-md gap-3 max-h-[90vh] overflow-y-scroll">
         <div class="flex flex-row w-full justify-between px-2">
             <h2 class="text-2xl font-bold">Detalhes da aula</h2>
             <button class="bg-background px-2 rounded-full" (click)="toogleModal()"><i class="pi pi-times"></i></button>
         </div>
         <div class="w-full flex flex-col bg-background p-4 rounded-md shadow gap-2 sm:gap-5">
             <h2 class="text-primary font-semibold text-lg">Informações</h2>
-            <div class="w-full grid grid-cols-3 gap-2">
-                <span class="text-paragraph font-semibold text-sm sm:text-base"><i class="pi pi-calendar text-primary"></i> Data:
+            <div class="w-full grid grid-cols-2 md:grid-cols-3 gap-2">
+                <span class="text-paragraph font-semibold text-sm sm:text-base"><i
+                        class="pi pi-calendar text-primary"></i> Data:
                     <span class="text-primary">{{session.data | date:"dd/MM/yyyy" }}</span></span>
-                <span class="text-paragraph font-semibold text-sm sm:text-base"><i class="pi pi-clock text-primary"></i> Horário: <span
-                        class="text-primary">{{session.data | date:"hh:mm" }}</span></span>
-                <span class="text-paragraph font-semibold text-sm sm:text-base"><i class="pi pi-wrench text-primary"></i> Modalidade: <span
+                <span class="text-paragraph font-semibold text-sm sm:text-base"><i class="pi pi-clock text-primary"></i>
+                    Horário: <span class="text-primary">{{session.data | date:"hh:mm" }}</span></span>
+                <span class="text-paragraph font-semibold text-sm sm:text-base"><i
+                        class="pi pi-wrench text-primary"></i> Modalidade: <span
                         class="bg-info text-white font-normal px-2 py-1 text-sm rounded-full">{{session.modalidadeNome}}</span></span>
-                <span class="text-paragraph font-semibold text-sm sm:text-base"><i class="pi pi-info-circle text-primary"></i> Status: <span
-                        class="bg-yellow text-white font-normal px-2 py-1 text-sm rounded-full">{{session.statusAulaNome}}</span></span>
+                <span class="text-paragraph font-semibold text-sm sm:text-base"><i
+                        class="pi pi-info-circle text-primary"></i> Status: <span
+                        class="text-white font-normal px-2 py-1 text-sm rounded-full"
+                        [ngClass]="{`bg-yellow`: session.statusAulaNome == 'Agendado', 'bg-error': session.statusAulaNome =='Cancelado', 'bg-success': session.statusAulaNome =='Concluido'}">{{session.statusAulaNome}}</span></span>
             </div>
             <div class="w-full flex flex-col gap-2">
                 <h2 class="text-primary font-semibold text-lg">Alunos</h2>
@@ -23,19 +29,25 @@
                         class="flex flex-col gap-1 items-center bg-white p-2 rounded-md shadow text-center font-medium transition transform hover:-translate-y-1 duration-300">
                         <span class="text-paragraph">{{aluno.nome}}</span>
                     </div>
-                    
+
                 </div>
             </div>
             <div>
                 <h2 class="text-primary font-semibold text-lg">Observações</h2>
                 <span class="text-paragraph text-sm">{{session.observacao}}</span>
             </div>
-            <div class="flex flex-row justify-end gap-2">
-                <button class="bg-error p-2 font-semibold text-white rounded-md text-sm md:text-base"><i class="pi pi-times md:block hidden"></i>
+            <div class="flex flex-row self-end gap-2"
+                *ngIf="(session.statusAulaNome !== 'Concluido' && session.statusAulaNome !== 'Cancelado')">
+                <button class="bg-error p-2 text-white rounded-md text-sm md:text-base"
+                    (click)="cancelSession(session.id)"><i class="pi"
+                        [ngClass]="{'pi-times': !loading2, 'pi-spinner animate-loading': loading2}"></i>
                     CANCELAR</button>
-                <button class="bg-info p-2 font-semibold text-white rounded-md text-sm md:text-base" (click)="editSession(session.id)"><i class="pi pi-pencil md:block hidden"></i>
+                <button class="bg-info p-2 text-white rounded-md text-sm md:text-base"
+                    (click)="editSession(session.id)"><i class="pi pi-pencil"></i>
                     EDITAR</button>
-                <button class="bg-success p-2 font-semibold text-white rounded-md text-sm md:text-base"><i class="pi pi-check md:block hidden"></i>
+                <button class="bg-success p-2 text-white rounded-md text-sm md:text-base"
+                    (click)="terminateSession(session.id)"><i class="pi"
+                        [ngClass]="{'pi-check': !loading1, 'pi-spinner animate-loading': loading1}"></i>
                     CONCLUIR</button>
             </div>
         </div>

@@ -1,5 +1,6 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, ViewChild } from "@angular/core";
 import { Validators } from '@angular/forms'
+import { SessionDetailsComponent } from "@sessions/session-details/session-details.component";
 import { Session } from "@shared/types/session.type";
 import { SessionService } from "@services/sessions";
 import { CategoryService } from "@services/category";
@@ -9,6 +10,7 @@ import { Category } from "@shared/types/category.type";
 import { Client } from "@shared/types/client.type";
 import { dateFormatterUtil } from "@shared/utils/date-input-formatter";
 import { sessionScheduleFactory } from "@shared/utils/schedule-request-factory";
+import { calendarEventFactoryUtil } from "@shared/utils/session-factory.util";
 import { BaseComponent } from "@components/base/base.component";
 import { CalendarEvent } from 'angular-calendar'
 import { debounceTime, distinctUntilChanged, filter } from "rxjs";
@@ -20,6 +22,8 @@ import { addMonths, subMonths } from 'date-fns'
     standalone: false
 })
 export class ScheduleComponent extends BaseComponent {
+
+    @ViewChild(SessionDetailsComponent) sessionDetails!: SessionDetailsComponent
 
     dateFormats = DateFormat
     today!: Date
@@ -42,39 +46,24 @@ export class ScheduleComponent extends BaseComponent {
     clientService = inject(ClientService)
 
     override ngOnInit(): void {
+        this.today = new Date()
+        this.sessionService.getAllSessions()
+            .subscribe({
+                next: (res: any) => {
+                    let temp: CalendarEvent<Session>[] = [];
+                    (res.data as Session[]).forEach(s => temp.push(calendarEventFactoryUtil(s)))
+                    this.sessions = temp
+                }
+            })
         this.createForm()
         this.subscribeToSearchInputChanges()
+        this.subscribeToRedirection()
         this.categoryService.listAllCategories()
             .subscribe({
                 next: (res: any) => this.categories = res.data,
             })
-        this.today = new Date()
 
-        this.sessions = []
 
-        this.activeRoute.queryParamMap
-            .pipe(
-                filter(params => params.has('newClientId') || params.has('edit'))
-            ).subscribe({
-                next: (params) => {
-                    if (params.get('newClientId') && params.get('newClientName')) {
-                        this.showClientNotFound = false
-                        this.onClientSelected({ id: Number(params.get('newClientId')), nome: <string>params.get('newClientName') })
-                        return
-                    }
-                    this.loadingService.show()
-                    this.sessionService.getSessionById(Number(params.get('edit')))
-                        .subscribe({
-                            next: (res: any) => {
-                                this.sessionToEdit = res.data
-                                this.initializeFormOnEditing()
-                            },
-                            complete: () => {
-                                this.loadingService.hide()
-                            }
-                        })
-                }
-            })
 
         if (this.sessionService.savedSessionPartial) {
             this.formGroup.setValue(this.sessionService.getSessionPartial())
@@ -157,6 +146,32 @@ export class ScheduleComponent extends BaseComponent {
             })
     }
 
+    private subscribeToRedirection(): void {
+        this.activeRoute.queryParamMap
+            .pipe(
+                filter(params => params.has('newClientId') || params.has('edit'))
+            ).subscribe({
+                next: (params) => {
+                    if (params.get('newClientId') && params.get('newClientName')) {
+                        this.showClientNotFound = false
+                        this.onClientSelected({ id: Number(params.get('newClientId')), nome: <string>params.get('newClientName') })
+                        return
+                    }
+                    this.loadingService.show()
+                    this.sessionService.getSessionById(Number(params.get('edit')))
+                        .subscribe({
+                            next: (res: any) => {
+                                this.sessionToEdit = res.data
+                                this.initializeFormOnEditing()
+                            },
+                            complete: () => {
+                                this.loadingService.hide()
+                            }
+                        })
+                }
+            })
+    }
+
     onClientSelected(client: Partial<Client>): void {
         const control = this.formGroup.get('alunos');
         const currentValue = <number[]>control?.value
@@ -171,6 +186,10 @@ export class ScheduleComponent extends BaseComponent {
         this.clients.push(client)
         this.formGroup.get('buscaAluno')?.reset()
         return
+    }
+
+    onEventSelected(event: any): void {
+        this.sessionDetails.toogleModal(event.meta)
     }
 
     cancelClientSchedule(clientId: number | undefined): void {
