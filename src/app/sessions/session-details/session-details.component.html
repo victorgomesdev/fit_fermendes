@@ -8,40 +8,81 @@
         </div>
         <div class="w-full flex flex-col bg-background p-4 rounded-md shadow gap-2 sm:gap-5">
             <h2 class="text-primary font-semibold text-lg">Informações</h2>
-            <div class="w-full grid grid-cols-2 md:grid-cols-3 gap-2">
-                <span class="text-paragraph font-semibold text-sm sm:text-base"><i
-                        class="pi pi-calendar text-primary"></i> Data:
-                    <span class="text-primary">{{session.data | date:"dd/MM/yyyy" }}</span></span>
-                <span class="text-paragraph font-semibold text-sm sm:text-base"><i class="pi pi-clock text-primary"></i>
-                    Horário: <span class="text-primary">{{session.data | date:"hh:mm" }}</span></span>
-                <span class="text-paragraph font-semibold text-sm sm:text-base"><i
-                        class="pi pi-wrench text-primary"></i> Modalidade: <span
-                        class="bg-info text-white font-normal px-2 py-1 text-sm rounded-full">{{session.modalidadeNome}}</span></span>
-                <span class="text-paragraph font-semibold text-sm sm:text-base"><i
-                        class="pi pi-info-circle text-primary"></i> Status: <span
-                        class="text-white font-normal px-2 py-1 text-sm rounded-full"
-                        [ngClass]="{`bg-yellow`: session.statusAulaNome == 'Agendado', 'bg-error': session.statusAulaNome =='Cancelado', 'bg-success': session.statusAulaNome =='Concluido'}">{{session.statusAulaNome}}</span></span>
-            </div>
-            <div class="w-full flex flex-col gap-2">
-                <h2 class="text-primary font-semibold text-lg">Alunos</h2>
-                <div class="w-3/4 grid grid-cols-3 gap-3 self-center">
-                    <div *ngFor="let aluno of session.alunos"
-                        class="flex flex-col gap-1 items-center bg-white p-2 rounded-md shadow text-center font-medium transition transform hover:-translate-y-1 duration-300">
-                        <span class="text-paragraph">{{aluno.nome}}</span>
-                    </div>
-
-                </div>
-            </div>
+            <table class="border-2 border-gray-300 rounded-md flex flex-row lg:flex-col items-stretch">
+                <thead class="w-full flex p-3 lg:border-b-2 border-r-2 lg:border-r-0 border-gray-300">
+                    <tr class="w-full flex flex-col lg:flex-row justify-between">
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 lg:text-center text-nowrap">
+                            <i class="pi pi-calendar text-primary"></i>
+                            Data
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 lg:text-center text-nowrap">
+                            <i class="pi pi-clock text-primary"></i>
+                            Hora
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 lg:text-center text-nowrap">
+                            <i class="pi pi-wrench text-primary"></i>
+                            Modalidade
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 lg:text-center text-nowrap">
+                            <i class="pi pi-info-circle text-primary"></i>
+                            Status
+                        </td>
+                    </tr>
+                </thead>
+                <tbody class="bg-white w-full flex flex-col items-stretch overflow-hidden">
+                    <tr
+                        class="cursor-pointer hover:bg-background p-3 transition-colors duration-200 flex flex-col lg:flex-row justify-between border-b gap-2">
+                        <td class="w-1/3 md:w-1/5 lg:text-center">{{session.data | date: 'dd/MM/yyyy' }}</td>
+                        <td class="w-1/3 md:w-1/5 lg:text-center">{{session.data | date: 'HH:mm': 'UTC'}}</td>
+                        <td class="w-1/3 md:w-1/5 lg:text-center"><span
+                                class="bg-info text-white px-2 py-1 rounded-full text-nowrap">{{session.modalidadeNome}}</span>
+                        </td>
+                        <td class="w-1/3 md:w-1/5 lg:text-center"><span
+                                class="px-2 py-1 rounded-full text-white"
+                                [ngClass]="{`bg-yellow`: session.statusAulaNome == 'Agendado', 'bg-error': session.statusAulaNome =='Cancelado', 'bg-success': session.statusAulaNome =='Concluido'}">{{session.statusAulaNome}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div>
                 <h2 class="text-primary font-semibold text-lg">Observações</h2>
-                <span class="text-paragraph text-sm">{{session.observacao}}</span>
+                <span class="text-paragraph text-sm md:text-base pl-5">{{session.observacao || 'Sem observações.'}}</span>
             </div>
+            <h2 class="text-primary font-semibold text-lg">Alunos</h2>
+            <table class="border-2 border-gray-300 rounded-md flex flex-col items-stretch">
+                <thead class="w-full flex p-3 border-b-2 border-gray-300">
+                    <tr class="w-full flex flex-row lg:justify-between">
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 lg:text-center">
+                            <i class="pi pi-user text-primary"></i>
+                            Nome
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 lg:text-center">
+                            <i class="pi pi-envelope text-primary"></i>
+                            Email
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 lg:text-center hidden md:block">
+                            <i class="pi pi-phone text-primary"></i>
+                            Telefone
+                        </td>
+                    </tr>
+                </thead>
+                <tbody class="bg-white w-full flex flex-col items-stretch overflow-hidden">
+                    <tr *ngFor="let client of session.alunos"
+                        class="cursor-pointer hover:bg-background p-3 transition-colors duration-200 flex flex-row lg:justify-between border-b">
+                        <td class="w-1/3 md:w-1/5 lg:text-center ">{{client.nome}}</td>
+                        <td class="w-1/3 md:w-1/5 lg:text-center overflow-clip"><span
+                                class="text-nowrap text-ellipsis">{{client.email}}</span></td>
+                        <td class="w-1/3 md:w-1/5 lg:text-center hidden md:block">{{client.telefone}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
             <div class="flex flex-row self-end gap-2"
                 *ngIf="(session.statusAulaNome !== 'Concluido' && session.statusAulaNome !== 'Cancelado')">
                 <button class="bg-error p-2 text-white rounded-md text-sm md:text-base"
                     (click)="cancelSession(session.id)"><i class="pi"
                         [ngClass]="{'pi-times': !loading2, 'pi-spinner animate-loading': loading2}"></i>
-                    CANCELAR</button>
+                    CANCELAR AULA</button>
                 <button class="bg-info p-2 text-white rounded-md text-sm md:text-base"
                     (click)="editSession(session.id)"><i class="pi pi-pencil"></i>
                     EDITAR</button>

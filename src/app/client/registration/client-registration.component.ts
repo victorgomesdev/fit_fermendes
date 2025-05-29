@@ -6,6 +6,7 @@ import { SessionService } from "@services/sessions";
 import { Client } from "@shared/types/client.type";
 import { cpfFormatterUtil } from "@shared/utils/cpf-formatter";
 import { imageToBase64Util } from "@shared/utils/image-to-base64";
+import { nonNegativeFormatter } from "@shared/utils/non-negative-value";
 import { phoneFormatterUtil } from "@shared/utils/phone-formatter";
 import { emailValidator } from "@shared/validators/email.validator";
 import { nonNegativeValidator } from "@shared/validators/negative-value.validator";
@@ -44,8 +45,9 @@ export class ClientRegistrationComponent extends BaseComponent {
                 this.clientImageName = <string>this.client.nomeImagem
                 this.clientImageUrl = <string>this.client.base64Imagem
                 this.initializeFormOnEditing()
+                this.loadingService.hide()
               },
-              complete: () => {
+              error: () => {
                 this.loadingService.hide()
               }
             })
@@ -142,6 +144,10 @@ export class ClientRegistrationComponent extends BaseComponent {
 
   onPhoneChanges(event: Event): void {
     this.formGroup.get('telefone')?.setValue(phoneFormatterUtil((<HTMLInputElement>event.target).value))
+  }
+
+  onWeightOrHeightChanges(event: Event, field: string): void {
+    this.formGroup.get(field)?.setValue(nonNegativeFormatter(event))
   }
 
   async onImageSelection(event: Event) {

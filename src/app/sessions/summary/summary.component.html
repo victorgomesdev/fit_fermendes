@@ -1,21 +1,104 @@
 <div class="w-full flex flex-col items-center pt-4 gap-8 animate-fadeIn">
-    <div class="w-full max-w-6xl flex flex-col bg-white rounded-md p-3 sm:p-5 gap-3">
+    <div class="w-full sm:w-[85%] flex flex-col bg-white rounded-md p-3 sm:p-5 gap-3">
         <h1 class="text-xl sm:text-2xl font-bold">Aulas marcadas</h1>
         <div class="flex flex-col bg-background rounded-lg shadow p-2 sm:p-4 gap-3">
-            <h2 class="font-semibold text-lg text-paragraph"><i class="pi pi-calendar-clock text-primary"></i> Aulas de hoje</h2>
-            <div class="flex flex-col sm:grid grid-cols-3 gap-3 w-full">
-                <session-card *ngFor="let session of todaySessions" (selected)="openModal($event)" [session]="session"/>
-                <span *ngIf="todaySessions.length == 0" class="text-paragraph font-semibold"><i class="pi pi-exclamation-circle"></i> Nenhuma aula hoje</span>
-            </div>
+            <h2 class="font-semibold text-lg text-paragraph"><i class="pi pi-calendar-clock text-primary"></i> Aulas de
+                hoje</h2>
+            <table *ngIf="todaySessions.length > 0"
+                class="border-2 border-gray-300 rounded-md flex flex-col items-stretch">
+                <thead class="w-full flex p-3 border-b-2 border-gray-300">
+                    <tr class="w-full flex flex-row justify-between">
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center">
+                            <i class="pi pi-calendar text-primary"></i>
+                            Data
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center">
+                            <i class="pi pi-clock text-primary"></i>
+                            Hora
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center hidden md:block">
+                            <i class="pi pi-wrench text-primary"></i>
+                            Modalidade
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center hidden md:block">
+                            <i class="pi pi-info-circle text-primary"></i>
+                            Status
+                        </td>
+                        <td class="w-1/3 md:w-1/5 text-center">
+                        </td>
+                    </tr>
+                </thead>
+                <tbody class="bg-white w-full flex flex-col items-stretch">
+                    <tr *ngFor="let session of todaySessions"
+                        class="cursor-pointer hover:bg-background p-3 transition-colors duration-200 flex flex-row justify-between border-b">
+                        <td class="w-1/3 md:w-1/5 text-center">{{session.data | date: 'dd/MM/yyyy' }}</td>
+                        <td class="w-1/3 md:w-1/5 text-center">{{session.data | date: 'HH:mm': 'UTC'}}</td>
+                        <td class="w-1/3 md:w-1/5 text-center hidden md:block"><span
+                                class="bg-info text-white px-2 py-1 rounded-full text-nowrap text-ellipsis">{{session.modalidadeNome}}</span></td>
+                        <td class="w-1/3 md:w-1/5 text-center hidden md:block"><span class="px-2 py-1 rounded-full text-white"
+                                [ngClass]="{`bg-yellow`: session.statusAulaNome == 'Agendado', 'bg-error': session.statusAulaNome =='Cancelado', 'bg-success': session.statusAulaNome =='Concluido'}">{{session.statusAulaNome}}</span>
+                        </td>
+                        <td class="w-1/3 md:w-1/5 text-center flex flex-col">
+                            <button
+                                class="bg-primary text-sm md:text-base text-white font-semibold rounded-md p-1 self-center"
+                                (click)="openModal(session)"><i class="pi pi-plus"></i> Detalhes</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <span *ngIf="todaySessions.length == 0" class="self-center text-paragraph font-semibold"><i
+                    class="pi pi-info-circle text-primary"></i> Nenhuma aula marcada para hoje.</span>
         </div>
     </div>
-    <div class="w-full max-w-6xl flex flex-col bg-white rounded-md p-3 sm:p-5 gap-3">
+    <div class="w-full sm:w-[85%] flex flex-col bg-white rounded-md p-3 sm:p-5 gap-3">
         <div class="flex flex-col bg-background rounded-lg shadow p-4 gap-3">
-            <h2 class="font-semibold text-lg text-paragraph"><i class="pi pi-calendar text-primary"></i> Próximas aulas</h2>
-            <div class="flex flex-col sm:grid grid-cols-3 gap-3 w-full">
-                <session-card *ngFor="let session of otherSessions" (selected)="openModal($event)" [session]="session"/>
-            </div>
+            <h2 class="font-semibold text-lg text-paragraph"><i class="pi pi-calendar text-primary"></i> Aulas recentes
+            </h2>
+            <table *ngIf="otherSessions.length > 0"
+                class="border-2 border-gray-300 rounded-md flex flex-col items-stretch">
+                <thead class="w-full flex p-3 border-b-2 border-gray-300">
+                    <tr class="w-full flex flex-row justify-between">
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center">
+                            <i class="pi pi-calendar text-primary"></i>
+                            Data
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center">
+                            <i class="pi pi-clock text-primary"></i>
+                            Hora
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center hidden md:block">
+                            <i class="pi pi-wrench text-primary"></i>
+                            Modalidade
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center hidden md:block">
+                            <i class="pi pi-info-circle text-primary"></i>
+                            Status
+                        </td>
+                        <td class="w-1/3 md:w-1/5 text-center">
+                        </td>
+                    </tr>
+                </thead>
+                <tbody class="bg-white w-full flex flex-col items-stretch">
+                    <tr *ngFor="let session of otherSessions"
+                        class="cursor-pointer hover:bg-background p-3 transition-colors duration-200 flex flex-row justify-between border-b">
+                        <td class="w-1/3 md:w-1/5 text-center">{{session.data | date: 'dd/MM/yyyy' }}</td>
+                        <td class="w-1/3 md:w-1/5 text-center">{{session.data | date: 'HH:mm': 'UTC'}}</td>
+                        <td class="w-1/3 md:w-1/5 text-center hidden md:block"><span
+                                class="bg-info text-white px-2 py-1 rounded-full text-nowrap text-ellipsis">{{session.modalidadeNome}}</span></td>
+                        <td class="w-1/3 md:w-1/5 text-center hidden md:block"><span class="px-2 py-1 rounded-full text-white"
+                                [ngClass]="{`bg-yellow`: session.statusAulaNome == 'Agendado', 'bg-error': session.statusAulaNome =='Cancelado', 'bg-success': session.statusAulaNome =='Concluido'}">{{session.statusAulaNome}}</span>
+                        </td>
+                        <td class="w-1/3 md:w-1/5 text-center flex flex-col">
+                            <button
+                                class="bg-primary text-sm md:text-base text-white font-semibold rounded-md p-1 self-center"
+                                (click)="openModal(session)"><i class="pi pi-plus"></i> Detalhes</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <span *ngIf="otherSessions.length == 0" class="self-center text-paragraph font-semibold"><i
+                    class="pi pi-info-circle text-primary"></i> Nenhuma aula recente.</span>
         </div>
     </div>
 </div>
-<session-details/>
+<session-details />

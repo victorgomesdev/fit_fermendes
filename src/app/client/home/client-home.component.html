@@ -1,12 +1,44 @@
-<div class="w-full flex flex-col items-center md:p-4 p-2 animate-fadeIn">
-  <div class="flex flex-col bg-white p-3 md:p-5 xl:w-3/4 md:w-full rounded-md gap-6">
+<div class="w-full flex flex-col items-center md:p-4 animate-fadeIn">
+  <div class="flex flex-col bg-white p-3 md:p-5 w-full sm:w-[85%] rounded-md gap-6">
     <div class="w-full flex flex-row justify-between items-center px-2">
       <h2 class="text-2xl font-bold">Alunos</h2>
-      <button class="md:text-base text-xs bg-primary p-2 rounded-md text-white font-semibold" (click)="redirectToRegistration()"><i class="pi pi-user-plus"></i> CADASTRAR</button>
+      <button class="md:text-base text-xs bg-primary p-2 rounded-md text-white font-semibold"
+        (click)="redirectToRegistration()"><i class="pi pi-user-plus"></i> CADASTRAR</button>
     </div>
-    <div class=" w-full grid grid-cols-2 xl:grid-cols-3 bg-background rounded-md shadow p-2 md:p-5 gap-3">
-      <client-card (selected)="clientSelected($event)" *ngFor="let client of clients; let index = index" [client]="client"/>
-      <no-client-card *ngIf="clients.length == 0 && isLoading == false"/>
+    <div class="w-full flex flex-col bg-background rounded-md shadow p-2 md:p-5 gap-3">
+      <table *ngIf="clients.length > 0" class="border-2 border-gray-300 rounded-md flex flex-col items-stretch">
+        <thead class="w-full flex p-3 border-b-2 border-gray-300">
+          <tr class="w-full flex flex-row justify-between">
+            <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center">
+              <i class="pi pi-user text-primary"></i>
+              Nome
+            </td>
+            <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center">
+              <i class="pi pi-envelope text-primary"></i>
+              Email
+            </td>
+            <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center hidden md:block">
+              <i class="pi pi-phone text-primary"></i>
+              Telefone
+            </td>
+            <td class="w-1/3 md:w-1/5 text-center">
+            </td>
+          </tr>
+        </thead>
+        <tbody class="bg-white w-full flex flex-col items-stretch">
+          <tr *ngFor="let client of clients"
+            class="cursor-pointer hover:bg-background p-3 transition-colors duration-200 flex flex-row justify-between border-b">
+            <td class="w-1/3 md:w-1/5 text-center ">{{client.nome}}</td>
+            <td class="w-1/3 md:w-1/5 text-center overflow-clip"><span class="text-nowrap text-ellipsis">{{client.email}}</span></td>
+            <td class="w-1/3 md:w-1/5 text-center hidden md:block">{{client.telefone}}</td>
+            <td class="w-1/3 md:w-1/5 text-center">
+              <button class="bg-primary text-sm md:text-base text-white font-semibold rounded-md p-1 self-center"
+                (click)="clientSelected(client)"><i class="pi pi-plus"></i> Detalhes</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <span *ngIf="clients.length == 0" class="text-paragraph font-semibold self-center"><i class="pi pi-info-circle text-primary"></i> Sem alunos cadastrados.</span>
     </div>
   </div>
 </div>

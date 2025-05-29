@@ -1,5 +1,5 @@
 <div class="w-full flex flex-col pt-4 animate-fadeIn">
-    <div class="flex flex-col bg-white rounded-md w-full xl:w-[70%] self-center p-5 gap-6">
+    <div class="flex flex-col bg-white rounded-md w-full sm:w-[85%] self-center p-5 gap-6">
         <h2 class="text-2xl font-bold">Histórico de aulas</h2>
         <div class="flex flex-col md:flex-row w-full justify-center gap-2 md:gap-5">
             <div class="bg-info flex flex-row lg:flex-col justify-center gap-1 items-center p-2 rounded-md">
@@ -22,20 +22,60 @@
         <div class="flex flex-col w-full bg-background rounded-md shadow p-3 md:p-5 gap-4">
             <div class="flex flex-row gap-5 items-center">
                 <h2 class="text-paragraph font-medium text-lg"><i class="pi pi-filter text-primary"></i> Filtrar</h2>
-                <select class="text-sm p-2 rounded-lg border-2 focus:border-primary outline-none transition-all duration-100 cursor-pointer" (change)="onFilterChange($event)">
+                <select
+                    class="text-sm p-2 rounded-lg border-2 focus:border-primary outline-none transition-all duration-100 cursor-pointer"
+                    (change)="onFilterChange($event)">
                     <option value="Todas" class="text-sm">Todas</option>
                     <option value="Agendadas" class="text-sm">Agendadas</option>
                     <option value="Concluídas" class="text-sm">Concluídas</option>
                     <option value="Canceladas" class="text-sm">Canceladas</option>
                 </select>
             </div>
-            <div class="w-full flex flex-col md:grid grid-cols-3 gap-3">
-                <session-card *ngFor="let session of selectedSessions" [session]="session" (selected)="openModal($event)"/>
-            </div>
+            <table *ngIf="selectedSessions.length > 0"
+                class="border-2 border-gray-300 rounded-md flex flex-col items-stretch">
+                <thead class="w-full flex p-3 border-b-2 border-gray-300">
+                    <tr class="w-full flex flex-row justify-between">
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center">
+                            <i class="pi pi-calendar text-primary"></i>
+                            Data
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center">
+                            <i class="pi pi-clock text-primary"></i>
+                            Hora
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center hidden md:block">
+                            <i class="pi pi-wrench text-primary"></i>
+                            Modalidade
+                        </td>
+                        <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center hidden md:block">
+                            <i class="pi pi-info-circle text-primary"></i>
+                            Status
+                        </td>
+                        <td class="w-1/3 md:w-1/5 text-center">
+                        </td>
+                    </tr>
+                </thead>
+                <tbody class="bg-white w-full flex flex-col items-stretch">
+                    <tr *ngFor="let session of selectedSessions"
+                        class="cursor-pointer hover:bg-background p-3 transition-colors duration-200 flex flex-row justify-between border-b">
+                        <td class="w-1/3 md:w-1/5 text-center">{{session.data | date: 'dd/MM/yyyy' }}</td>
+                        <td class="w-1/3 md:w-1/5 text-center">{{session.data | date: 'HH:mm': 'UTC'}}</td>
+                        <td class="w-1/3 md:w-1/5 text-center hidden md:block"><span
+                                class="bg-info text-white px-2 py-1 rounded-full text-nowrap text-ellipsis">{{session.modalidadeNome}}</span></td>
+                        <td class="w-1/3 md:w-1/5 text-center hidden md:block"><span class="px-2 py-1 rounded-full text-white"
+                                [ngClass]="{`bg-yellow`: session.statusAulaNome == 'Agendado', 'bg-error': session.statusAulaNome =='Cancelado', 'bg-success': session.statusAulaNome =='Concluido'}">{{session.statusAulaNome}}</span>
+                        </td>
+                        <td class="w-1/3 md:w-1/5 text-center flex flex-col">
+                            <button
+                                class="bg-primary text-sm md:text-base text-white font-semibold rounded-md p-1 self-center"
+                                (click)="openModal(session)"><i class="pi pi-plus"></i> Detalhes</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <span *ngIf="selectedSessions.length == 0" class="self-center text-paragraph font-semibold"><i
+                    class="pi pi-info-circle text-primary"></i> Nenhuma aula para mostrar.</span>
         </div>
     </div>
 </div>
-<session-details/>
-<!--
-<button class="text-sm font-semibold px-3 py-1 border rounded-2xl border-info text-info">TODAS</button>
--->
+<session-details />
