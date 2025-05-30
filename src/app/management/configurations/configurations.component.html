@@ -2,32 +2,38 @@
   <div class="flex flex-col bg-white p-4 rounded-md shadow w-full lg:w-2/3 gap-3">
     <h2 class="text-2xl font-bold">Configurações</h2>
     <div class="w-full flex flex-col bg-background rounded-md shadow p-3 gap-3">
-      <h2 class="text-paragraph font-semibold text-lg"><i class="pi pi-users text-primary"></i> Usuários</h2>
-      <div class="grid grid-cols-2 xl:grid-cols-3 gap-3">
-        <div
-          class="flex flex-col items-center bg-white md:p-3 rounded-md shadow gap-4 transition hover:-translate-y-1 duration-300">
-          <img src="assets/user.png" alt="user" class="w-24">
-          <div class="w-full flex flex-col bg-background rounded-md p-3 gap-1">
-            <span class="text-paragraph font-semibold"><i class="pi pi-user text-primary"></i> Nome: Victor</span>
-            <span class="text-paragraph font-semibold hidden md:block"><i class="pi pi-envelope text-primary"></i>
-              Email:
-              victor&#64;teste.com</span>
-            <span class="text-paragraph font-semibold hidden md:block"><i class="pi pi-crown text-primary"></i> Cargo:
-              Administrador</span>
-            <div class="flex md:flex-row flex-col justify-center gap-2 md:gap-3 mt-2">
-              <button class="bg-info text-white p-2 rounded-md font-semibold"><i class="pi pi-pencil"></i>
-                EDITAR</button>
-              <button class="bg-error text-white p-2 rounded-md font-semibold"><i class="pi pi-times"></i>
-                EXCLUIR</button>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-row justify-center items-center p-2  gap-2">
-          <span class="text-paragraph font-semibold text-sm sm:text-base">Novo usuário</span>
-          <button class="bg-primary px-2 py-1 rounded-md text-white" (click)="openModal()"><i
-              class="pi pi-plus"></i></button>
-        </div>
+      <div class="flex flex-row justify-between w-full px-3 items-center">
+        <h2 class="text-paragraph font-semibold text-lg"><i class="pi pi-users text-primary"></i> Usuários</h2>
+        <button class="bg-primary p-2 rounded-md text-white" (click)="openModal()"><i class="pi pi-user-plus"></i> CADASTRAR</button>
       </div>
+      <table *ngIf="users.length > 0" class="border-2 border-gray-300 rounded-md flex flex-col items-stretch">
+        <thead class="w-full flex p-3 border-b-2 border-gray-300">
+          <tr class="w-full flex flex-row justify-between">
+            <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center">
+              <i class="pi pi-user text-primary"></i>
+              Nome
+            </td>
+            <td class="text-paragraph font-semibold w-1/3 md:w-1/5 text-center">
+              <i class="pi pi-envelope text-primary"></i>
+              Email
+            </td>
+            <td class="w-1/3 md:w-1/5 text-center">
+            </td>
+          </tr>
+        </thead>
+        <tbody class="bg-white w-full flex flex-col items-stretch">
+          <tr *ngFor="let user of users"
+            class="cursor-pointer hover:bg-background p-3 transition-colors duration-200 flex flex-row justify-between border-b">
+            <td class="w-1/3 md:w-1/5 text-center ">{{user.nome}}</td>
+            <td class="w-1/3 md:w-1/5 text-center overflow-clip"><span
+                class="text-nowrap text-ellipsis">{{user.email}}</span></td>
+            <td class="w-1/3 md:w-1/5 text-center">
+              <button class="bg-info text-sm md:text-base text-white font-semibold rounded-md p-1 self-center" (click)="openModal(user)"><i
+                  class="pi pi-pencil"></i> Editar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

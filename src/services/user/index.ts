@@ -25,8 +25,12 @@ export class UserService extends BaseService {
     return this.get(this.PATH + `/${id}`)
   }
 
-  updateUserData(id: number) {
-    return this.put(this.PATH + `/${id}`, {})
+  updateUserData(id: number, data: any) {
+    return this.put(this.PATH + `/${id}`, data)
+  }
+
+  registerNewUser(user: any) {
+    return this.post(this.PATH, user)
   }
 
 }
