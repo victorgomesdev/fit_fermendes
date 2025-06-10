@@ -20,7 +20,8 @@ export class EditCategoryComponent extends BaseComponent {
 
   override ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      cor: ['', Validators.required]
     })
   }
 
@@ -34,7 +35,7 @@ export class EditCategoryComponent extends BaseComponent {
 
   private saveEditing(): void {
     if (this.formGroup.valid) {
-      this.categoryService.editCategory(<number>this.category?.id, this.formGroup.get('name')?.value)
+      this.categoryService.editCategory(<number>this.category?.id, this.formGroup.value.name, this.formGroup.value.cor)
         .subscribe({
           next: (res: any) => {
             this.saveCategory.emit(res.data as Category)
@@ -49,7 +50,7 @@ export class EditCategoryComponent extends BaseComponent {
 
   private createNewCategory() {
     if (this.formGroup.valid) {
-      this.categoryService.createNewCategory(this.formGroup.get('name')?.value)
+      this.categoryService.createNewCategory(this.formGroup.value.name, this.formGroup.value.cor)
         .subscribe({
           next: (res: any) => {
             this.saveCategory.emit(res.data as Category)

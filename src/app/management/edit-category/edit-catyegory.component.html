@@ -15,7 +15,7 @@
         <label for="cor" class="text-paragraph font-semibold"><i class="pi pi-palette text-primary"></i> Cor<span
             class="text-error">*</span></label>
         <input id="cor" type="color"
-          class="w-10 h-10 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:shadow-input-focus" />
+          class="w-10 h-10 rounded-md outline-none border-2 cursor-pointer focus:border-primary" formControlName="cor" [ngClass]="isFieldValid('cor')"/>
       </span>
       <span class="self-end flex flex-row gap-3">
         <button class="bg-error text-white font-semibold p-2 rounded-md" (click)="toogleModal()"><i class="pi pi-times"></i>CANCELAR</button>

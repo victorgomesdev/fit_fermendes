@@ -12,11 +12,11 @@ export class CategoryService extends BaseService {
     return this.get(this.PATH + '/lista')
   }
 
-  createNewCategory(name: string) {
-    return this.post(this.PATH, { nome: name })
+  createNewCategory(name: string, color: string) {
+    return this.post(this.PATH, { nome: name, cor: color })
   }
 
-  editCategory(id: number, name: string) {
-    return this.put(this.PATH + `/${id}`, { nome: name })
+  editCategory(id: number, name: string, color: string) {
+    return this.put(this.PATH + `/${id}`, { nome: name, cor: color })
   }
 }
