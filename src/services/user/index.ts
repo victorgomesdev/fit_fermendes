@@ -33,4 +33,11 @@ export class UserService extends BaseService {
     return this.post(this.PATH, user)
   }
 
+  requestPasswordRecovery(email: string) {
+    return this.post(this.PATH + '/solicitarRecuperacao', { email })
+  }
+
+  recoverPassword(novaSenha: string, codigo: string) {
+    return this.post(this.PATH + 'recuperarSenha', { codigo, novaSenha })
+  }
 }

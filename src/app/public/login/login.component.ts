@@ -71,4 +71,18 @@ export class LoginComponent extends BaseComponent {
         }
       })
   }
+
+  onRecoveryRequested(): void {
+    if (this.formGroup.get('email')?.valid) {
+      this.alertService.info('Recuperação de senha solicitada!')
+      this.userService.requestPasswordRecovery(this.formGroup.value.email)
+        .subscribe({
+          next: (res: any) => {
+            this.router.navigate(['/recuperarSenha/', res.data.validador])
+          }
+        })
+      return
+    }
+    this.alertService.warn('Email não informado!')
+  }
 }

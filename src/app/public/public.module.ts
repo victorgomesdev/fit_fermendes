@@ -6,12 +6,14 @@ import { PublicRoutingModule } from "./public.routing.module";
 import { PublicComponet } from "./public.component";
 import { LoginComponent } from "./login/login.component";
 import { HomeComponent } from "./home/home.component";
+import { RecoveryPasswordComponent } from "./recovery-password/recovery-password.component";
 
 @NgModule({
   declarations: [
     PublicComponet,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    RecoveryPasswordComponent
   ],
   imports: [
     PublicRoutingModule,

@@ -12,7 +12,8 @@
                 <input type="password" name="senha" id="senha" class="p-2 rounded-md outline-none border-2 focus:border-primary" placeholder="Senha" formControlName="senha" [ngClass]="isFieldValid('senha')">
             </div>
         </div>
-        <div class="w-full flex flex-row justify-end gap-3">
+        <div class="w-full flex flex-row justify-between gap-3">
+            <button class="p-2 text-paragraph underline" (click)="onRecoveryRequested()">Esqueci a senha</button>
             <button class="bg-primary p-2 text-white rounded-md" (click)="loginWithEmail()" [disabled]="isLoading"><i class="pi" [ngClass]="{'pi-spinner animate-loading': isLoading, 'pi-sign-in': !isLoading}"></i> ENTRAR</button>
         </div>
     </div>

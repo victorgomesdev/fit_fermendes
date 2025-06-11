@@ -3,6 +3,7 @@ import { Route, RouterModule } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
 import { LoginComponent } from "./login/login.component";
 import { PublicComponet } from "./public.component";
+import { RecoveryPasswordComponent } from "./recovery-password/recovery-password.component";
 
 const routes: Route[] = [
   {
@@ -16,6 +17,10 @@ const routes: Route[] = [
       {
         path: 'auth',
         component: LoginComponent
+      },
+      {
+        path: 'recuperarSenha/:codigo',
+        component: RecoveryPasswordComponent
       }
     ]
   }

@@ -51,7 +51,7 @@ export class NewUserComponent extends BaseComponent {
       error: () => {
         this.loading = false
       },
-      complete: ()=> location.reload()
+      complete: () => location.reload()
     })
   }
 
@@ -68,7 +68,7 @@ export class NewUserComponent extends BaseComponent {
       error: () => {
         this.loading = false
       },
-      complete: ()=> location.reload()
+      complete: () => location.reload()
     })
   }
 
