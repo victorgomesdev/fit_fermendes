@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http"
 import { inject } from "@angular/core"
 import { Observable } from "rxjs"
-import { env } from "./environment.prod"
+import { env } from "./environment.dev"
 
 export abstract class BaseService {
 

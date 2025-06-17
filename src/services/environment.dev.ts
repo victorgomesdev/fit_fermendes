@@ -1,3 +1,4 @@
 export const env =  {
-  isProduction: false
+  isProduction: false,
+  apiUrl: '/api'
 }
