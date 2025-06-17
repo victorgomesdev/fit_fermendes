@@ -1,10 +1,11 @@
 import { HttpClient } from "@angular/common/http"
 import { inject } from "@angular/core"
 import { Observable } from "rxjs"
+import { env } from "./environment.prod"
 
 export abstract class BaseService {
 
-  protected readonly API_URL: string = '/api'
+  protected readonly API_URL: string =  env.isProduction ? env.apiUrl : '/api'
   protected client = inject(HttpClient)
 
   protected get<T>(url: string): Observable<T> {
