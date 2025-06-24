@@ -3,5 +3,5 @@ export function nonNegativeFormatter(event: any): number {
   if(value < 0) {
     return 0
   }
-  return value
+  return Number(value)
 }

@@ -84,13 +84,13 @@
         <label for="altura" class="text-paragraph font-semibold"><i class="pi pi-arrows-v text-primary"></i> Altura
           (cm)<span class="text-error">*</span></label>
         <input type="number" id="altura" class="outline-none border-2 rounded-md p-2 focus:border-primary"
-          placeholder="Altura" formControlName="altura" [ngClass]="isFieldValid('altura')"  (change)="onWeightOrHeightChanges($event, 'altura')">
+          placeholder="Altura" formControlName="altura" [ngClass]="isFieldValid('altura')"  (input)="onWeightOrHeightChanges($event, 'altura')">
       </span>
       <span class="flex flex-col gap-1">
         <label for="peso" class="text-paragraph font-semibold"><i class="pi pi-gauge text-primary"></i> Peso
           (kg)<span class="text-error">*</span></label>
         <input type="number" id="peso" class="outline-none border-2 rounded-md p-2 focus:border-primary"
-          placeholder="Peso" formControlName="peso" [ngClass]="isFieldValid('peso')" (change)="onWeightOrHeightChanges($event, 'peso')">
+          placeholder="Peso" formControlName="peso" [ngClass]="isFieldValid('peso')" (input)="onWeightOrHeightChanges($event, 'peso')">
       </span>
     </div>
     <div class="self-end">

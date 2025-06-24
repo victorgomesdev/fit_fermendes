@@ -148,6 +148,7 @@ export class ClientRegistrationComponent extends BaseComponent {
 
   onWeightOrHeightChanges(event: Event, field: string): void {
     this.formGroup.get(field)?.setValue(nonNegativeFormatter(event))
+    console.log(this.formGroup.value)
   }
 
   async onImageSelection(event: Event) {
