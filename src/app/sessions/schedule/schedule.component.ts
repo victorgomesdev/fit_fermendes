@@ -126,6 +126,7 @@ export class ScheduleComponent extends BaseComponent {
     private subscribeToSearchInputChanges(): void {
         this.formGroup.get('buscaAluno')?.valueChanges
             .pipe(
+                filter((text: string) => !text.includes(' ')),
                 debounceTime(300),
                 distinctUntilChanged()
             ).subscribe(name => {
@@ -134,10 +135,12 @@ export class ScheduleComponent extends BaseComponent {
                         .subscribe({
                             next: (val) => {
                                 if (val.data.length == 0) {
+                                    this.searchResult = []
                                     this.showClientNotFound = true
                                     return
                                 }
-                                this.searchResult.push(...val.data)
+                                this.searchResult = val.data
+                                this.showClientNotFound = false
                             },
                             error: () => {
                                 this.showClientNotFound = true
