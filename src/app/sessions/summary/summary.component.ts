@@ -1,7 +1,9 @@
-import { Component, inject, OnInit, ViewChild } from "@angular/core";
+import { Component, inject, ViewChild } from "@angular/core";
 import { BaseComponent } from "@components/base/base.component";
+import { CategoryService } from "@services/category";
 import { SessionService } from "@services/sessions";
 import { SessionDetailsComponent } from "@sessions/session-details/session-details.component";
+import { Category } from "@shared/types/category.type";
 import { Session } from "@shared/types/session.type";
 
 @Component({
@@ -15,23 +17,41 @@ export class SummaryComponent extends BaseComponent {
 
     todaySessions: Session[] = []
     otherSessions: Session[] = []
+    categories: any = {}
     today = new Date().toISOString().split('T')[0]
 
     showDropdown = false
 
     sessionService = inject(SessionService)
+    categoryService = inject(CategoryService)
 
     override ngOnInit(): void {
         this.loadingService.show()
-        this.sessionService.getAllSessions()
+        this.categoryService.listAllCategories()
             .subscribe({
-                next: (res: any) => {
-                    this.otherSessions = (<Session[]>res.data).filter(s => s.data.split('T')[0] != this.today)
-                    this.todaySessions = (<Session[]>res.data).filter(s => s.data.split('T')[0] == this.today)
-                    this.loadingService.hide()
+                next: (cat: any) => {
+                    cat.data.forEach((c: Category) => {
+                        Object.defineProperty(this.categories, String(c.id), { value: c.cor })
+                    });
                 },
-                error: () => {
-                    this.loadingService.hide()
+                complete: () => {
+                    this.sessionService.getAllSessions()
+                        .subscribe({
+                            next: (res: any) => {
+                                res.data = (<Session[]>res.data).map(s => {
+                                    return {
+                                        ...s,
+                                        modalidadeCor: this.categories[s.modalidadeId]
+                                    }
+                                })
+                                this.otherSessions = (<Session[]>res.data).filter(s => s.data.split('T')[0] != this.today)
+                                this.todaySessions = (<Session[]>res.data).filter(s => s.data.split('T')[0] == this.today)
+                                this.loadingService.hide()
+                            },
+                            error: () => {
+                                this.loadingService.hide()
+                            }
+                        })
                 }
             })
     }

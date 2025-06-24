@@ -1,4 +1,5 @@
 export type Category = {
   id: number,
-  nome: string
+  nome: string,
+  cor: string
 }

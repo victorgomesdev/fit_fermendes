@@ -80,13 +80,13 @@
                                     class="outline-none border-2 focus:border-primary rounded-lg p-2 w-full bg-background"
                                     placeholder="Pesquisar" formControlName="buscaAluno">
                                 <div *ngIf="searchResult.length > 0" class="absolute z-50 w-full bg-white flex flex-col gap-1 p-2 shadow">
-                                    <button
+                                    <button 
                                         class="truncate text-paragraph cursor-pointer p-2 rounded-md border hover:bg-primary hover:text-white transition-colors duration-300" *ngFor="let c of searchResult" (click)="onClientSelected(c)">{{c.nome}}</button>
                                 </div>
                             </div>
-                            <div class="w-full flex flex-col bg-background rounded-md p-3 gap-3 shadow">
+                            <div *ngIf="showClientNotFound != true" class="w-full flex flex-col bg-background rounded-md p-3 gap-3 shadow">
                                 <p class="text-paragraph font-semibold">Alunos selecionados:</p>
-                                <span *ngIf="clients.length == 0" class="text-paragraph text-center"><i class="pi pi-exclamation-circle"></i> Nenhum aluno
+                                <span *ngIf="clients.length === 0" class="text-paragraph text-center"><i class="pi pi-exclamation-circle"></i> Nenhum aluno
                                     selecionado</span>
                                 <div class="w-full grid grid-cols-2 sm:grid-cols-3 gap-2">
                                     <div

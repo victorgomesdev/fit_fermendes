@@ -1,5 +1,6 @@
 import { Component, inject, ViewChild } from "@angular/core";
 import { Validators } from '@angular/forms'
+import { BaseComponent } from "@components/base/base.component";
 import { SessionDetailsComponent } from "@sessions/session-details/session-details.component";
 import { Session } from "@shared/types/session.type";
 import { SessionService } from "@services/sessions";
@@ -11,7 +12,6 @@ import { Client } from "@shared/types/client.type";
 import { dateFormatterUtil } from "@shared/utils/date-input-formatter";
 import { sessionScheduleFactory } from "@shared/utils/schedule-request-factory";
 import { calendarEventFactoryUtil } from "@shared/utils/session-factory.util";
-import { BaseComponent } from "@components/base/base.component";
 import { CalendarEvent } from 'angular-calendar'
 import { debounceTime, distinctUntilChanged, filter } from "rxjs";
 import { addMonths, subMonths } from 'date-fns'
@@ -32,7 +32,7 @@ export class ScheduleComponent extends BaseComponent {
     sessionToEdit!: Session
 
     sessions!: CalendarEvent<Session>[]
-    categories!: Category[]
+    categories: Category[] = []
     searchResult: Client[] = []
     clients: Partial<Client>[] = []
 
@@ -47,23 +47,23 @@ export class ScheduleComponent extends BaseComponent {
 
     override ngOnInit(): void {
         this.today = new Date()
-        this.sessionService.getAllSessions()
+        this.categoryService.listAllCategories()
             .subscribe({
-                next: (res: any) => {
-                    let temp: CalendarEvent<Session>[] = [];
-                    (res.data as Session[]).forEach(s => temp.push(calendarEventFactoryUtil(s)))
-                    this.sessions = temp
+                next: (res: any) => this.categories = res.data,
+                complete: () => {
+                    this.sessionService.getAllSessions()
+                        .subscribe({
+                            next: (res: any) => {
+                                let temp: CalendarEvent<Session>[] = [];
+                                (res.data as Session[]).forEach(s => temp.push(calendarEventFactoryUtil(s, this.categories)))
+                                this.sessions = temp
+                            }
+                        })
                 }
             })
         this.createForm()
         this.subscribeToSearchInputChanges()
         this.subscribeToRedirection()
-        this.categoryService.listAllCategories()
-            .subscribe({
-                next: (res: any) => this.categories = res.data,
-            })
-
-
 
         if (this.sessionService.savedSessionPartial) {
             this.formGroup.setValue(this.sessionService.getSessionPartial())
@@ -128,12 +128,16 @@ export class ScheduleComponent extends BaseComponent {
             .pipe(
                 debounceTime(300),
                 distinctUntilChanged()
-            ).subscribe(id => {
-                if (id) {
-                    this.clientService.getClientById(id)
+            ).subscribe(name => {
+                if (name) {
+                    this.clientService.searchClientByName(name)
                         .subscribe({
                             next: (val) => {
-                                this.searchResult.push(val.data)
+                                if (val.data.length == 0) {
+                                    this.showClientNotFound = true
+                                    return
+                                }
+                                this.searchResult.push(...val.data)
                             },
                             error: () => {
                                 this.showClientNotFound = true

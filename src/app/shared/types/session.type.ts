@@ -1,5 +1,3 @@
-import { Client } from "@shared/types/client.type"
-
 export type Session = {
   id?: number,
   observacao?: string,
@@ -8,7 +6,8 @@ export type Session = {
   statusAulaNome?: string,
   modalidadeId: number,
   modalidadeNome?: string,
-  alunos: any
+  alunos: any,
+  modalidadeCor?: string
 }
 
 export enum SessionStatus {

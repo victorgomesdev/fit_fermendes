@@ -68,7 +68,10 @@ export class EditCategoryComponent extends BaseComponent {
     this.show = !this.show
     if (category) {
       this.category = category
-      this.formGroup.get('name')?.setValue(category.nome)
+      this.formGroup.setValue({
+        name: category.nome,
+        cor: category.cor
+      })
       return
     }
 

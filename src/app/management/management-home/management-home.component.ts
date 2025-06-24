@@ -44,6 +44,7 @@ export class ManagementHomeComponent extends BaseComponent implements OnInit {
             return
         }
         this.categories[edited].nome = newCategory.nome
+        this.categories[edited].cor = newCategory.cor
         this.openModal()
         return
     }
