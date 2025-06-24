@@ -19,6 +19,10 @@ export class ClientService extends BaseService {
     return this.get(this.PATH + `/${id}`)
   }
 
+  searchClientByName(name: string): Observable<any> {
+    return this.get(this.PATH + `/lista?nome=${name}`)
+  }
+
   updateClientById(id: number, clientData: Client): Observable<Client> {
     return this.put(this.PATH + `/${id}`, clientData)
   }
