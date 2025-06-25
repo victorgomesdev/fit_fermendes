@@ -12,6 +12,7 @@ import { Client } from "@shared/types/client.type";
 import { dateFormatterUtil } from "@shared/utils/date-input-formatter";
 import { sessionScheduleFactory } from "@shared/utils/schedule-request-factory";
 import { calendarEventFactoryUtil } from "@shared/utils/session-factory.util";
+import { scheduleDateValidator } from "@shared/validators/schedule-date.validator";
 import { CalendarEvent } from 'angular-calendar'
 import { debounceTime, distinctUntilChanged, filter } from "rxjs";
 import { addMonths, subMonths } from 'date-fns'
@@ -114,7 +115,7 @@ export class ScheduleComponent extends BaseComponent {
 
     override createForm(): void {
         this.formGroup = this.formBuilder.group({
-            data: [dateFormatterUtil(new Date()), Validators.required],
+            data: [dateFormatterUtil(new Date()), [Validators.required, scheduleDateValidator()]],
             modalidadeId: ['', Validators.required],
             observacao: '',
             alunos: [[], Validators.required],
@@ -244,7 +245,7 @@ export class ScheduleComponent extends BaseComponent {
                 },
                 complete: () => {
                     this.loadingService.hide()
-                    this.router.navigate(['/aulas'])
+                    window.history.back()
                 }
             })
     }
