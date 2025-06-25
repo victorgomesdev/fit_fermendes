@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, inject } from "@angular/core";
 import { Validators } from "@angular/forms";
 import { BaseComponent } from "@components/base/base.component";
@@ -36,7 +37,11 @@ export class RecoveryPasswordComponent extends BaseComponent {
       this.userService.recoverPassword(this.formGroup.value.novaSenha, this.recoveryCode)
         .subscribe({
           next: (res: any) => {
-            
+            this.alertService.info('Senha alterada com sucesso!')
+            this.router.navigate(['/auth'])
+          },
+          error: (err: HttpErrorResponse) => {
+            this.alertService.error(err.error.message)
           }
         })
       return
