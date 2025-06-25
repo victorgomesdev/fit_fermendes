@@ -1,5 +1,5 @@
 <div class="w-full flex flex-col items-center pt-4 animate-fadeIn">
-    <div class="flex flex-col px-2 lg:px-7 py-5 gap-3 bg-white rounded-md w-full sm:w-[85%] ">
+    <div class="flex flex-col px-2 lg:px-7 py-5 gap-3 bg-white rounded-md w-full sm:w-[92%]">
         <div class="w-full flex flex-row items-center justify-between px-2">
             <h1 class="text-2xl font-bold">Agendar</h1>
             <span class="xl:hidden">
@@ -52,11 +52,16 @@
                             <select id="horario"
                                 class="p-2 rounded-lg border-2 focus:border-primary outline-none transition-all duration-100 cursor-pointer" formControlName="horario" [ngClass]="isFieldValid('horario')">
                                 <option value="">Selecione um horário</option>
+                                <option value="14:00">08:00</option>
+                                <option value="14:00">09:00</option>
                                 <option value="10:00">10:00</option>
                                 <option value="11:00">11:00</option>
                                 <option value="12:00">12:00</option>
                                 <option value="13:00">13:00</option>
                                 <option value="14:00">14:00</option>
+                                <option value="14:00">15:00</option>
+                                <option value="14:00">16:00</option>
+                                <option value="14:00">17:00</option>
                             </select>
                         </span>
                     </div>
